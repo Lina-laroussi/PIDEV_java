@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierMedecinController">
+       <children>
+       <Pane prefHeight="621.0" prefWidth="601.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
+         <children>
+            <Label layoutX="200.0" layoutY="24.0" text="Modifier Médecin" textFill="#15558d">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+         <VBox layoutX="25.0" layoutY="60.0" prefHeight="561.0" prefWidth="533.0">
+            <children>
+               <VBox alignment="BOTTOM_CENTER" prefHeight="106.0" prefWidth="503.0" spacing="50.0">
+                  <children>
+                     <HBox prefHeight="72.0" prefWidth="503.0">
+                        <children>
+                           <Label text="Nom">
+                              <font>
+                                 <Font name="System Bold" size="15.0" />
+                              </font>
+                              <HBox.margin>
+                                 <Insets top="5.0" />
+                              </HBox.margin>
+                           </Label>
+                           <TextField fx:id="nom_medecin">
+                              <padding>
+                                 <Insets left="20.0" top="10.0" />
+                              </padding>
+                              <HBox.margin>
+                                 <Insets left="20.0" top="3.0" />
+                              </HBox.margin>
+                           </TextField>
+                           <Label text="Prénom">
+                              <HBox.margin>
+                                 <Insets top="5.0" />
+                              </HBox.margin>
+                              <padding>
+                                 <Insets left="30.0" />
+                              </padding>
+                              <font>
+                                 <Font name="System Bold" size="15.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="prenom_medecin">
+                              <HBox.margin>
+                                 <Insets left="20.0" top="3.0" />
+                              </HBox.margin>
+                              <padding>
+                                 <Insets left="20.0" top="10.0" />
+                              </padding>
+                           </TextField>
+                        </children>
+                        <padding>
+                           <Insets left="20.0" top="15.0" />
+                        </padding>
+                     </HBox>
+                  </children>
+               </VBox>
+               <HBox prefHeight="76.0" prefWidth="482.0">
+                  <children>
+                     <Label text="Email">
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                     </Label>
+                     <Label>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                        <padding>
+                           <Insets left="30.0" />
+                        </padding>
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="email_medecin" prefHeight="27.0" prefWidth="401.0">
+                        <padding>
+                           <Insets left="200.0" top="10.0" />
+                        </padding>
+                        <HBox.margin>
+                           <Insets top="3.0" />
+                        </HBox.margin>
+                     </TextField>
+                  </children>
+                  <padding>
+                     <Insets left="20.0" top="15.0" />
+                  </padding>
+               </HBox>
+               <HBox prefHeight="72.0" prefWidth="676.0">
+                  <children>
+                     <Label text="Date de naissance">
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                     </Label>
+                     <Label>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                        <padding>
+                           <Insets left="30.0" />
+                        </padding>
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                     </Label>
+                     <DatePicker fx:id="dateNaissance_medecin" prefHeight="25.0" prefWidth="316.0" />
+                  </children>
+                  <padding>
+                     <Insets left="20.0" top="15.0" />
+                  </padding>
+               </HBox>
+               <HBox prefHeight="72.0" prefWidth="520.0">
+                  <children>
+                     <Label text="Sexe">
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                     </Label>
+                     <Label>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                        <padding>
+                           <Insets left="30.0" />
+                        </padding>
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                     </Label>
+                     <RadioButton fx:id="sexe_medecin_femme" mnemonicParsing="false" text="Femme">
+                        <HBox.margin>
+                           <Insets left="100.0" top="8.0" />
+                        </HBox.margin>
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </RadioButton>
+                     <RadioButton fx:id="sexe_medecin_homme" mnemonicParsing="false" text="Homme">
+                        <HBox.margin>
+                           <Insets left="150.0" top="8.0" />
+                        </HBox.margin>
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </RadioButton>
+                  </children>
+                  <padding>
+                     <Insets left="20.0" top="15.0" />
+                  </padding>
+               </HBox>
+               <HBox prefHeight="72.0" prefWidth="503.0">
+                  <children>
+                     <Label text="Téléphone">
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                     </Label>
+                     <Label>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                        <padding>
+                           <Insets left="30.0" />
+                        </padding>
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="tel_medecin" prefHeight="27.0" prefWidth="375.0">
+                        <padding>
+                           <Insets left="170.0" top="10.0" />
+                        </padding>
+                        <HBox.margin>
+                           <Insets top="3.0" />
+                        </HBox.margin>
+                     </TextField>
+                  </children>
+                  <padding>
+                     <Insets left="20.0" top="15.0" />
+                  </padding>
+               </HBox>
+               <HBox prefHeight="72.0" prefWidth="503.0">
+                  <children>
+                     <Label text="Adresse">
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                     </Label>
+                     <Label>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                        <padding>
+                           <Insets left="30.0" />
+                        </padding>
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="adresse_medecin" prefHeight="27.0" prefWidth="397.0">
+                        <padding>
+                           <Insets left="170.0" top="10.0" />
+                        </padding>
+                        <HBox.margin>
+                           <Insets top="3.0" />
+                        </HBox.margin>
+                     </TextField>
+                  </children>
+                  <padding>
+                     <Insets left="20.0" top="15.0" />
+                  </padding>
+               </HBox>
+            <HBox prefHeight="72.0" prefWidth="503.0">
+               <children>
+                  <Label text="Spécialité">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label>
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="specialite_medecin" prefHeight="27.0" prefWidth="397.0">
+                     <padding>
+                        <Insets left="170.0" top="10.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets top="3.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets left="20.0" top="15.0" />
+               </padding>
+            </HBox>
+               <HBox alignment="CENTER" prefHeight="25.0" prefWidth="473.0">
+                  <children>
+                     <Label>
+                        <HBox.margin>
+                           <Insets top="5.0" />
+                        </HBox.margin>
+                        <padding>
+                           <Insets left="30.0" />
+                        </padding>
+                        <font>
+                           <Font name="System Bold" size="15.0" />
+                        </font>
+                     </Label>
+                     <Button fx:id="button_update" mnemonicParsing="false" onAction="#updateUser" onMouseClicked="#updateUser" style="-fx-background-color: #15558d;" styleClass="my-button" text="Modifier" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="14.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets bottom="30.0" right="60.0" />
+                        </HBox.margin>
+                     </Button>
+                  </children>
+                  <padding>
+                     <Insets top="15.0" />
+                  </padding>
+               <VBox.margin>
+                  <Insets left="60.0" />
+               </VBox.margin>
+               </HBox>
+            </children>
+         </VBox>
+   </children>
+</AnchorPane>

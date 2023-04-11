@@ -1,0 +1,23 @@
+.my-button{
+    -fx-border-width: 1px; /* largeur de bordure */
+    -fx-border-radius: 5px; /* rayon de coin */
+   
+}
+
+.image{
+     -fx-border-width: 1px; /* largeur de bordure */
+    -fx-border-radius: 10px; /* rayon de coin */
+}
+
+.table .column-header {
+    -fx-background-color:  #808283; /* Set background color */
+    -fx-font-weight: bold; /* Set font weight */
+}
+
+.table .table-cell {
+    -fx-alignment: CENTER; /* Set cell alignment */
+}
+.table .row-cell:hover {
+    -fx-background-color: #e1e1e1; /* Set background color on hover */
+}
+
