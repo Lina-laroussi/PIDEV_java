@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="604.0" prefWidth="735.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ProduitController">
+    <stylesheets>
+        <URL value="@produit.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane layoutY="3.0" prefHeight="604.0" prefWidth="231.0" style="-fx-background-color: #C0DFEF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutX="46.0" layoutY="522.0" mnemonicParsing="false" onAction="#Modifier" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: green;" text="Modifier" textAlignment="CENTER" />
+            <Button layoutX="46.0" layoutY="480.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: green;" text="Ajouter" textAlignment="CENTER" />
+            <Button layoutX="46.0" layoutY="560.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: green;" text="Supprimer" textAlignment="CENTER" />
+       <Button fx:id="browseButtonImage" layoutX="86.0" layoutY="313.0" onAction="#handleBrowseButtonAction" text="Choisir une image" textFill="#0a0ae4" />
+            <Label layoutX="18.0" layoutY="41.0" text="Nom" textAlignment="CENTER" textFill="#186f23">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <Label layoutX="4.0" layoutY="74.0" prefHeight="14.0" prefWidth="77.0" text="Description" textAlignment="CENTER" textFill="#186f23">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <Label layoutX="21.0" layoutY="136.0" text="Etat" textAlignment="CENTER" textFill="#186f23">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <Label layoutX="14.0" layoutY="316.0" text="Image" textAlignment="CENTER" textFill="#186f23">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <Label layoutX="22.0" layoutY="218.0" text="Prix" textAlignment="CENTER" textFill="#186f23">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <Label layoutX="5.0" layoutY="180.0" text="Quantite" textAlignment="CENTER" textFill="#186f23">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <TextField fx:id="Nom" layoutX="67.0" layoutY="39.0" />
+            <TextField fx:id="Description" layoutX="56.0" layoutY="95.0" />
+            <TextField fx:id="Quantite" layoutX="68.0" layoutY="177.0" />
+            <TextField fx:id="Prix" layoutX="67.0" layoutY="215.0" />
+            <AnchorPane fx:id="myAnchorPane" layoutX="48.0" layoutY="350.0" prefHeight="130.0" prefWidth="165.0" />
+            <ChoiceBox fx:id="Etat" layoutX="67.0" layoutY="133.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="Categorie_id" layoutX="78.0" layoutY="263.0" prefWidth="150.0" />
+            <Label layoutX="3.0" layoutY="265.0" text="Categorie" textAlignment="CENTER" textFill="#186f23">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+
+         </children>
+      </AnchorPane>
+      <TableView fx:id="table_produits" layoutX="232.0" layoutY="53.0" onMouseClicked="#getselect" prefHeight="537.0" prefWidth="503.0">
+        <columns>
+          <TableColumn fx:id="col_nom" prefWidth="101.0" text="Nom" />
+          <TableColumn fx:id="col_description" prefWidth="86.0" text="Description" />
+            <TableColumn fx:id="col_etat" prefWidth="61.0" text="Etat" />
+            <TableColumn fx:id="col_image" prefWidth="75.0" text="Image" />
+            <TableColumn fx:id="col_prix" prefWidth="59.0" text="Prix" />
+            <TableColumn fx:id="col_quantite" prefWidth="66.0" text="Quantite" />
+            <TableColumn fx:id="col_Id" prefWidth="54.0" text="Id" />
+        </columns>
+      </TableView>
+      <Label layoutX="354.0" layoutY="14.0" text="La liste des produits" textAlignment="CENTER" textFill="#3896ee">
+         <font>
+            <Font name="Bodoni MT Black" size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
