@@ -27,6 +27,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import services.AdminService;
@@ -56,58 +57,120 @@ public class ModifierUserController implements Initializable {
     @FXML
     private Button button_update;
 
-    @FXML
-    private Button button_annuler;
     
-    @FXML
-    private ToggleGroup group; 
+    @FXML 
+    private ImageView image_user;
+    
+    
+    private static final String EMAIL_REGEX = "^[\\w\\d._%+-]+@[\\w\\d.-]+\\.[A-Za-z]{2,}$";
+    private static final String TEL_REGEX="\\d{8}";
+
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*User user=new User();
-        getUser(user);     */
+       
     }    
 
+    
+    
+    public void inflateUI(User u) {
+       nom_user.setText(u.getNom()); // Set the DatePicker value using the formatted date
+       prenom_user.setText(u.getPrenom());
+       email_user.setText(u.getEmail());
+       if(u.getDate_de_naissance()== null){
+                dateNaissance_user.setValue(LocalDate.now());
+       }else{
+       java.util.Date utilDate = new java.util.Date(u.getDate_de_naissance().getTime());
+                System.out.println(utilDate);
+                try{
+                    dateNaissance_user.setValue(utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+
+                }catch(Exception e){
+                    System.out.println(e);
+        }
+       }
+           ToggleGroup toggleGroup = new ToggleGroup();
+           sexe_user_homme.setToggleGroup(toggleGroup);
+           sexe_user_femme.setToggleGroup(toggleGroup);
+       if(u.getSexe()==null){
+                sexe_user_homme.setSelected(true);
+            }
+            else if(u.getSexe().equals("Homme")){
+                sexe_user_homme.setSelected(true);
+            }else{
+                sexe_user_homme.setSelected(false);
+                sexe_user_femme.setSelected(true);
+        }   
+        if(u.getAdresse()==null){
+                adresse_user.setText("Entrez votre adresse");
+           }else{
+                adresse_user.setText(u.getAdresse());
+           }
+           
+            if(u.getTel()==null){
+                tel_user.setText("Entrez votre tel");
+           }else{
+                tel_user.setText(u.getTel());
+           }
+    }
    
     @FXML
-    private void updateUser(ActionEvent event) throws Exception {
+    public void updateUser(ActionEvent event) throws Exception {
 
        try{
       
         if(nom_user.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre nom");
+            alert.setContentText("Vous devez entrez un nom");
             alert.showAndWait();  
+        }else if(nom_user.getText().length()<3){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("le nom doit comporter au moins 2 caractères");
+             alert.showAndWait();  
         }else if(prenom_user.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("vous devez entrez votre prenom");
-            alert.showAndWait();  
+            alert.setContentText("vous devez entrez un prenom");
+            alert.showAndWait(); 
+        }else if(prenom_user.getText().length()<3){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("le prenom doit comporter au moins 2 caractères");
+             alert.showAndWait();   
+             
         }else if(email_user.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre email");
-            alert.showAndWait();  
+            alert.setContentText("Vous devez entrez un email");
+            alert.showAndWait(); 
+            
+        }else if(!email_user.getText().matches(EMAIL_REGEX)){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("Email invalide");
+             alert.showAndWait();
         }else if(dateNaissance_user.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre date de naissance");
-            alert.showAndWait();  
-        }else if(sexe_user_homme.getText().equals("") || sexe_user_femme.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre sexe");
+            alert.setContentText("Vous devez entrez une date de naissance");
             alert.showAndWait();  
         }else if(tel_user.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre téléphone");
-            alert.showAndWait();  
+            alert.setContentText("Vous devez entrez le téléphone");
+            alert.showAndWait();
+        }else if(!tel_user.getText().matches(TEL_REGEX)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Vous numéro de téléphone n'est pas valide");
+            alert.showAndWait();    
         }else if(adresse_user.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre adresse");
+            alert.setContentText("Vous devez entrez l'adresse");
             alert.showAndWait();  
         }
         
@@ -125,13 +188,16 @@ public class ModifierUserController implements Initializable {
          String tel = tel_user.getText();
          String adresse = adresse_user.getText();
          
+         
         User user= new User(nom,prenom,email,dateNaissance,sexe,tel,adresse); 
         User currentUser = getUser(user);
         int id =currentUser.getId();
-        User user1= new User(id,nom,prenom,email,dateNaissance,sexe,tel,adresse); 
+        String image=currentUser.getImage();
+        
+        User user1= new User(id,nom,prenom,email,dateNaissance,sexe,tel,adresse,image); 
         AdminService Adminservice = new AdminService();
         Adminservice.updateUser(user1);
-                
+         System.out.println(user1);        
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("AJOUT AVEC SUCCES");
         alert.setHeaderText(null);
@@ -147,7 +213,7 @@ public class ModifierUserController implements Initializable {
             alert.showAndWait();
         }
         String title = "succes ";
-        String message = "planning modifié avec succes";
+        String message = "utilisateur modifié avec succes";
      
     }
 
@@ -182,9 +248,9 @@ public class ModifierUserController implements Initializable {
                 tel_user.setText(currentUser.getTel());
            }
        
-           
-           sexe_user_homme.setToggleGroup(group);
-           sexe_user_femme.setToggleGroup(group);
+           ToggleGroup toggleGroup = new ToggleGroup();
+           sexe_user_homme.setToggleGroup(toggleGroup);
+           sexe_user_femme.setToggleGroup(toggleGroup);
             if(currentUser.getTel()==null){
                sexe_user_homme.setSelected(true);
             }
@@ -198,10 +264,9 @@ public class ModifierUserController implements Initializable {
                 sexe_user_femme.setSelected(true);
             }
             
-           User userUpdate = new User(currentUser.getId(), currentUser.getNom(),  currentUser.getPrenom(), currentUser.getEmail(),  currentUser.getDate_de_naissance(),  currentUser.getSexe(),  currentUser.getTel(),  currentUser.getAdresse());
+           User userUpdate = new User(currentUser.getId(), currentUser.getNom(),  currentUser.getPrenom(), currentUser.getEmail(),  currentUser.getDate_de_naissance(),  currentUser.getSexe(),  currentUser.getTel(),  currentUser.getAdresse(),currentUser.getImage());
            AdminService adminService = new AdminService();
            User currentUser1 = adminService.getUser(userUpdate);
-           System.out.println(currentUser1);
         return currentUser1;
     }
     

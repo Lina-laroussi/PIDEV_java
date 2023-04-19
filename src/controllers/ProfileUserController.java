@@ -7,9 +7,14 @@ package controllers;
 
 import entities.User;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -22,6 +27,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -29,8 +35,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import services.UserService;
 import utils.Session;
@@ -67,10 +76,18 @@ public class ProfileUserController implements Initializable {
     private RadioButton sexe_user_femme;   
     
     @FXML
-    private ToggleGroup group;   
+    private Circle circleImg;
     
     @FXML
-    private Circle circleImg;
+    private ImageView image_user;
+    
+    @FXML
+    private Button button_image;
+    
+    private static final String EMAIL_REGEX = "^[\\w\\d._%+-]+@[\\w\\d.-]+\\.[A-Za-z]{2,}$";
+    private static final String TEL_REGEX="\\d{8}";
+    private FileChooser fileChooser;
+
  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -107,9 +124,10 @@ public class ProfileUserController implements Initializable {
                 tel_user.setText(currentUser.getTel());
            }
        
+           ToggleGroup toggleGroup = new ToggleGroup();
+           sexe_user_homme.setToggleGroup(toggleGroup);
+           sexe_user_femme.setToggleGroup(toggleGroup);
            
-           sexe_user_homme.setToggleGroup(group);
-           sexe_user_femme.setToggleGroup(group);
             if(currentUser.getTel()==null){
                sexe_user_homme.setSelected(true);
             }
@@ -123,24 +141,68 @@ public class ProfileUserController implements Initializable {
                 sexe_user_femme.setSelected(true);
             }   
             
-            Image image = new Image(getClass().getResourceAsStream("../gui/user1.png")); // Replace with the path to your actual image file
+            Image image = new Image(getClass().getResourceAsStream("../gui/images/pngegg.png")); // Replace with the path to your actual image file
             if(currentUser.getImage()== null){
-                //image_medecin.setImage(image);
                 circleImg.setFill(new ImagePattern(image));
+                circleImg.setStroke(Color.TRANSPARENT);
 
             }else{
-                byte[] imageData = currentUser.getImage().getBytes(); // Replace "image" with the actual column name that stores the image data
-
-                // Convert the image data to an InputStream
-                InputStream inputStream = new ByteArrayInputStream(imageData);
-                // Create an Image object from the InputStream
-                Image imageMedecin = new Image(inputStream);  
-                System.out.println(imageMedecin);
-                //image_medecin.setImage(imageMedecin);
+                String imagePath = "c:/uploads/" + currentUser.getImage();
+                try {
+                    File imageFile = new File(imagePath);
+                    FileInputStream fileInputStream = new FileInputStream(imageFile);
+                    Image imageUser = new Image(fileInputStream);
+                    //image_user.setImage(imageUser);
+                     circleImg.setFill(new ImagePattern(imageUser));
+                     circleImg.setStroke(Color.TRANSPARENT);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
             }
     }    
     
     
+       @FXML
+    private void AjouterPhoto() throws IOException {
+        
+        Stage primaryStage = null;
+       // Use FileChooser to choose an image file
+        if (fileChooser == null) {
+            fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        }
+        File selectedFile = fileChooser.showOpenDialog(null);
+        
+        if (selectedFile != null) {
+            try {
+                // Display the chosen image in the ImageView
+                Image image = new Image(new FileInputStream(selectedFile));
+                 circleImg.setFill(new ImagePattern(image));
+                 // Copy the image to the destination directory
+                String destinationDirectoryPath = "c:/uploads/"; 
+                String imageName = selectedFile.getName(); 
+                Path source = selectedFile.toPath();
+                Path destination = new File(destinationDirectoryPath + imageName).toPath();
+                Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image copied to: " + destinationDirectoryPath + imageName);
+                User currentUser = Session.getInstance().getUser();
+                int id =currentUser.getId();
+       
+                User user= new User(id,imageName);
+                UserService userService = new UserService();
+                userService.updateUserImage(user);
+                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                 alert.setTitle("AJOUT AVEC SUCCES");
+                 alert.setHeaderText(null);
+                 alert.setContentText("image ajoutés avec succées");
+                 alert.showAndWait();
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+    }
     
     
      @FXML
@@ -153,31 +215,52 @@ public class ProfileUserController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez votre nom");
             alert.showAndWait();  
+        }
+        else if(nom_user.getText().length()<3){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("Votre nom doit comporter au moins 2 caractères");
+             alert.showAndWait();    
+             
         }else if(prenom_user.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("vous devez entrez votre prenom");
             alert.showAndWait();  
-        }else if(email_user.getText().equals("")){
+            
+        }else if(prenom_user.getText().length()<3){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("Votre prénom doit comporter au moins 2 caractères");
+             alert.showAndWait();
+             
+        } else if(email_user.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez votre email");
             alert.showAndWait();  
+            
+        } else if(!email_user.getText().matches(EMAIL_REGEX)){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("Email invalide");
+             alert.showAndWait();    
+             
         }else if(dateNaissance_user.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez votre date de naissance");
-            alert.showAndWait();  
-        }else if(sexe_user_homme.getText().equals("") || sexe_user_femme.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre sexe");
-            alert.showAndWait();  
+            alert.showAndWait();   
         }else if(tel_user.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez votre téléphone");
             alert.showAndWait();  
+        }else if(!tel_user.getText().matches(TEL_REGEX)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Vous numéro de téléphone n'est pas valide");
+            alert.showAndWait();    
         }else if(adresse_user.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -198,13 +281,12 @@ public class ProfileUserController implements Initializable {
          }
          String tel = tel_user.getText();
          String adresse = adresse_user.getText();
-        
-     
-        
+               
         User currentUser = Session.getInstance().getUser();
         int id =currentUser.getId();
+        String image = currentUser.getImage();
         
-        User user= new User(id,nom,prenom,email,dateNaissance,sexe,tel,adresse);
+        User user= new User(id,nom,prenom,email,dateNaissance,sexe,tel,adresse,image);
         UserService userService = new UserService();
         userService.updateUser(user);
         

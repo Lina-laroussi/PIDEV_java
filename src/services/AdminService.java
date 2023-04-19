@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.BCrypt;
@@ -27,7 +29,7 @@ public class AdminService {
     }
     
     public ObservableList<User> ListUsers() throws SQLException {
-        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation FROM user WHERE (NOT(roles LIKE '%ROLE_ADMIN%') AND etat != 'deleted')";
+        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image FROM user WHERE (NOT(roles LIKE '%ROLE_ADMIN%') AND etat != 'deleted')";
         ObservableList<User> UserList =  FXCollections.observableArrayList();
         try {
             PreparedStatement st2 = cnx.prepareStatement(request);
@@ -47,10 +49,8 @@ public class AdminService {
                 String etat = resultSet.getString("etat");
                 String roles = resultSet.getString("roles");
                 Date date_de_creation = resultSet.getDate("date_de_creation");  
-                User user = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation);
-
-                //User user = new User(id,nom,prenom,email,password,dateNaissance,sexe,tel,adresse,specialite);
-               
+                String image= resultSet.getString("image");
+                User user = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image);               
                 UserList.add(user);
             }
              
@@ -58,7 +58,6 @@ public class AdminService {
             System.out.println(ex);
                     
         }
-        System.out.println(UserList);
         return UserList;
 
     }
@@ -91,7 +90,7 @@ public class AdminService {
     }
     
     
-    public void updateUser(User user) {
+    public User updateUser(User user) throws SQLException {
         String request = "UPDATE user SET nom =\""+ user.getNom()+ "\",prenom=\""+ user.getPrenom()+ "\",email=\""+ user.getEmail()+ "\",date_de_naissance=\"" + new java.sql.Date(user.getDate_de_naissance().getTime())+ "\",sexe=\""+ user.getSexe()+ "\",num_tel=\""+ user.getTel()+ "\",adresse=\""+ user.getAdresse()+ "\"where id="+ user.getId()+"";
         try{
            PreparedStatement st = cnx.prepareStatement(request);  
@@ -101,23 +100,25 @@ public class AdminService {
         catch(SQLException ex){
             System.out.println("erreur update "+ex);
         }
+        return user;
     }
      
-    public void updateMedecin(User medecin) {
-              String request = "UPDATE user SET nom =\""+ medecin.getNom()+ "\",prenom=\""+ medecin.getPrenom()+ "\",email=\""+ medecin.getEmail()+ "\",date_de_naissance=\"" + new java.sql.Date(medecin.getDate_de_naissance().getTime())+ "\",sexe=\""+ medecin.getSexe()+ "\",num_tel=\""+ medecin.getTel()+ "\",adresse=\""+ medecin.getAdresse()+ "\",specialite=\""+ medecin.getSpecialité()+ "\"where id="+ medecin.getId()+"";
-       System.out.println(medecin.getNom());
+    public User updateMedecin(User medecin) {
+        String request = "UPDATE user SET nom =\""+ medecin.getNom()+ "\",prenom=\""+ medecin.getPrenom()+ "\",email=\""+ medecin.getEmail()+ "\",date_de_naissance=\"" + new java.sql.Date(medecin.getDate_de_naissance().getTime())+ "\",sexe=\""+ medecin.getSexe()+ "\",num_tel=\""+ medecin.getTel()+ "\",adresse=\""+ medecin.getAdresse()+ "\",specialite=\""+ medecin.getSpecialité()+ "\"where id="+ medecin.getId()+"";
         try{
            PreparedStatement st = cnx.prepareStatement(request);
             st.executeUpdate();
             System.out.println("medecin updated");
         }
-        catch(Exception ex){
+        catch(SQLException ex){
             System.out.println("erreur update "+ex);
         }
+        return medecin;
     }
     
+    
      public User getUser(User user) throws SQLException {
-        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation FROM user WHERE email= ?" ;
+        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image FROM user WHERE email= ?" ;
         User  user1 =  new User();
         try {
             PreparedStatement st2 = cnx.prepareStatement(request);
@@ -138,9 +139,8 @@ public class AdminService {
                 String etat = resultSet.getString("etat");
                 String roles = resultSet.getString("roles");
                 Date date_de_creation = resultSet.getDate("date_de_creation");  
-                user1 = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation);
-
-                
+                String image= resultSet.getString("image");
+                user1 = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image);
             }
              
         } catch (SQLException ex) {
@@ -150,6 +150,23 @@ public class AdminService {
         return user1;
 
     }
+     
+     public List<User> search(String critere) throws SQLException {
+      return ListUsers().stream()
+           .filter(a ->{
+               boolean match = (a.getNom().contains(critere))|| 
+               (a.getPrenom().contains(critere))||
+               (a.getEmail().contains(critere))||
+               (a.getEtat().contains(critere))||
+               (a.getRoles().contains(critere));
+           return match;
+        })
+              
+   .collect(Collectors.toList());
+        
+} 
+     
+     
     
     
 }

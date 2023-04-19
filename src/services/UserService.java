@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import utils.BCrypt;
 import utils.MyConnection;
 
@@ -35,10 +36,10 @@ public class UserService {
         st.setString(3,patient.getEmail());
         st.setString(4,password);
         st.setString(5,"non valide");
-        st.setDate(6, new java.sql.Date(new java.util.Date().getDate()));
-        st.setString(7,"['ROLE_PATIENT']");
+        st.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
+        st.setString(7,"[\"ROLE_PATIENT\"]");
         st.executeUpdate();
-        }catch(Exception ex){
+        }catch(SQLException ex){
             System.out.println("Error in method add " +ex);
         }        
     }
@@ -54,10 +55,10 @@ public class UserService {
         st.setString(3,medecin.getEmail());
         st.setString(4,password);
         st.setString(5,"non valide");
-        st.setDate(6, new java.sql.Date(new java.util.Date().getDate()));
-        st.setString(7,"['ROLE_MEDECIN']");
+        st.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
+        st.setString(7,"[\"ROLE_MEDECIN\"]");
         st.executeUpdate();
-        }catch(Exception ex){
+        }catch(SQLException ex){
             System.out.println("Error in method add " +ex);
         }        
     }
@@ -72,10 +73,10 @@ public class UserService {
         st.setString(3,pharmacien.getEmail());
         st.setString(4,password);
         st.setString(5,"non valide");
-        st.setDate(6, new java.sql.Date(new java.util.Date().getDate()));
-        st.setString(7,"['ROLE_PHARMACIEN']");
+        st.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
+        st.setString(7,"[\"ROLE_PHARMACIEN\"]");
         st.executeUpdate();
-        }catch(Exception ex){
+        }catch(SQLException ex){
             System.out.println("Error in method add " +ex);
         }        
     }
@@ -91,10 +92,10 @@ public class UserService {
         st.setString(3,assureur.getEmail());
         st.setString(4,password);
         st.setString(5,"non valide");
-        st.setDate(6, new java.sql.Date(new java.util.Date().getDate()));
-        st.setString(7,"['ROLE_ASSUREUR']");
+        st.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
+        st.setString(7,"[\"ROLE_ASSUREUR\"]");
         st.executeUpdate();
-        }catch(Exception ex){
+        }catch(SQLException ex){
             System.out.println("Error in method add " +ex);
         }        
     }
@@ -127,13 +128,14 @@ public class UserService {
                                 rs.getString(12),///sexe
                                 rs.getString(9),//tel
                                 rs.getString(13),//specialite
-                                rs.getDate(14)
+                                rs.getDate(14),
+                                rs.getString(17)
                                 );
                            
                 
         }
         }
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println("erreur authentification " + e);
         }
         return user ;
@@ -148,10 +150,11 @@ public class UserService {
             st.executeUpdate();
             System.out.println("medecin updated");
         }
-        catch(Exception ex){
+        catch(SQLException ex){
             System.out.println("erreur update "+ex);
         }
-    }
+        
+            }
      
      
      
@@ -164,9 +167,22 @@ public class UserService {
             st.executeUpdate();
             System.out.println("user updated");
         }
-        catch(Exception ex){
+        catch(SQLException ex){
             System.out.println("erreur update "+ex);
         }
+      }
+        
+        
+      public void updateUserImage(User user) {
+         String request = "UPDATE user SET image =\"" + user.getImage()+ "\"where id="+ user.getId()+"" ;
+          try{
+            PreparedStatement st = cnx.prepareStatement(request);  
+            st.executeUpdate();
+            System.out.println("user image updated");
+          }
+          catch(SQLException ex){
+             System.out.println("erreur update "+ex);
+          }
     }
     
     

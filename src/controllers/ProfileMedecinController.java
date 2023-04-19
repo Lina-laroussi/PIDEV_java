@@ -6,12 +6,19 @@
 package controllers;
 
 import entities.User;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import javafx.scene.image.Image;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
@@ -19,6 +26,9 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,10 +47,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import services.UserService;
 import utils.Session;
 
@@ -82,20 +94,24 @@ public class ProfileMedecinController implements Initializable {
     
     @FXML
     private RadioButton sexe_medecin_femme;    
-
-    @FXML
-    private ToggleGroup group; 
     
     @FXML
     private Button add_photo; 
     
     @FXML
+    private Button button_image;
+    
+    @FXML
     private Circle circleImg;
     
-        
     
-    SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-    // Change the output format to match the format accepted by JFoenix DatePicker
+    
+    
+        
+    private static final String EMAIL_REGEX = "^[\\w\\d._%+-]+@[\\w\\d.-]+\\.[A-Za-z]{2,}$";
+    private static final String TEL_REGEX="\\d{8}";
+
+    private FileChooser fileChooser;
     
      
 
@@ -142,8 +158,9 @@ public class ProfileMedecinController implements Initializable {
                 specialite_medecin.setText(currentMedecin.getSpecialité());
            }
            
-            sexe_medecin_homme.setToggleGroup(group);
-            sexe_medecin_femme.setToggleGroup(group);
+            ToggleGroup toggleGroup = new ToggleGroup();
+            sexe_medecin_homme.setToggleGroup(toggleGroup);
+            sexe_medecin_femme.setToggleGroup(toggleGroup);
             
             if(currentMedecin.getSexe()==null){
                 sexe_medecin_homme.setSelected(true);
@@ -155,24 +172,26 @@ public class ProfileMedecinController implements Initializable {
                 sexe_medecin_femme.setSelected(true);
             }   
             
-            Image image = new Image(getClass().getResourceAsStream("../gui/user1.png")); // Replace with the path to your actual image file
+            Image image = new Image(getClass().getResourceAsStream("../gui/images/pngegg.png")); // Replace with the path to your actual image file
             if(currentMedecin.getImage()== null){
-                //image_medecin.setImage(image);
-                circleImg.setFill(new ImagePattern(image));
+                  circleImg.setFill(new ImagePattern(image));
+                  circleImg.setStroke(Color.TRANSPARENT);
 
             }else{
-                byte[] imageData = currentMedecin.getImage().getBytes(); // Replace "image" with the actual column name that stores the image data
-
-                // Convert the image data to an InputStream
-                InputStream inputStream = new ByteArrayInputStream(imageData);
-                // Create an Image object from the InputStream
-                Image imageMedecin = new Image(inputStream);  
-                System.out.println(imageMedecin);
-                image_medecin.setImage(imageMedecin);
+                String imagePath = "c:/uploads/" + currentMedecin.getImage();
+                try {
+                    File imageFile = new File(imagePath);
+                    FileInputStream fileInputStream = new FileInputStream(imageFile);
+                    Image imageMedecin = new Image(fileInputStream);
+                    circleImg.setFill(new ImagePattern(imageMedecin));
+                    circleImg.setStroke(Color.TRANSPARENT);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+                
             }
-            
-          
-    }    
+ }
+              
     
     
       
@@ -195,6 +214,48 @@ public class ProfileMedecinController implements Initializable {
             stageRegister .show();
     }
     
+     @FXML
+    private void AjouterPhoto() throws IOException {
+        
+        Stage primaryStage = null;
+       // Use FileChooser to choose an image file
+        if (fileChooser == null) {
+            fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        }
+        File selectedFile = fileChooser.showOpenDialog(null);
+        
+        if (selectedFile != null) {
+            try {
+                // Display the chosen image in the ImageView
+                Image image = new Image(new FileInputStream(selectedFile));
+                circleImg.setFill(new ImagePattern(image));
+                 // Copy the image to the destination directory
+                String destinationDirectoryPath = "c:/uploads/"; 
+                String imageName = selectedFile.getName(); 
+                Path source = selectedFile.toPath();
+                Path destination = new File(destinationDirectoryPath + imageName).toPath();
+                Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image copied to: " + destinationDirectoryPath + imageName);
+                User currentMedecin = Session.getInstance().getUser();
+                int id =currentMedecin.getId();
+       
+                User user= new User(id,imageName);
+                UserService userService = new UserService();
+                userService.updateUserImage(user);
+                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                 alert.setTitle("AJOUT AVEC SUCCES");
+                 alert.setHeaderText(null);
+                 alert.setContentText("image ajoutés avec succées");
+                 alert.showAndWait();
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+    }
+    
     
     
     
@@ -209,31 +270,49 @@ public class ProfileMedecinController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez votre nom");
             alert.showAndWait();  
+        }else if(nom_medecin.getText().length()<3){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("Votre prenom doit comporter au moins 2 caractères");
+             alert.showAndWait();
         }else if(prenom_medecin.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("vous devez entrez votre prenom");
             alert.showAndWait();  
-        }else if(email_medecin.getText().equals("")){
+        }else if(prenom_medecin.getText().length()<3){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("Votre nom doit comporter au moins 2 caractères");
+             alert.showAndWait();
+        }
+        else if(email_medecin.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez votre email");
             alert.showAndWait();  
+            
+        }
+         else if(!email_medecin.getText().matches(EMAIL_REGEX)){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("Email invalide");
+             alert.showAndWait();
         }else if(dateNaissance_medecin.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez votre date de naissance");
             alert.showAndWait();  
-        }else if(sexe_medecin_homme.getText().equals("") || sexe_medecin_femme.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre sexe");
-            alert.showAndWait();  
         }else if(tel_medecin.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Vous devez entrez votre téléphone");
-            alert.showAndWait();  
+            alert.showAndWait();   
+        }else if(!tel_medecin.getText().matches(TEL_REGEX)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Vous numéro de téléphone n'est pas valide");
+            alert.showAndWait();     
         }else if(adresse_medecin.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -263,12 +342,13 @@ public class ProfileMedecinController implements Initializable {
          String tel = tel_medecin.getText();
          String adresse = adresse_medecin.getText();
          String specialite=specialite_medecin.getText();
-         String image =image_medecin.getImage().toString();
-        
+         
+         
         User currentMedecin = Session.getInstance().getUser();
         int id =currentMedecin.getId();
-      
-        User user= new User(id,nom,prenom,email,dateNaissance,sexe,tel,adresse,specialite);
+        String image = currentMedecin.getImage();
+       
+        User user= new User(id,nom,prenom,email,dateNaissance,sexe,tel,adresse,specialite,image);
         UserService userService = new UserService();
         userService.updateMedecin(user);
         

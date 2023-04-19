@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="49.0" fitWidth="117.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@logoMedB.png" />
+                  <Image url="@images/logoMedB.png" />
                </image>
             </ImageView>
             <Button fx:id="button_login" layoutX="634.0" layoutY="16.0" mnemonicParsing="false" onAction="#loginAction" onMouseClicked="#loginAction" style="-fx-background-color: #15558d;" styleClass="my-button" text="Se connecter" textFill="WHITE">
@@ -48,7 +48,7 @@
       </Pane>
       <ImageView fitHeight="239.0" fitWidth="320.0" layoutX="46.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@login-banner.png" />
+            <Image url="@images/login-banner.png" />
          </image>
       </ImageView>
       <Label layoutX="449.0" layoutY="94.0" text="Inscription Pharmacien" textFill="#15558d">

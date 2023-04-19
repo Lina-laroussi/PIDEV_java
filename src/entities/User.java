@@ -35,8 +35,14 @@ public class User {
         this.nom = nom;
         this.prenom = prenom;
     }
+    
+    
+     public User(int id,String image) {
+        this.id=id;
+        this.Image=image;
+    }
      
-    public User(int id,String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse, String specialité) {
+    public User(int id,String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse, String specialité,String image) {
        
         this.id=id;
         this.nom = nom;
@@ -47,6 +53,7 @@ public class User {
         this.tel = tel;
         this.Adresse = Adresse;
         this.specialité = specialité;
+        this.Image=image;
     
     }
     
@@ -75,7 +82,7 @@ public class User {
     
     
     
-        public User(int id,String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse) {
+        public User(int id,String nom, String prenom,String email, Date date_de_naissance, String sexe, String tel, String Adresse,String image) {
        
         this.id=id;
         this.nom = nom;
@@ -85,13 +92,14 @@ public class User {
         this.sexe = sexe;
         this.tel = tel;
         this.Adresse = Adresse;
+        this.Image=image;
      
     }
     
     
     
 
-    public User(int id, String nom, String prenom, String email, String password, String etat, Date date_de_naissance, String roles,String Adresse,String sexe,String tel,String specialite,Date date_de_creation) {
+    public User(int id, String nom, String prenom, String email, String password, String etat, Date date_de_naissance, String roles,String Adresse,String sexe,String tel,String specialite,Date date_de_creation,String image) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -105,6 +113,7 @@ public class User {
         this.tel = tel;
         this.specialité = specialite;
         this.date_de_creation=date_de_creation;
+        this.Image=image;
         
     }
 

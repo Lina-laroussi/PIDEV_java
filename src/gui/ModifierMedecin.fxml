@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierMedecinController">
+<AnchorPane id="AnchorPane" prefHeight="621.0" prefWidth="525.0" style="-fx-background-color: #FFFFFF;" styleClass="parent" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierMedecinController">
        <children>
-       <Pane prefHeight="621.0" prefWidth="601.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
+       <Pane prefHeight="621.0" prefWidth="532.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
          <children>
             <Label layoutX="200.0" layoutY="24.0" text="Modifier Médecin" textFill="#15558d">
                <font>
@@ -23,11 +23,11 @@
             </Label>
          </children>
       </Pane>
-         <VBox layoutX="25.0" layoutY="60.0" prefHeight="561.0" prefWidth="533.0">
+         <VBox layoutY="60.0" prefHeight="561.0" prefWidth="601.0">
             <children>
                <VBox alignment="BOTTOM_CENTER" prefHeight="106.0" prefWidth="503.0" spacing="50.0">
                   <children>
-                     <HBox prefHeight="72.0" prefWidth="503.0">
+                     <HBox prefHeight="72.0" prefWidth="558.0">
                         <children>
                            <Label text="Nom">
                               <font>
@@ -38,9 +38,6 @@
                               </HBox.margin>
                            </Label>
                            <TextField fx:id="nom_medecin">
-                              <padding>
-                                 <Insets left="20.0" top="10.0" />
-                              </padding>
                               <HBox.margin>
                                  <Insets left="20.0" top="3.0" />
                               </HBox.margin>
@@ -60,9 +57,6 @@
                               <HBox.margin>
                                  <Insets left="20.0" top="3.0" />
                               </HBox.margin>
-                              <padding>
-                                 <Insets left="20.0" top="10.0" />
-                              </padding>
                            </TextField>
                         </children>
                         <padding>
@@ -71,7 +65,7 @@
                      </HBox>
                   </children>
                </VBox>
-               <HBox prefHeight="76.0" prefWidth="482.0">
+               <HBox prefHeight="76.0" prefWidth="558.0">
                   <children>
                      <Label text="Email">
                         <font>
@@ -93,9 +87,6 @@
                         </font>
                      </Label>
                      <TextField fx:id="email_medecin" prefHeight="27.0" prefWidth="401.0">
-                        <padding>
-                           <Insets left="200.0" top="10.0" />
-                        </padding>
                         <HBox.margin>
                            <Insets top="3.0" />
                         </HBox.margin>
@@ -105,7 +96,7 @@
                      <Insets left="20.0" top="15.0" />
                   </padding>
                </HBox>
-               <HBox prefHeight="72.0" prefWidth="676.0">
+               <HBox prefHeight="72.0" prefWidth="558.0">
                   <children>
                      <Label text="Date de naissance">
                         <font>
@@ -132,7 +123,7 @@
                      <Insets left="20.0" top="15.0" />
                   </padding>
                </HBox>
-               <HBox prefHeight="72.0" prefWidth="520.0">
+               <HBox prefHeight="67.0" prefWidth="601.0">
                   <children>
                      <Label text="Sexe">
                         <font>
@@ -196,9 +187,6 @@
                         </font>
                      </Label>
                      <TextField fx:id="tel_medecin" prefHeight="27.0" prefWidth="375.0">
-                        <padding>
-                           <Insets left="170.0" top="10.0" />
-                        </padding>
                         <HBox.margin>
                            <Insets top="3.0" />
                         </HBox.margin>
@@ -230,9 +218,6 @@
                         </font>
                      </Label>
                      <TextField fx:id="adresse_medecin" prefHeight="27.0" prefWidth="397.0">
-                        <padding>
-                           <Insets left="170.0" top="10.0" />
-                        </padding>
                         <HBox.margin>
                            <Insets top="3.0" />
                         </HBox.margin>
@@ -264,9 +249,6 @@
                      </font>
                   </Label>
                   <TextField fx:id="specialite_medecin" prefHeight="27.0" prefWidth="397.0">
-                     <padding>
-                        <Insets left="170.0" top="10.0" />
-                     </padding>
                      <HBox.margin>
                         <Insets top="3.0" />
                      </HBox.margin>
@@ -276,7 +258,7 @@
                   <Insets left="20.0" top="15.0" />
                </padding>
             </HBox>
-               <HBox alignment="CENTER" prefHeight="25.0" prefWidth="473.0">
+               <HBox alignment="CENTER" prefHeight="75.0" prefWidth="471.0">
                   <children>
                      <Label>
                         <HBox.margin>

@@ -87,7 +87,7 @@ public class LoginController implements Initializable {
                      Session.getInstance().setUser(user);
                      System.out.println(Session.getInstance().getUser());
                     
-                    if(user.getRoles().equals("['ROLE_ADMIN']")){
+                    if(user.getRoles().equals("[\"ROLE_ADMIN\"]")){
                         
                         Parent parentDashboard = FXMLLoader.load(getClass().getResource("../gui/DashboardAdmin.fxml"));
 
@@ -105,7 +105,7 @@ public class LoginController implements Initializable {
                             alert.setContentText("votre compte n'est pas validé par l'administrateur");
                             alert.showAndWait();
                             
-                    }else if (user.getRoles().equals("['ROLE_MEDECIN']")){
+                    }else if (user.getRoles().equals("[\"ROLE_MEDECIN\"]")){
                         Parent parentProfile = FXMLLoader.load(getClass().getResource("../gui/ProfileMedecin.fxml"));
 
                         Scene sceneProfile= new Scene(parentProfile);

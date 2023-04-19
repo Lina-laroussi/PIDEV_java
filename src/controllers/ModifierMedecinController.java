@@ -22,6 +22,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import services.AdminService;
 
@@ -57,59 +58,130 @@ public class ModifierMedecinController implements Initializable {
 
     @FXML
     private Button button_update;
+    
+    @FXML 
+    private ImageView image_medecin;
    
-    @FXML
-    private ToggleGroup group; 
      
+    private static final String EMAIL_REGEX = "^[\\w\\d._%+-]+@[\\w\\d.-]+\\.[A-Za-z]{2,}$";
+    private static final String TEL_REGEX="\\d{8}";
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
 
    
+    public void inflateUI(User u) {
+       nom_medecin.setText(u.getNom()); // Set the DatePicker value using the formatted date
+       prenom_medecin.setText(u.getPrenom());
+       email_medecin.setText(u.getEmail());
+       if(u.getDate_de_naissance()== null){
+                dateNaissance_medecin.setValue(LocalDate.now());
+       }else{
+       java.util.Date utilDate = new java.util.Date(u.getDate_de_naissance().getTime());
+                System.out.println(utilDate);
+                try{
+                    dateNaissance_medecin.setValue(utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+
+                }catch(Exception e){
+                    System.out.println(e);
+        }
+       }
+           ToggleGroup toggleGroup = new ToggleGroup();
+           sexe_medecin_homme.setToggleGroup(toggleGroup);
+           sexe_medecin_femme.setToggleGroup(toggleGroup);
+       if(u.getSexe()==null){
+                sexe_medecin_homme.setSelected(true);
+            }
+            else if(u.getSexe().equals("Homme")){
+                sexe_medecin_homme.setSelected(true);
+            }else{
+                sexe_medecin_homme.setSelected(false);
+                sexe_medecin_femme.setSelected(true);
+        }   
+        if(u.getAdresse()==null){
+                adresse_medecin.setText("Entrez votre adresse");
+           }else{
+                adresse_medecin.setText(u.getAdresse());
+           }
+           
+         if(u.getTel()==null){
+                tel_medecin.setText("Entrez votre tel");
+           }else{
+                tel_medecin.setText(u.getTel());
+         }
+         if(u.getSpecialité()==null){
+                specialite_medecin.setText("Entrez votre specialité");
+        }else{
+                specialite_medecin.setText(u.getSpecialité());
+        }
+    }
+    
+    
     @FXML
-    private void updateUser(ActionEvent event) throws SQLException {
+    public void updateUser(ActionEvent event) throws SQLException {
          try{
       
         if(nom_medecin.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre nom");
+            alert.setContentText("Vous devez entrez un nom");
             alert.showAndWait();  
+        }
+        else if(nom_medecin.getText().length()<3){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("le nom doit comporter au moins 2 caractères");
+             alert.showAndWait();   
+             
         }else if(prenom_medecin.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("vous devez entrez votre prenom");
-            alert.showAndWait();  
+            alert.setContentText("vous devez entrez un prenom");
+            alert.showAndWait(); 
+            
+        }else if(prenom_medecin.getText().length()<3){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("le prénom doit comporter au moins 2 caractères");
+             alert.showAndWait();   
         }else if(email_medecin.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre email");
+            alert.setContentText("Vous devez entrez un email");
             alert.showAndWait();  
+        }
+         else if(!email_medecin.getText().matches(EMAIL_REGEX)){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setHeaderText(null);
+             alert.setContentText("Email invalide");
+             alert.showAndWait();
         }else if(dateNaissance_medecin.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre date de naissance");
-            alert.showAndWait();  
-        }else if(sexe_medecin_homme.getText().equals("") || sexe_medecin_femme.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre sexe");
+            alert.setContentText("Vous devez entrez une date de naissance");
             alert.showAndWait();  
         }else if(tel_medecin.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre téléphone");
-            alert.showAndWait();  
+            alert.setContentText("Vous devez entrez le téléphone");
+            alert.showAndWait();   
+        }else if(!tel_medecin.getText().matches(TEL_REGEX)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Vous numéro de téléphone n'est pas valide");
+            alert.showAndWait();    
         }else if(adresse_medecin.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre adresse");
+            alert.setContentText("Vous devez entrez l'adresse");
             alert.showAndWait();  
         }else if(specialite_medecin.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez entrez votre specialite");
+            alert.setContentText("Vous devez entrez la specialite");
             alert.showAndWait();  
         }
         
@@ -128,14 +200,16 @@ public class ModifierMedecinController implements Initializable {
          String adresse = adresse_medecin.getText();
          String specialité = specialite_medecin.getText();
          
+         
         User user= new User(nom,prenom,email,dateNaissance,sexe,tel,adresse,specialité); 
         User currentUser = getUser(user);
         int id =currentUser.getId();
+        String image = currentUser.getImage();
         
-        User user1= new User(id,nom,prenom,email,dateNaissance,sexe,tel,adresse,specialité); 
+        User user1= new User(id,nom,prenom,email,dateNaissance,sexe,tel,adresse,specialité,image); 
         AdminService Adminservice = new AdminService();
-        Adminservice.updateMedecin(user1);
-                
+        User userUpdated = Adminservice.updateMedecin(user1);
+        System.out.println(user1);        
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("AJOUT AVEC SUCCES");
         alert.setHeaderText(null);
@@ -151,7 +225,7 @@ public class ModifierMedecinController implements Initializable {
             alert.showAndWait();
         }
         String title = "succes ";
-        String message = "planning modifié avec succes";
+        String message = "utilisateur modifié avec succes";
     }
     
       public User getUser(User currentUser) throws SQLException{
@@ -190,9 +264,9 @@ public class ModifierMedecinController implements Initializable {
             }else{
                 specialite_medecin.setText(currentUser.getSpecialité());
             }
-            
-           sexe_medecin_homme.setToggleGroup(group);
-           sexe_medecin_femme.setToggleGroup(group);
+           ToggleGroup toggleGroup = new ToggleGroup();
+           sexe_medecin_homme.setToggleGroup(toggleGroup);
+           sexe_medecin_femme.setToggleGroup(toggleGroup);
             if(currentUser.getTel()==null){
                sexe_medecin_homme.setSelected(true);
             }
@@ -206,10 +280,9 @@ public class ModifierMedecinController implements Initializable {
                 sexe_medecin_femme.setSelected(true);
             }
             
-           User userUpdate = new User(currentUser.getId(), currentUser.getNom(),  currentUser.getPrenom(), currentUser.getEmail(),  currentUser.getDate_de_naissance(),  currentUser.getSexe(),  currentUser.getTel(),  currentUser.getAdresse(),currentUser.getSpecialité());
+           User userUpdate = new User(currentUser.getId(), currentUser.getNom(),  currentUser.getPrenom(), currentUser.getEmail(),  currentUser.getDate_de_naissance(),  currentUser.getSexe(),  currentUser.getTel(),  currentUser.getAdresse(),currentUser.getSpecialité(),currentUser.getImage());
            AdminService adminService = new AdminService();
            User currentUser1 = adminService.getUser(userUpdate);
-           System.out.println(currentUser1);
         return currentUser1;
     }
 }

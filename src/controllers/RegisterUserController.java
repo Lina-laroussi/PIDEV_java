@@ -51,8 +51,7 @@ public class RegisterUserController implements Initializable {
     private Button button_register;
     
     private static final String EMAIL_REGEX = "^[\\w\\d._%+-]+@[\\w\\d.-]+\\.[A-Za-z]{2,}$";
-    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-    
+    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -132,7 +131,7 @@ public class RegisterUserController implements Initializable {
             String email = tf_email.getText();
             String password = tf_password.getText();
           
-     
+        try{
             User patient= new User(nom,prenom,email,password);
             UserService us = new UserService();
             
@@ -152,6 +151,10 @@ public class RegisterUserController implements Initializable {
         
             stageRegister.setScene(sceneRegister);
             stageRegister.show();
+            
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
                     
    }     
     }
@@ -229,7 +232,7 @@ public class RegisterUserController implements Initializable {
             String email = tf_email.getText();
             String password = tf_password.getText();
           
-     
+         try{
             User medecin= new User(nom,prenom,email,password);
             UserService us = new UserService();
             
@@ -249,6 +252,10 @@ public class RegisterUserController implements Initializable {
         
             stageRegister.setScene(sceneRegister);
             stageRegister.show();
+         }
+         catch(IOException e){
+             System.out.println(e.getMessage());
+         }
                     
    }     
     }
@@ -325,7 +332,7 @@ public class RegisterUserController implements Initializable {
             String email = tf_email.getText();
             String password = tf_password.getText();
           
-     
+     try{
             User pharmacien= new User(nom,prenom,email,password);
             UserService us = new UserService();
             
@@ -345,6 +352,10 @@ public class RegisterUserController implements Initializable {
         
             stageRegister.setScene(sceneRegister);
             stageRegister.show();
+            
+     }catch(IOException e){
+         System.out.println(e.getMessage());
+     }    
                     
    }     
     }
@@ -421,7 +432,7 @@ public class RegisterUserController implements Initializable {
             String email = tf_email.getText();
             String password = tf_password.getText();
           
-     
+         try{
             User assureur= new User(nom,prenom,email,password);
             UserService us = new UserService();
             
@@ -441,6 +452,9 @@ public class RegisterUserController implements Initializable {
         
             stageRegister.setScene(sceneRegister);
             stageRegister.show();
+         }catch(IOException e){
+             System.out.println(e.getMessage());
+         }    
                     
    }     
     }
