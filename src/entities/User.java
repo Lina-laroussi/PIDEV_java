@@ -29,6 +29,8 @@ public class User {
 
     public User() {
     }
+    
+    
 
     public User(int id,String nom, String prenom) {
         this.id=id;
@@ -36,8 +38,12 @@ public class User {
         this.prenom = prenom;
     }
     
+    public User(String email) {
+        this.email=email;
+    }
     
-     public User(int id,String image) {
+    
+    public User(int id,String image) {
         this.id=id;
         this.Image=image;
     }
@@ -118,7 +124,6 @@ public class User {
     }
 
     public User(String nom, String prenom, String email, String password) {
-        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;

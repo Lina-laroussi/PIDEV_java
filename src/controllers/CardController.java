@@ -6,11 +6,9 @@
 package controllers;
 
 import entities.User;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -25,12 +23,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import services.AdminService;
 
 
@@ -69,7 +65,7 @@ public class CardController implements Initializable {
                 circleImg.setFill(new ImagePattern(image));
                 circleImg.setStroke(Color.TRANSPARENT);
         }else{
-            String imagePath = "c:/uploads/" + user.getImage();
+            String imagePath = "c:/xampp/htdocs/uploads/" + user.getImage();
                 try {
                     File imageFile = new File(imagePath);
                     FileInputStream fileInputStream = new FileInputStream(imageFile);
@@ -83,14 +79,24 @@ public class CardController implements Initializable {
         username.setText(user.getNom().substring(0, 1).toUpperCase() +user.getNom().substring(1) +" "+ user.getPrenom().substring(0, 1).toUpperCase() +user.getPrenom().substring(1));
         email.setText(user.getEmail());
         etat.setText(user.getEtat());
-        if(user.getEtat().equals("valide")){
+        if(user.getEtat().equals("valide") && user.getRoles().equals("[\"ROLE_PATIENT\"]")){
+            btn_valider.setVisible(false);
+            etat.setText("Vérifié");
+            etat.setTextFill(Color.GREEN);     
+        }
+        else if(user.getEtat().equals("valide")){
             btn_valider.setVisible(false);
             etat.setText("Valide");
-            etat.setTextFill(Color.GREEN); // set the text color to red    
-        }else {
+            etat.setTextFill(Color.GREEN);    
+            
+        }else if(user.getEtat().equals("non vérifié"))  {
+             etat.setText("Non vérifié");
+             etat.setTextFill(Color.RED);
+        }else{
              etat.setText("Non valide");
              etat.setTextFill(Color.RED);
         }
+        
         if(user.getRoles().equals("[\"ROLE_MEDECIN\"]")){
             role.setText("Médecin");
             role.setTextFill(Color.DARKSLATEBLUE);

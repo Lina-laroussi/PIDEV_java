@@ -8,7 +8,11 @@ package controllers;
 import entities.User;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
@@ -24,9 +28,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import services.AdminService;
 import services.UserService;
+import utils.EmailUtils;
 import utils.Session;
-
 
 public class RegisterUserController implements Initializable {
 
@@ -134,25 +139,47 @@ public class RegisterUserController implements Initializable {
         try{
             User patient= new User(nom,prenom,email,password);
             UserService us = new UserService();
+           
             
-            us.registerPatient(patient);    
-              
+            us.registerPatient(patient);  
+            AdminService adminService1 = new AdminService();
+            
+            
+            String randomString = UUID.randomUUID().toString();
+            String verificationCode = adminService1.getUser(patient).getId() + "-" + randomString;
+            try{
+                 EmailUtils.sendVerificationCode(email, "votre compte est crée avec succées" , verificationCode);
+                 
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+               
+            
+            
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText(null);
-            alert.setContentText("votre compte a été ajouté avec succées ");
+            alert.setContentText("votre compte a été ajouté avec succées, un code a été envoyé à votre email pour verifier votre compte");
             alert.showAndWait();
             
-            Parent parentLogin = FXMLLoader.load(getClass().getResource("../gui/login.fxml"));
-        
-            Scene sceneRegister = new Scene(parentLogin);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/VerifyCode.fxml"));
+            Parent parent = loader.load();
+            VerifyCodeController controller = (VerifyCodeController) loader.getController();
+            System.out.println(verificationCode);
+            controller.verifierEmail(verificationCode);
+            try{
+                 User patient1= new User(nom,prenom,email,password);
+                 AdminService adminService = new AdminService();
+                 controller.getUser( adminService.getUser(patient1));
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
+            Scene sceneRegister = new Scene(parent);
             Stage stageRegister  = (Stage)((Node)event.getSource()).getScene().getWindow();
-       
             stageRegister.hide();
-        
             stageRegister.setScene(sceneRegister);
             stageRegister.show();
             
-        }catch(IOException e){
+        }catch(IOException | SQLException e){
             System.out.println(e.getMessage());
         }
                     
@@ -237,6 +264,12 @@ public class RegisterUserController implements Initializable {
             UserService us = new UserService();
             
             us.registerMedecin(medecin);    
+            
+            try{
+                 EmailUtils.sendEmail(email, "votre compte est crée avec succées",nom);
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
               
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText(null);
@@ -337,6 +370,11 @@ public class RegisterUserController implements Initializable {
             UserService us = new UserService();
             
             us.registerPharmacien(pharmacien);    
+            try{
+                 EmailUtils.sendEmail(email, "votre compte a été crée avec succées",nom);
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
               
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText(null);
@@ -437,6 +475,12 @@ public class RegisterUserController implements Initializable {
             UserService us = new UserService();
             
             us.registerAssureur(assureur);    
+            
+            try{
+                EmailUtils.sendEmail(email, "votre compte est crée avec succées",nom );
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
               
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText(null);

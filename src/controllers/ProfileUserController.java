@@ -147,7 +147,7 @@ public class ProfileUserController implements Initializable {
                 circleImg.setStroke(Color.TRANSPARENT);
 
             }else{
-                String imagePath = "c:/uploads/" + currentUser.getImage();
+                String imagePath = "c:/xampp/htdocs/uploads/" + currentUser.getImage();
                 try {
                     File imageFile = new File(imagePath);
                     FileInputStream fileInputStream = new FileInputStream(imageFile);
@@ -180,7 +180,7 @@ public class ProfileUserController implements Initializable {
                 Image image = new Image(new FileInputStream(selectedFile));
                  circleImg.setFill(new ImagePattern(image));
                  // Copy the image to the destination directory
-                String destinationDirectoryPath = "c:/uploads/"; 
+                String destinationDirectoryPath = "c:/xampp/htdocs/uploads/"; 
                 String imageName = selectedFile.getName(); 
                 Path source = selectedFile.toPath();
                 Path destination = new File(destinationDirectoryPath + imageName).toPath();

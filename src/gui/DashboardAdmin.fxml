@@ -142,7 +142,7 @@
                      <Insets />
                   </VBox.margin>
                   <children>
-                     <TextField fx:id="rechercher" prefHeight="31.0" prefWidth="208.0" promptText="Rechercher">
+                     <TextField fx:id="rechercher" onKeyReleased="#rechercherUsers" prefHeight="31.0" prefWidth="208.0" promptText="Rechercher">
                         <HBox.margin>
                            <Insets bottom="30.0" right="30.0" />
                         </HBox.margin>

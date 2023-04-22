@@ -10,7 +10,9 @@ import entities.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +26,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import services.AdminService;
 import services.UserService;
+import utils.EmailUtils;
 import utils.Session;
 
 
@@ -41,8 +45,12 @@ public class LoginController implements Initializable {
     private PasswordField tf_password;
     @FXML
     private Button button_login;
+    
     @FXML
     private Button button_register;
+    
+    @FXML
+    private Button button_oublié;
     
    
     private static final String EMAIL_REGEX = "^[\\w\\d._%+-]+@[\\w\\d.-]+\\.[A-Za-z]{2,}$";
@@ -83,7 +91,6 @@ public class LoginController implements Initializable {
             
             
             if(user!=null){
-                    //user = us.LoginUser(email, password);
                      Session.getInstance().setUser(user);
                      System.out.println(Session.getInstance().getUser());
                     
@@ -99,7 +106,41 @@ public class LoginController implements Initializable {
                         stageDashboard  .setScene(sceneDashboard );
                         stageDashboard  .show();
                     
-                    }else if(user.getEtat().equals("non valide")){
+                    }else if(user.getEtat().equals("non vérifié") ){
+                          String randomString = UUID.randomUUID().toString();
+                          String verificationCode = Session.getInstance().getUser().getId() + "-" + randomString;
+                         
+                         try{
+                                 EmailUtils.sendVerificationCode(email, "Nouveau code de verification" , verificationCode);
+
+                         }catch(Exception e){
+                                System.out.println(e.getMessage());
+                        }  
+                         Alert alert = new Alert(Alert.AlertType.ERROR);
+                         alert.setHeaderText(null);
+                         alert.setContentText("votre compte n'est pas vérifié,"
+                                    + "un code a été envoyé à votre email pour verifier votre compte");
+                         alert.showAndWait();
+                         
+                          FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/VerifyCode.fxml"));
+                          Parent parent = loader.load();
+                          VerifyCodeController controller = (VerifyCodeController) loader.getController();
+                          System.out.println(verificationCode);
+                          controller.verifierEmail(verificationCode);
+                          try{
+                                 AdminService adminService = new AdminService();
+                                 controller.getUser( adminService.getUser(Session.getInstance().getUser()));
+                          }catch(SQLException e){
+                                System.out.println(e.getMessage());
+                          }
+                            
+                          Scene sceneRegister = new Scene(parent);
+                          Stage stageRegister  = (Stage)((Node)event.getSource()).getScene().getWindow();
+                          stageRegister.hide();
+                          stageRegister.setScene(sceneRegister);
+                          stageRegister.show();    
+                            
+                    }else if(user.getEtat().equals("non valide") ){
                       Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setHeaderText(null);
                             alert.setContentText("votre compte n'est pas validé par l'administrateur");

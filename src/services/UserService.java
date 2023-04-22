@@ -35,13 +35,28 @@ public class UserService {
         st.setString(2,patient.getPrenom());
         st.setString(3,patient.getEmail());
         st.setString(4,password);
-        st.setString(5,"non valide");
+        st.setString(5,"non vérifié");
         st.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
         st.setString(7,"[\"ROLE_PATIENT\"]");
         st.executeUpdate();
         }catch(SQLException ex){
             System.out.println("Error in method add " +ex);
         }        
+    }
+     
+     
+     
+    public void VerifyPatient(User user) throws SQLException   {
+       String request = "UPDATE user SET etat='valide' WHERE email= ?" ;
+        try{
+           PreparedStatement st = cnx.prepareStatement(request); 
+            st.setString(1, user.getEmail());
+            st.executeUpdate();
+            System.out.println("email patient verified");
+        }
+        catch(SQLException ex){
+            System.out.println("erreur update "+ex);
+        }     
     }
      
      

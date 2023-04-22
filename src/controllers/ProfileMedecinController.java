@@ -178,7 +178,7 @@ public class ProfileMedecinController implements Initializable {
                   circleImg.setStroke(Color.TRANSPARENT);
 
             }else{
-                String imagePath = "c:/uploads/" + currentMedecin.getImage();
+                String imagePath = "c:/xampp/htdocs/uploads/" + currentMedecin.getImage();
                 try {
                     File imageFile = new File(imagePath);
                     FileInputStream fileInputStream = new FileInputStream(imageFile);
@@ -232,7 +232,7 @@ public class ProfileMedecinController implements Initializable {
                 Image image = new Image(new FileInputStream(selectedFile));
                 circleImg.setFill(new ImagePattern(image));
                  // Copy the image to the destination directory
-                String destinationDirectoryPath = "c:/uploads/"; 
+                String destinationDirectoryPath = "c:/xampp/htdocs/uploads/"; 
                 String imageName = selectedFile.getName(); 
                 Path source = selectedFile.toPath();
                 Path destination = new File(destinationDirectoryPath + imageName).toPath();
