@@ -57,6 +57,9 @@ public class ModifierUserController implements Initializable {
     @FXML
     private Button button_update;
 
+    @FXML
+    private Button button_bloquer;
+    
     
     @FXML 
     private ImageView image_user;

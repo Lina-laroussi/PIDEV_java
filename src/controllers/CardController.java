@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -48,6 +49,8 @@ public class CardController implements Initializable {
     private Button btn_valider;
     @FXML
     private Button btn_delete;
+    @FXML
+    private ImageView img_valider;
     
 
     User user;
@@ -79,16 +82,37 @@ public class CardController implements Initializable {
         username.setText(user.getNom().substring(0, 1).toUpperCase() +user.getNom().substring(1) +" "+ user.getPrenom().substring(0, 1).toUpperCase() +user.getPrenom().substring(1));
         email.setText(user.getEmail());
         etat.setText(user.getEtat());
-        if(user.getEtat().equals("valide") && user.getRoles().equals("[\"ROLE_PATIENT\"]")){
-            btn_valider.setVisible(false);
+        if(user.getEtat().equals("valide") && user.getRoles().equals("[\"ROLE_PATIENT\"]") && user.isIs_blocked()==false){
+            btn_valider.setStyle(
+                 "-fx-background-color: #f86d6d;"   
+            );
+            Image imagebtn = new Image(getClass().getResourceAsStream("../gui/images/lock1.png"));
+            img_valider.setImage(imagebtn);
+            btn_valider.setGraphic(img_valider);            
             etat.setText("Vérifié");
             etat.setTextFill(Color.GREEN);     
         }
-        else if(user.getEtat().equals("valide")){
-            btn_valider.setVisible(false);
+        else if(user.getEtat().equals("valide") && user.isIs_blocked()==false){
+            btn_valider.setStyle(
+                 "-fx-background-color: #f86d6d;"   
+            );
+            Image imagebtn = new Image(getClass().getResourceAsStream("../gui/images/lock1.png"));
+            img_valider.setImage(imagebtn);
+            btn_valider.setGraphic(img_valider);   
             etat.setText("Valide");
             etat.setTextFill(Color.GREEN);    
             
+        }else if(user.getEtat().equals("valide") && user.isIs_blocked()==true){
+            
+            btn_valider.setStyle(
+                 "-fx-background-color: #08d02d;"   
+            );
+            Image imagebtn = new Image(getClass().getResourceAsStream("../gui/images/unlock.png"));
+            img_valider.setImage(imagebtn);
+            btn_valider.setGraphic(img_valider);   
+            etat.setText("Bloqué");
+            etat.setTextFill(Color.RED);  
+        
         }else if(user.getEtat().equals("non vérifié"))  {
              etat.setText("Non vérifié");
              etat.setTextFill(Color.RED);
@@ -116,15 +140,16 @@ public class CardController implements Initializable {
     @FXML
     void deleteUser(ActionEvent event) throws SQLException {
         AdminService adminService = new AdminService();
-        try{
+       try{
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Suppression ? ");
+        alert.setHeaderText(null);
+        alert.setContentText("Voulez-vous vraiment supprimer cet utilisateur");
+        alert.showAndWait();
         adminService.deleteUser(user);
         setData(user);
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Suppression AVEC SUCCES");
-        alert.setHeaderText(null);
-        alert.setContentText("utilisateur supprimé");
-        alert.showAndWait();
-        }catch(RuntimeException ex){
+        
+       }catch(RuntimeException ex){
             System.out.println(ex);
             Alert alert = new Alert(Alert.AlertType.ERROR,"erreur",ButtonType.CLOSE);
             alert.showAndWait();
@@ -135,15 +160,33 @@ public class CardController implements Initializable {
      @FXML
     void validerUser(ActionEvent event) throws SQLException {
         AdminService adminService = new AdminService();
-        try{
-        adminService.ValidateUser(user);
-        setData(user);
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Validation AVEC SUCCES");
-        alert.setHeaderText(null);
-        alert.setContentText("utilisateur validée");
-        alert.showAndWait();
-        }catch(RuntimeException ex){
+       try{
+        if(user.getEtat().equals("non valide")){  
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Validation utilisateur");
+            alert.setHeaderText(null);
+            alert.setContentText("Voulez-vous vraiment valider cette utilisateur ?");
+            alert.showAndWait();
+            adminService.ValidateUser(user);
+            setData(user);
+        }else if(user.getEtat().equals("valide") && user.isIs_blocked()==false){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Bloquer utilisateur");
+            alert.setHeaderText(null);
+            alert.setContentText("Voulez-vous vraiment bloquer cette utilisateur ?");
+            alert.showAndWait();
+            adminService.BlockUser(user);
+            setData(user);
+        }else if(user.getEtat().equals("valide") && user.isIs_blocked()==true){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Débloquer utilisateur");
+            alert.setHeaderText(null);
+            alert.setContentText("Voulez-vous vraiment débloquer cette utilisateur ?");
+            alert.showAndWait();
+            adminService.UnblockUser(user);
+            setData(user);
+        }    
+       }catch(RuntimeException ex){
             System.out.println(ex);
             Alert alert = new Alert(Alert.AlertType.ERROR,"erreur",ButtonType.CLOSE);
             alert.showAndWait();
@@ -174,7 +217,7 @@ public class CardController implements Initializable {
                 Parent parent = loader.load();
 
                 ModifierUserController controller = (ModifierUserController) loader.getController();
-                // controller.inflateUI(this.user);
+                //controller.inflateUI(this.user);
                  User userUpdate = new User(user.getId(), user.getNom(),  user.getPrenom(), user.getEmail(),  user.getDate_de_naissance(),  user.getSexe(),  user.getTel(),  user.getAdresse(),user.getImage());
                  controller.getUser(userUpdate);
                   Scene scene = new Scene(parent);
@@ -185,7 +228,7 @@ public class CardController implements Initializable {
             }    
         }
         catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
     

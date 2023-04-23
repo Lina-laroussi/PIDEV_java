@@ -27,7 +27,7 @@ public class UserService {
     
     
      public void registerPatient(User patient) {
-       String request = "INSERT INTO User SET nom=?,prenom=?,email=?,password=?,etat=?,date_de_creation=?,roles=?" ;
+       String request = "INSERT INTO User SET nom=?,prenom=?,email=?,password=?,etat=?,date_de_creation=?,roles=?,is_blocked=?" ;
        try{
         String password = BCrypt.hashpw(patient.getPassword(),BCrypt.gensalt(13));
         PreparedStatement st = cnx.prepareStatement(request);
@@ -38,6 +38,7 @@ public class UserService {
         st.setString(5,"non vérifié");
         st.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
         st.setString(7,"[\"ROLE_PATIENT\"]");
+        st.setBoolean(8, false);
         st.executeUpdate();
         }catch(SQLException ex){
             System.out.println("Error in method add " +ex);
@@ -59,9 +60,22 @@ public class UserService {
         }     
     }
      
+    
+     public void updateUserPassword(User user ,String password) throws SQLException   {
+       String request = "UPDATE user SET password=\"" + password + "\"where email= ?" ;
+        try{
+           PreparedStatement st = cnx.prepareStatement(request); 
+            st.setString(1, user.getEmail());
+            st.executeUpdate();
+            System.out.println("user password updated");
+        }
+        catch(SQLException ex){
+            System.out.println("erreur update "+ex);
+        }     
+    }
      
      public void registerMedecin(User medecin) {
-       String request = "INSERT INTO User SET nom=?,prenom=?,email=?,password=?,etat=?,date_de_creation=?,roles=?" ;
+       String request = "INSERT INTO User SET nom=?,prenom=?,email=?,password=?,etat=?,date_de_creation=?,roles=?,is_blocked=?" ;
        try{
         String password = BCrypt.hashpw(medecin.getPassword(),BCrypt.gensalt(13));
         PreparedStatement st = cnx.prepareStatement(request);
@@ -72,6 +86,7 @@ public class UserService {
         st.setString(5,"non valide");
         st.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
         st.setString(7,"[\"ROLE_MEDECIN\"]");
+        st.setBoolean(8, false);
         st.executeUpdate();
         }catch(SQLException ex){
             System.out.println("Error in method add " +ex);
@@ -79,7 +94,7 @@ public class UserService {
     }
      
     public void registerPharmacien(User pharmacien) {
-       String request = "INSERT INTO User SET nom=?,prenom=?,email=?,password=?,etat=?,date_de_creation=?,roles=?" ;
+       String request = "INSERT INTO User SET nom=?,prenom=?,email=?,password=?,etat=?,date_de_creation=?,roles=?,is_blocked=?" ;
        try{
         String password = BCrypt.hashpw(pharmacien.getPassword(),BCrypt.gensalt(13));
         PreparedStatement st = cnx.prepareStatement(request);
@@ -90,6 +105,7 @@ public class UserService {
         st.setString(5,"non valide");
         st.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
         st.setString(7,"[\"ROLE_PHARMACIEN\"]");
+        st.setBoolean(8, false);
         st.executeUpdate();
         }catch(SQLException ex){
             System.out.println("Error in method add " +ex);
@@ -98,7 +114,7 @@ public class UserService {
     
     
      public void registerAssureur(User assureur) {
-       String request = "INSERT INTO User SET nom=?,prenom=?,email=?,password=?,etat=?,date_de_creation=?,roles=?" ;
+       String request = "INSERT INTO User SET nom=?,prenom=?,email=?,password=?,etat=?,date_de_creation=?,roles=?,is_blocked=?" ;
        try{
         String password = BCrypt.hashpw(assureur.getPassword(),BCrypt.gensalt(13));
         PreparedStatement st = cnx.prepareStatement(request);
@@ -109,6 +125,7 @@ public class UserService {
         st.setString(5,"non valide");
         st.setDate(6, new java.sql.Date(new java.util.Date().getTime()));
         st.setString(7,"[\"ROLE_ASSUREUR\"]");
+        st.setBoolean(8, false);
         st.executeUpdate();
         }catch(SQLException ex){
             System.out.println("Error in method add " +ex);
@@ -144,7 +161,8 @@ public class UserService {
                                 rs.getString(9),//tel
                                 rs.getString(13),//specialite
                                 rs.getDate(14),
-                                rs.getString(17)
+                                rs.getString(17),
+                                rs.getBoolean(21)
                                 );
                            
                 

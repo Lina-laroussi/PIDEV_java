@@ -59,6 +59,9 @@ public class ModifierMedecinController implements Initializable {
     @FXML
     private Button button_update;
     
+    @FXML
+    private Button button_bloquer;
+    
     @FXML 
     private ImageView image_medecin;
    
@@ -117,6 +120,7 @@ public class ModifierMedecinController implements Initializable {
         }else{
                 specialite_medecin.setText(u.getSpecialité());
         }
+            
     }
     
     
@@ -279,7 +283,7 @@ public class ModifierMedecinController implements Initializable {
                 sexe_medecin_homme.setSelected(false);
                 sexe_medecin_femme.setSelected(true);
             }
-            
+           
            User userUpdate = new User(currentUser.getId(), currentUser.getNom(),  currentUser.getPrenom(), currentUser.getEmail(),  currentUser.getDate_de_naissance(),  currentUser.getSexe(),  currentUser.getTel(),  currentUser.getAdresse(),currentUser.getSpecialité(),currentUser.getImage());
            AdminService adminService = new AdminService();
            User currentUser1 = adminService.getUser(userUpdate);

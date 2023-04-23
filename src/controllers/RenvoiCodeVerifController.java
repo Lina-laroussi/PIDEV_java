@@ -30,8 +30,6 @@ import utils.EmailUtils;
 public class RenvoiCodeVerifController implements Initializable {
 
     @FXML
-    private Button button_login;
-    @FXML
     private TextField tf_email;
     @FXML
     private Button button_renvoi_code;
@@ -43,18 +41,6 @@ public class RenvoiCodeVerifController implements Initializable {
     }    
 
     @FXML
-    private void loginAction(ActionEvent event) throws IOException {
-            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
-            Scene sceneRegister = new Scene(parentLogin);
-            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
-       
-            stageRegister .hide();
-        
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
-    }
-
-    @FXML
     private void RenvoyerCode(ActionEvent event) {
         
         String email = tf_email.getText();
@@ -64,7 +50,7 @@ public class RenvoiCodeVerifController implements Initializable {
            User user = new User(email);
            User patient = adminService.getUser(user);
            if(!email.equals(patient.getEmail())){
-                   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                   Alert alert = new Alert(Alert.AlertType.ERROR);
                    alert.setHeaderText(null);
                    alert.setContentText("Email incorrect");
                    alert.showAndWait();

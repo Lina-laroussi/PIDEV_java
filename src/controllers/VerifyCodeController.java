@@ -28,8 +28,7 @@ import utils.EmailUtils;
 
 public class VerifyCodeController implements Initializable {
 
-    @FXML
-    private Button button_login;
+  
     @FXML
     private TextField tf_code;
     @FXML
@@ -46,19 +45,7 @@ public class VerifyCodeController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void loginAction(ActionEvent event) throws IOException {
-        
-            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
-            Scene sceneRegister = new Scene(parentLogin);
-            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
-       
-            stageRegister .hide();
-        
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
-    }
-    
+ 
     
     
     public String verifierEmail(String verificationCode){

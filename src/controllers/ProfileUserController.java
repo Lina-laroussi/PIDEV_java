@@ -49,8 +49,6 @@ public class ProfileUserController implements Initializable {
 
     
     @FXML
-    private Label username;
-    @FXML
     private TextField nom_user;
      
     @FXML
@@ -75,25 +73,15 @@ public class ProfileUserController implements Initializable {
     @FXML
     private RadioButton sexe_user_femme;   
     
-    @FXML
-    private Circle circleImg;
-    
-    @FXML
-    private ImageView image_user;
-    
-    @FXML
-    private Button button_image;
     
     private static final String EMAIL_REGEX = "^[\\w\\d._%+-]+@[\\w\\d.-]+\\.[A-Za-z]{2,}$";
     private static final String TEL_REGEX="\\d{8}";
-    private FileChooser fileChooser;
 
  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         User currentUser = Session.getInstance().getUser();
         System.out.println(currentUser);
-            username.setText(currentUser.getNom().substring(0, 1).toUpperCase() +currentUser.getNom().substring(1) +" "+ currentUser.getPrenom().substring(0, 1).toUpperCase() +currentUser.getPrenom().substring(1));
             nom_user.setText(currentUser.getNom());
             prenom_user.setText(currentUser.getPrenom());
             email_user.setText(currentUser.getEmail()); 
@@ -139,70 +127,11 @@ public class ProfileUserController implements Initializable {
             }else{
                 sexe_user_homme.setSelected(false);
                 sexe_user_femme.setSelected(true);
-            }   
-            
-            Image image = new Image(getClass().getResourceAsStream("../gui/images/pngegg.png")); // Replace with the path to your actual image file
-            if(currentUser.getImage()== null){
-                circleImg.setFill(new ImagePattern(image));
-                circleImg.setStroke(Color.TRANSPARENT);
-
-            }else{
-                String imagePath = "c:/xampp/htdocs/uploads/" + currentUser.getImage();
-                try {
-                    File imageFile = new File(imagePath);
-                    FileInputStream fileInputStream = new FileInputStream(imageFile);
-                    Image imageUser = new Image(fileInputStream);
-                    //image_user.setImage(imageUser);
-                     circleImg.setFill(new ImagePattern(imageUser));
-                     circleImg.setStroke(Color.TRANSPARENT);
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
+            }          
     }    
     
     
-       @FXML
-    private void AjouterPhoto() throws IOException {
-        
-        Stage primaryStage = null;
-       // Use FileChooser to choose an image file
-        if (fileChooser == null) {
-            fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
-        }
-        File selectedFile = fileChooser.showOpenDialog(null);
-        
-        if (selectedFile != null) {
-            try {
-                // Display the chosen image in the ImageView
-                Image image = new Image(new FileInputStream(selectedFile));
-                 circleImg.setFill(new ImagePattern(image));
-                 // Copy the image to the destination directory
-                String destinationDirectoryPath = "c:/xampp/htdocs/uploads/"; 
-                String imageName = selectedFile.getName(); 
-                Path source = selectedFile.toPath();
-                Path destination = new File(destinationDirectoryPath + imageName).toPath();
-                Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Image copied to: " + destinationDirectoryPath + imageName);
-                User currentUser = Session.getInstance().getUser();
-                int id =currentUser.getId();
-       
-                User user= new User(id,imageName);
-                UserService userService = new UserService();
-                userService.updateUserImage(user);
-                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                 alert.setTitle("AJOUT AVEC SUCCES");
-                 alert.setHeaderText(null);
-                 alert.setContentText("image ajoutés avec succées");
-                 alert.showAndWait();
-                
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-    }
-    }
+      
     
     
      @FXML
@@ -310,28 +239,5 @@ public class ProfileUserController implements Initializable {
         String message = "planning modifié avec succes";
      
     }
-    
-    
-    
-    
-    @FXML
-    private void deconnectAction(ActionEvent event) throws IOException {
-        
-            User user = new User();
-            Session.getInstance().setUser(user);
-            System.out.println(user);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("deconnexion réussie ");
-            alert.showAndWait();   
-            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
-            Scene sceneRegister = new Scene(parentLogin);
-            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
-       
-            stageRegister .hide();
-        
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
-    }
-   
+      
 }

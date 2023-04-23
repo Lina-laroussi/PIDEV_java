@@ -108,4 +108,51 @@ public class EmailUtils {
       Transport.send(message);
       System.out.println("Message sent successfully!");
    }
+    
+    
+    
+    
+    public static void sendPassword(String to, String subject, String randomPassword) throws Exception {
+        
+      String from = "medcare.nonreply@gmail.com";
+      String password = "qyarrspaqlrqgqgf";
+      String host = "smtp.gmail.com";
+
+      // Get system properties
+      Properties properties = System.getProperties();
+
+      // Setup mail server
+      properties.setProperty("mail.smtp.host", host);
+      properties.put("mail.smtp.auth", "true");
+      properties.put("mail.smtp.port", "465");
+      properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+      properties.put("mail.smtp.socketFactory.port", "465");
+
+      // Get default session object
+      Session session = Session.getDefaultInstance(properties,
+         new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+               return new PasswordAuthentication(from, password);
+            }
+         });
+
+      // Create message
+      MimeMessage message = new MimeMessage(session);
+      message.setFrom(new InternetAddress(from));
+      message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+      message.setSubject(subject);
+      String htmlBody = "<html><body>" +
+                         "<h1>Nouveau mot de passe</h1>" +
+                         "<p>Votre nouveau mot de passe est: <strong>" + randomPassword + "</strong></p>" +
+                         "<p>Vous devez changer votre mot de passe</p>" +
+                         "</body></html>";
+      
+      message.setContent(htmlBody, "text/html");
+      // Send message
+      Transport.send(message);
+      System.out.println("Message sent successfully!");
+   }  
+    
+    
 }

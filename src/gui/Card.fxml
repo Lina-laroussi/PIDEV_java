@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="300.0" style="-fx-border-radius: 30px; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CardController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="300.0" style="-fx-background-radius: 30px; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CardController">
    <children>
       <HBox alignment="CENTER" prefHeight="109.0" prefWidth="400.0">
          <children>
@@ -75,7 +75,7 @@
             </Button>
             <Button fx:id="btn_valider" mnemonicParsing="false" onAction="#validerUser" onMouseClicked="#validerUser" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #08d02d;">
                <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="img_valider" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/check.png" />
                      </image>

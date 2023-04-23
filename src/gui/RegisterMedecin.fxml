@@ -12,40 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegisterUserController">
    <children>
-      <Pane prefHeight="59.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
-         <children>
-            <ImageView fitHeight="49.0" fitWidth="117.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/logoMedB.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="button_login" layoutX="634.0" layoutY="16.0" mnemonicParsing="false" onAction="#loginAction" onMouseClicked="#loginAction" style="-fx-background-color: #15558d;" styleClass="my-button" text="Se connecter" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button layoutX="156.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Accueil">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button layoutX="226.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Médecins">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button layoutX="304.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Pharmacies">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button layoutX="391.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Doctoshop">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
+       <fx:include source="Menu.fxml"/>  
       <ImageView fitHeight="239.0" fitWidth="320.0" layoutX="46.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/login-banner.png" />

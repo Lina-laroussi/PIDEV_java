@@ -29,7 +29,7 @@ public class AdminService {
     }
     
     public ObservableList<User> ListUsers() throws SQLException {
-        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image FROM user WHERE (NOT(roles LIKE '%ROLE_ADMIN%') AND etat != 'deleted')";
+        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image,is_blocked FROM user WHERE (NOT(roles LIKE '%ROLE_ADMIN%') AND etat != 'deleted')";
         ObservableList<User> UserList =  FXCollections.observableArrayList();
         try {
             PreparedStatement st2 = cnx.prepareStatement(request);
@@ -50,7 +50,8 @@ public class AdminService {
                 String roles = resultSet.getString("roles");
                 Date date_de_creation = resultSet.getDate("date_de_creation");  
                 String image= resultSet.getString("image");
-                User user = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image);               
+                Boolean is_blocked=resultSet.getBoolean("is_blocked");
+                User user = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image,is_blocked);               
                 UserList.add(user);
             }
              
@@ -88,7 +89,34 @@ public class AdminService {
             System.out.println("erreur update "+ex);
         }     
     }
+     
+     public void BlockUser(User user) throws SQLException   {
+       String request = "UPDATE user SET is_blocked=? WHERE id=" + user.getId()+"" ;
+        try{
+           PreparedStatement st = cnx.prepareStatement(request);  
+            st.setBoolean(1, true);
+            st.executeUpdate();
+            System.out.println("user blocked");
+        }
+        catch(SQLException ex){
+            System.out.println("erreur update "+ex);
+        }     
+    } 
     
+     
+     public void UnblockUser(User user) throws SQLException   {
+       String request = "UPDATE user SET is_blocked=? WHERE id=" + user.getId()+"" ;
+        try{
+           PreparedStatement st = cnx.prepareStatement(request);  
+            st.setBoolean(1, false);
+            st.executeUpdate();
+            System.out.println("user unblocked");
+        }
+        catch(SQLException ex){
+            System.out.println("erreur update "+ex);
+        }     
+    } 
+     
     
     public User updateUser(User user) throws SQLException {
         String request = "UPDATE user SET nom =\""+ user.getNom()+ "\",prenom=\""+ user.getPrenom()+ "\",email=\""+ user.getEmail()+ "\",date_de_naissance=\"" + new java.sql.Date(user.getDate_de_naissance().getTime())+ "\",sexe=\""+ user.getSexe()+ "\",num_tel=\""+ user.getTel()+ "\",adresse=\""+ user.getAdresse()+ "\"where id="+ user.getId()+"";
@@ -118,7 +146,7 @@ public class AdminService {
     
     
      public User getUser(User user) throws SQLException {
-        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image FROM user WHERE email= ?" ;
+        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image,is_blocked FROM user WHERE email= ?" ;
         User  user1 =  new User();
         try {
             PreparedStatement st2 = cnx.prepareStatement(request);
@@ -140,7 +168,8 @@ public class AdminService {
                 String roles = resultSet.getString("roles");
                 Date date_de_creation = resultSet.getDate("date_de_creation");  
                 String image= resultSet.getString("image");
-                user1 = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image);
+                Boolean is_blocked=resultSet.getBoolean("is_blocked");
+                user1 = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image,is_blocked);
             }
              
         } catch (SQLException ex) {

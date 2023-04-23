@@ -59,12 +59,7 @@ import utils.Session;
 
 public class ProfileMedecinController implements Initializable {
 
- 
-    
-    @FXML
-    private Label username;
-    
-    
+        
     @FXML
     private TextField nom_medecin;
      
@@ -85,33 +80,19 @@ public class ProfileMedecinController implements Initializable {
     
     @FXML
     private TextField specialite_medecin;
-    
-    @FXML 
-    private ImageView image_medecin;
-    
+      
     @FXML
     private RadioButton sexe_medecin_homme;   
     
     @FXML
     private RadioButton sexe_medecin_femme;    
-    
-    @FXML
-    private Button add_photo; 
-    
-    @FXML
-    private Button button_image;
-    
-    @FXML
-    private Circle circleImg;
-    
-    
+       
     
     
         
     private static final String EMAIL_REGEX = "^[\\w\\d._%+-]+@[\\w\\d.-]+\\.[A-Za-z]{2,}$";
     private static final String TEL_REGEX="\\d{8}";
 
-    private FileChooser fileChooser;
     
      
 
@@ -121,7 +102,6 @@ public class ProfileMedecinController implements Initializable {
        
         User currentMedecin = Session.getInstance().getUser();
         System.out.println(currentMedecin);
-            username.setText(currentMedecin.getNom().substring(0, 1).toUpperCase() +currentMedecin.getNom().substring(1) +" "+ currentMedecin.getPrenom().substring(0, 1).toUpperCase() +currentMedecin.getPrenom().substring(1));
             nom_medecin.setText(currentMedecin.getNom());
             prenom_medecin.setText(currentMedecin.getPrenom());
             email_medecin.setText(currentMedecin.getEmail()); 
@@ -172,93 +152,10 @@ public class ProfileMedecinController implements Initializable {
                 sexe_medecin_femme.setSelected(true);
             }   
             
-            Image image = new Image(getClass().getResourceAsStream("../gui/images/pngegg.png")); // Replace with the path to your actual image file
-            if(currentMedecin.getImage()== null){
-                  circleImg.setFill(new ImagePattern(image));
-                  circleImg.setStroke(Color.TRANSPARENT);
-
-            }else{
-                String imagePath = "c:/xampp/htdocs/uploads/" + currentMedecin.getImage();
-                try {
-                    File imageFile = new File(imagePath);
-                    FileInputStream fileInputStream = new FileInputStream(imageFile);
-                    Image imageMedecin = new Image(fileInputStream);
-                    circleImg.setFill(new ImagePattern(imageMedecin));
-                    circleImg.setStroke(Color.TRANSPARENT);
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
-                
-            }
+           
  }
               
-    
-    
-      
-      @FXML
-    private void deconnectAction(ActionEvent event) throws IOException {
-        
-            
-            Session.getInstance().clear();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("deconnexion réussie ");
-            alert.showAndWait();   
-            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
-            Scene sceneRegister = new Scene(parentLogin);
-            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
-       
-            stageRegister .hide();
-        
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
-    }
-    
-     @FXML
-    private void AjouterPhoto() throws IOException {
-        
-        Stage primaryStage = null;
-       // Use FileChooser to choose an image file
-        if (fileChooser == null) {
-            fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
-        }
-        File selectedFile = fileChooser.showOpenDialog(null);
-        
-        if (selectedFile != null) {
-            try {
-                // Display the chosen image in the ImageView
-                Image image = new Image(new FileInputStream(selectedFile));
-                circleImg.setFill(new ImagePattern(image));
-                 // Copy the image to the destination directory
-                String destinationDirectoryPath = "c:/xampp/htdocs/uploads/"; 
-                String imageName = selectedFile.getName(); 
-                Path source = selectedFile.toPath();
-                Path destination = new File(destinationDirectoryPath + imageName).toPath();
-                Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Image copied to: " + destinationDirectoryPath + imageName);
-                User currentMedecin = Session.getInstance().getUser();
-                int id =currentMedecin.getId();
-       
-                User user= new User(id,imageName);
-                UserService userService = new UserService();
-                userService.updateUserImage(user);
-                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                 alert.setTitle("AJOUT AVEC SUCCES");
-                 alert.setHeaderText(null);
-                 alert.setContentText("image ajoutés avec succées");
-                 alert.showAndWait();
-                
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-    }
-    }
-    
-    
-    
-    
+     
    
     @FXML
     private void updateMedecin(ActionEvent event) throws Exception {
@@ -372,8 +269,5 @@ public class ProfileMedecinController implements Initializable {
         String message = "planning modifié avec succes";
      
     }
-    
    
-     
-    
 }

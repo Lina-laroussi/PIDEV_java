@@ -15,10 +15,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 
 public class Choose_profileController implements Initializable {
+
+    
+    @FXML
+    private Button button_patient;
+
+    @FXML
+    private Button button_medecin;
+
+    @FXML
+    private Button button_pharmacien;
+
+    @FXML
+    private Button button_assureur;
 
     /**
      * Initializes the controller class.
@@ -82,18 +96,7 @@ public class Choose_profileController implements Initializable {
             stageRegister .show();
     }
     
-    @FXML
-    private void loginAction(ActionEvent event) throws IOException {
-        
-            Parent parentRegister= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
-            Scene sceneRegister = new Scene(parentRegister);
-            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
-       
-            stageRegister .hide();
-        
-            stageRegister.setScene(sceneRegister);
-            stageRegister .show();
-    }
+   
     
     
     

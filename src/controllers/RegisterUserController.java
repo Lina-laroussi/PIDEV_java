@@ -504,10 +504,10 @@ public class RegisterUserController implements Initializable {
     }
      
     
-      @FXML
+     @FXML
     private void loginAction(ActionEvent event) throws IOException {
         
-            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/login.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
             Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
        
@@ -516,5 +516,7 @@ public class RegisterUserController implements Initializable {
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
     }
+    
+  
     
 }

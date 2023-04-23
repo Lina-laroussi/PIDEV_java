@@ -138,24 +138,7 @@ public class DashboardAdminController implements Initializable {
            
     
     
-    @FXML
-    private void deconnectAction(ActionEvent event) throws IOException {
-        
-            
-            Session.getInstance().clear();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("deconnexion réussie ");
-            alert.showAndWait();   
-            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
-            Scene sceneRegister = new Scene(parentLogin);
-            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
-       
-            stageRegister .hide();
-        
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
-    }
+ 
     
 }    
     
