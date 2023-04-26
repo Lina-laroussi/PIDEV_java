@@ -87,7 +87,7 @@ public class CardController implements Initializable {
         circleImg.setFill(new ImagePattern(im));
         nameLb.setText(rdv.getFullName());
         dateLb.setText(rdv.getDate().toString());
-        heureLb.setText(rdv.getHeureDebut().toString()+"-" + rdv.getHeureFin().toString());
+        heureLb.setText(rdv.getHeureDebut().toString().substring(0, 5)+"-" + rdv.getHeureFin().toString().substring(0, 5));
         symptomesLb.setText(rdv.getSymptomes().substring(0, Math.min(rdv.getSymptomes().length(), maxLength)));
         if (rdv.getSymptomes().length() > maxLength) {
         Tooltip tooltip = new Tooltip(rdv.getSymptomes()); // create a tooltip to show the full text

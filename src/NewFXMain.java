@@ -10,6 +10,8 @@ import controllers.AfficherPlanningController;
 import controllers.AjouterPlanningController;
 import controllers.MedecinDashbordController;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -45,6 +47,7 @@ public class NewFXMain extends Application {
             //AfficherPlanningController controller = loader.getController();
 
             primaryStage.setScene(scene);
+           // primaryStage.setScene(new Scene(new FullCalendarView(LocalDate.now()).getView()));
             primaryStage.setTitle("Medcare");
             primaryStage.show();
             

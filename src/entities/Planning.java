@@ -19,6 +19,7 @@ public class Planning {
     private Date DateFin;
     private Date heureDebut;
     private Date heureFin;
+    private int idMedecin;
 
     public Planning() {
     }
@@ -40,13 +41,28 @@ public class Planning {
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
     }
-
+    public Planning(int idPlanning, Date dateDebut, Date DateFin, Date heureDebut, Date heureFin,String etat) {
+        this.idPlanning = idPlanning;
+        this.etat = etat;
+        this.dateDebut = dateDebut;
+        this.DateFin = DateFin;
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin;
+    }
     public Planning(String description, Date dateDebut, Date DateFin, Date heureDebut, Date heureFin) {
         this.description = description;
         this.dateDebut = dateDebut;
         this.DateFin = DateFin;
         this.heureDebut = heureDebut;
         this.heureFin = heureFin;
+    }
+
+    public int getIdMedecin() {
+        return idMedecin;
+    }
+
+    public void setIdMedecin(int idMedecin) {
+        this.idMedecin = idMedecin;
     }
 
     public Planning(String description, Date dateDebut, Date DateFin) {

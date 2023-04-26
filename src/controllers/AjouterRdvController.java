@@ -46,7 +46,7 @@ public class AjouterRdvController implements Initializable{
     private JFXTextArea tf_symptomes;
     private final Connection cnx;
     private PreparedStatement ste;
-    
+    private RendezVous rdv ;
     private int planningId;
     
     public AjouterRdvController() {
@@ -61,6 +61,14 @@ public class AjouterRdvController implements Initializable{
     }  
     public void setPlanningId(Planning p){
         this.planningId = p.getIdPlanning();
+    }
+    public void setDate(LocalDate d){
+        tf_date.setValue(d);
+        tf_date.setDisable(true);
+
+    }
+    public RendezVous getRdv(){
+        return this.rdv;
     }
 
     @FXML
@@ -104,7 +112,8 @@ public class AjouterRdvController implements Initializable{
                  Date heureFin = heureFormat.parse(tf_heure_fin.getValue().toString());
                  System.out.println("date controller"+date);
                  
-                RendezVous rdv = new RendezVous(tf_symptomes.getText(), "en attente",date,heureDebut,heureFin,planningId);
+                rdv = new RendezVous(tf_symptomes.getText(), "en attente",date,heureDebut,heureFin,planningId);
+                rdv.setIdPatient(2);
                 RendezVousService rendezVousService = new RendezVousService();
                 rendezVousService.ajouterRendezVous(rdv);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

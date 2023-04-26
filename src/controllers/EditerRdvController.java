@@ -60,6 +60,10 @@ public class EditerRdvController implements Initializable {
     
     private PreparedStatement ste;
     
+    private Runnable onValiderAction;
+    
+    private RendezVous rdv;
+    
     SimpleDateFormat heureFormatPicker = new SimpleDateFormat("HH:mm");
     
     SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy"); // Change the output format to match the format accepted by JFoenix DatePicker
@@ -75,7 +79,9 @@ public class EditerRdvController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }   
-    
+    public void setOnValiderAction(Runnable action) {
+        this.onValiderAction = action;
+    }
     public void inflateUI(RendezVous rdv) {
        rdvId= rdv.getIdRdv();
        planningId = rdv.getIdPlanning();
@@ -86,7 +92,14 @@ public class EditerRdvController implements Initializable {
        tf_symptomes.setText(rdv.getSymptomes());
         
     }   
+    public void setDate(LocalDate d){
+        tf_date.setValue(d);
+        tf_date.setDisable(true);
 
+    }
+    public RendezVous getRendezVous(){
+        return this.rdv;
+    }
     @FXML
     private void Valider(ActionEvent event) {
         
@@ -127,7 +140,8 @@ try{
                 Date heureFin = heureFormat.parse(tf_heure_fin.getValue().toString());
                 System.out.println("date controller"+date);
 
-                 RendezVous rdv = new RendezVous(rdvId,tf_symptomes.getText(), etat,date,heureDebut,heureFin,planningId);
+                RendezVous rdv = new RendezVous(rdvId,tf_symptomes.getText(), etat,date,heureDebut,heureFin,planningId);
+                this.rdv = rdv;
                 RendezVousService rendezVousService = new RendezVousService();
                 rendezVousService.editerRdv(rdv);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -135,6 +149,9 @@ try{
                 alert.setHeaderText(null);
                 alert.setContentText("rendezVous modifié avec succès");
                 alert.showAndWait();
+                if (onValiderAction != null) {
+                    onValiderAction.run();
+                }
                 }catch (ParseException ex) {
                 System.out.println(ex.getMessage());
             }

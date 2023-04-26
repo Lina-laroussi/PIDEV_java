@@ -10,6 +10,7 @@ import entities.RendezVous;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,6 +23,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -31,8 +35,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import services.PlanningService;
 import services.RendezVousService;
+import controllers.FullCalendarView;
 
 /**
  * FXML Controller class
@@ -145,5 +151,22 @@ public class MedecinDashbordController implements Initializable {
      
         afficherRdvs();
     }
-    
+    @FXML
+    void showCalendar(ActionEvent event) {
+          //Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            Parent root = FXMLLoader.load(getClass().getResource("./gui/MedecinDashbord.fxml"));
+            //Scene scene = new Scene(root);
+            //AfficherPlanningController controller = loader.getController();
+
+            //primaryStage.setScene(scene);
+            ///primaryStage.setScene(new Scene(new FullCalendarView(LocalDate.now()).getView()));
+            //primaryStage.setTitle("Medcare");
+           // primaryStage.show();
+           bigContainer.getChildren().clear();
+           bigContainer.getChildren().add(new FullCalendarView(LocalDate.now()).getView());
+            
+
+
+    }
+
 }

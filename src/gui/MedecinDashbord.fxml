@@ -104,7 +104,7 @@
                <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="308.0" prefHeight="47.0" prefWidth="206.0">
                   <children>
                      <FontAwesomeIconView fill="#4480bc" glyphName="CALENDAR" size="15" text="" />
-                     <Button mnemonicParsing="false" style="-fx-background-color: #ffffff;" text="Calendrier" textFill="#515050">
+                     <Button mnemonicParsing="false" onAction="#showCalendar" style="-fx-background-color: #ffffff;" text="Calendrier" textFill="#515050">
                         <font>
                            <Font size="14.0" />
                         </font>

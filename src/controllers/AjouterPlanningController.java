@@ -113,6 +113,7 @@ try{
         System.out.println("date controller"+dateDebut);
         
         Planning p = new Planning(tf_description.getText(),dateDebut,dateFin,heureDebut,heureFin);
+        p.setIdMedecin(1);
         PlanningService planningService = new PlanningService();
         planningService.ajouterPlanning(p);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -5,13 +5,14 @@
  */
 package entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author rouai
  */
-public class RendezVous {
+public class RendezVous implements Serializable{
     private int idRdv;
     private String symptomes;
     private String etat;
@@ -20,7 +21,7 @@ public class RendezVous {
     private Date heureFin;
     private int idPlanning;
     private String fullName;
-
+    private int idPatient;
     public RendezVous() {
     } 
 
@@ -114,6 +115,14 @@ public class RendezVous {
 
     public void setHeureFin(Date heureFin) {
         this.heureFin = heureFin;
+    }
+
+    public int getIdPatient() {
+        return idPatient;
+    }
+
+    public void setIdPatient(int idPatient) {
+        this.idPatient = idPatient;
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +39,7 @@ public class PlanningService {
     }
     public void ajouterPlanning(Planning p){
         //String request = "INSERT INTO Planning SET date_debut=?,date_fin=?,heure_debut=?,heure_fin=?,description=?,etat=?,date_de_creation=?,date_de_modification" ;
-        String request="INSERT INTO planning(date_debut,date_fin,heure_debut,heure_fin,description,etat,date_de_creation,date_de_modification)"+"VALUES(?,?,?,?,?,?,?,?) ";
+        String request="INSERT INTO planning(date_debut,date_fin,heure_debut,heure_fin,description,etat,date_de_creation,date_de_modification,medecin_id)"+"VALUES(?,?,?,?,?,?,?,?,?) ";
 
        try {
             preparedStatement = cnx.prepareStatement(request);
@@ -50,6 +51,7 @@ public class PlanningService {
             preparedStatement.setString(6,"en cours");
             preparedStatement.setDate(7,new java.sql.Date(new java.util.Date().getTime()));
             preparedStatement.setDate(8,new java.sql.Date(new java.util.Date().getTime()));
+            preparedStatement.setInt(9,p.getIdMedecin());
 
             preparedStatement.executeUpdate();
             System.out.println ("succes"); 
@@ -145,5 +147,23 @@ public class PlanningService {
                 .collect(Collectors.toList());
         
 }
+        public Planning findByDate(LocalDate date) {
+        String request = "SELECT * FROM planning WHERE date_debut <= '" + java.sql.Date.valueOf(date) + "' AND date_fin >= '" + java.sql.Date.valueOf(date) + "'";
+        Planning planning = new Planning();
+        try {
+        preparedStatement = cnx.prepareStatement(request);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            
+            planning = new Planning(resultSet.getInt("id"),resultSet.getDate("date_debut"),resultSet.getDate("date_fin"),resultSet.getTime("heure_debut"),resultSet.getTime("heure_fin"),resultSet.getString("etat"));
+
+        }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+                    
+        }
+        return planning;
+
+    }
          
 }

@@ -13,6 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.MyConnection;
@@ -31,7 +34,7 @@ public class RendezVousService {
            cnx = MyConnection.getInstance().getCnx();
     }
     public void ajouterRendezVous(RendezVous rdv){
-       String request="INSERT INTO rendez_vous(date,heure_debut,heure_fin,symptomes,etat,date_de_creation,planning_id)"+"VALUES(?,?,?,?,?,?,?) ";
+       String request="INSERT INTO rendez_vous(date,heure_debut,heure_fin,symptomes,etat,date_de_creation,planning_id,patient_id)"+"VALUES(?,?,?,?,?,?,?,?) ";
        try {
             preparedStatement = cnx.prepareStatement(request);
             preparedStatement.setDate(1,new java.sql.Date(rdv.getDate().getTime()));
@@ -41,7 +44,7 @@ public class RendezVousService {
             preparedStatement.setString(5,"en attente");
             preparedStatement.setDate(6,new java.sql.Date(new java.util.Date().getTime()));
             preparedStatement.setInt(7,rdv.getIdPlanning());
-
+            preparedStatement.setInt(8,rdv.getIdPatient());
             preparedStatement.executeUpdate();
             System.out.println ("succes"); 
        
@@ -151,6 +154,32 @@ public class RendezVousService {
                     
         }
          return rdv;
+    }
+    
+    public List<RendezVous> findByDate(LocalDate date) throws SQLException{
+        String request = "SELECT * FROM rendez_vous WHERE date='" + java.sql.Date.valueOf(date) + "'ORDER BY heure_debut";
+        List<RendezVous> rendezVousList =new ArrayList<>();
+        try {
+            preparedStatement = cnx.prepareStatement(request);
+            ResultSet resultSet = preparedStatement.executeQuery();                    
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int idPlanning = resultSet.getInt("planning_id");
+                String etat = resultSet.getString("etat");
+                Date dateRdv = resultSet.getDate("date");
+                Time heureDebut = resultSet.getTime("heure_debut");
+                Time heureFin = resultSet.getTime("heure_fin");
+                String symptomes = resultSet.getString("symptomes");
+                RendezVous rendez_vous = new RendezVous(id, symptomes,etat,dateRdv,heureDebut,heureFin,idPlanning);
+                rendezVousList.add(rendez_vous);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+                    
+        }
+        return rendezVousList;
+
     }
 
 }
