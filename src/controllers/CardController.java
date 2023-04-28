@@ -11,11 +11,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -68,7 +70,7 @@ public class CardController implements Initializable {
                 circleImg.setFill(new ImagePattern(image));
                 circleImg.setStroke(Color.TRANSPARENT);
         }else{
-            String imagePath = "c:/xampp/htdocs/uploads/" + user.getImage();
+            String imagePath = "C:/Users/larou/Desktop/MedCare/PIDEV/public/uploads/utilisateurs/" + user.getImage();
                 try {
                     File imageFile = new File(imagePath);
                     FileInputStream fileInputStream = new FileInputStream(imageFile);
@@ -92,6 +94,7 @@ public class CardController implements Initializable {
             etat.setText("Vérifié");
             etat.setTextFill(Color.GREEN);     
         }
+        
         else if(user.getEtat().equals("valide") && user.isIs_blocked()==false){
             btn_valider.setStyle(
                  "-fx-background-color: #f86d6d;"   
@@ -116,6 +119,7 @@ public class CardController implements Initializable {
         }else if(user.getEtat().equals("non vérifié"))  {
              etat.setText("Non vérifié");
              etat.setTextFill(Color.RED);
+             btn_valider.setVisible(false);
         }else{
              etat.setText("Non valide");
              etat.setTextFill(Color.RED);
@@ -138,7 +142,7 @@ public class CardController implements Initializable {
      
      
     @FXML
-    void deleteUser(ActionEvent event) throws SQLException {
+    void deleteUser(ActionEvent event) throws SQLException, IOException {
         AdminService adminService = new AdminService();
        try{
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -148,7 +152,7 @@ public class CardController implements Initializable {
         alert.showAndWait();
         adminService.deleteUser(user);
         setData(user);
-        
+         
        }catch(RuntimeException ex){
             System.out.println(ex);
             Alert alert = new Alert(Alert.AlertType.ERROR,"erreur",ButtonType.CLOSE);
@@ -177,6 +181,7 @@ public class CardController implements Initializable {
             alert.showAndWait();
             adminService.BlockUser(user);
             setData(user);
+          
         }else if(user.getEtat().equals("valide") && user.isIs_blocked()==true){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Débloquer utilisateur");
@@ -184,7 +189,7 @@ public class CardController implements Initializable {
             alert.setContentText("Voulez-vous vraiment débloquer cette utilisateur ?");
             alert.showAndWait();
             adminService.UnblockUser(user);
-            setData(user);
+            setData(user);  
         }    
        }catch(RuntimeException ex){
             System.out.println(ex);
@@ -231,6 +236,9 @@ public class CardController implements Initializable {
             System.out.println(e.getMessage());
         }
     }
+    
+    
+    
     
     
    

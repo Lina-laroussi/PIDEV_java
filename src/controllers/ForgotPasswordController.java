@@ -11,7 +11,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.UUID;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,8 +23,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import services.AdminService;
-import services.UserService;
-import utils.BCrypt;
 import utils.EmailUtils;
 
 
@@ -37,9 +34,7 @@ public class ForgotPasswordController implements Initializable {
     @FXML
     private Button button_renvoi_password;
     
-    private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-    private static final int PASSWORD_LENGTH = 13;
-
+  
     /**
      * Initializes the controller class.
      */
@@ -48,17 +43,7 @@ public class ForgotPasswordController implements Initializable {
         // TODO
     }    
 
-    public static String generatePassword() {
-        Random random = new Random();
-        StringBuilder password = new StringBuilder();
-        
-        for (int i = 0; i < PASSWORD_LENGTH; i++) {
-            int index = random.nextInt(CHARACTERS.length());
-            password.append(CHARACTERS.charAt(index));
-        }
-        
-        return password.toString();
-    }
+ 
 
     
     
@@ -76,15 +61,16 @@ public class ForgotPasswordController implements Initializable {
                    alert.setContentText("Email incorrect");
                    alert.showAndWait();
            }else{
-               String randomPassword = generatePassword();
-               String NewPassword = BCrypt.hashpw(randomPassword,BCrypt.gensalt(13));   
+                Random random = new Random();
+                int randomNumber = random.nextInt(800001) + 100000;
+                String verificationCode = Integer.toString(randomNumber);
+                User user2 = new User(user1.getNom(),email,verificationCode);
 
-               UserService userService = new UserService();
-               userService.updateUserPassword(user1, NewPassword);
-               
+                adminService.updateCodeUser(user2);
+
                
                try{
-                    EmailUtils.sendPassword(email, "Nouveau Mot de Passe" , randomPassword);
+                    EmailUtils.sendPassword(email, "Nouveau Mot de Passe" , verificationCode,user2);
 
                 }catch(Exception e){
                         System.out.println(e.getMessage());
@@ -92,10 +78,10 @@ public class ForgotPasswordController implements Initializable {
                
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText(null);
-            alert.setContentText("un mot de passe a été envoyé à votre email");
+            alert.setContentText("un code a été envoyé à votre email");
             alert.showAndWait();
             
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/VerifyCodePassword.fxml"));
             Parent parent = loader.load(); 
             Scene sceneRegister = new Scene(parent);
             Stage stageRegister  = (Stage)((Node)event.getSource()).getScene().getWindow();

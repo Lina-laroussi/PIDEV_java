@@ -21,9 +21,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import services.AdminService;
 import services.UserService;
 import utils.EmailUtils;
+import utils.Session;
 
 
 public class VerifyCodeController implements Initializable {
@@ -33,11 +36,10 @@ public class VerifyCodeController implements Initializable {
     private TextField tf_code;
     @FXML
     private Button button_code;
+    
     @FXML
-    private Button button_renvoi;
+    private Button button_renvoyer;
 
-    private String Code ;
-    private User user;
     
 
     @Override
@@ -48,64 +50,62 @@ public class VerifyCodeController implements Initializable {
  
     
     
-    public String verifierEmail(String verificationCode){
-        Code = verificationCode;
-        return Code;
-    }
-    
-    public User getUser(User patient){
-       user = patient;
-       return user;
-    }
-    
     @FXML
     private void EnvoyerCode(ActionEvent event) throws IOException{
         
-        User patient = getUser(user);
+        
+        AdminService adminservice = new AdminService();
         String userCode =tf_code.getText();
-        
-        String code = verifierEmail(Code);
-        String[] parts = Code.split("-");
-        String userId = parts[0]; 
-        
-        if (userCode.equals(code) && patient.getId() == Integer.parseInt(userId)) {
-            System.out.println("Email address is verified.");
-            try{
-                UserService userService = new UserService();
-                userService.VerifyPatient(patient);
+        try{
+            User patient = adminservice.getUserByCode(userCode);
+
+            if (patient.getEmail() == null)  {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("il semble que vous avez entré le mauvais code , vous pouvez renvoyer un autre code de vérification ");
+                alert.showAndWait();
+
+            } else {
+              
+                try{
+                    UserService userService = new UserService();
+                    userService.VerifyPatient(patient);
+                }
+                catch(SQLException e){
+                    System.out.println(e.getMessage());
+                }
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("votre compte a été vérifié ");
+                alert.showAndWait();
+
+
+                Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+                Scene sceneRegister = new Scene(parentLogin);
+                Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stageRegister .hide();
+                stageRegister .setScene(sceneRegister);
+                stageRegister .show();
             }
-            catch(SQLException e){
-                System.out.println(e.getMessage());
-            }
-            
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("votre compte a été vérifié ");
-            alert.showAndWait();
-            
-            
-            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
-            Scene sceneRegister = new Scene(parentLogin);
-            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stageRegister .hide();
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
-            
-        } else {
-            System.out.println("Invalid verification code.");
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("il semble que vous avez entré le mauvais code , vous pouvez renvoyer un autre code de vérification ");
-            alert.showAndWait();
-            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }   
+    }
+    
+    
+     @FXML
+    private void RenvoyerAction(ActionEvent event) throws IOException {
+        
             Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/RenvoiCodeVerif.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
             Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
             stageRegister .hide();
+        
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
-            
-        }
-           
     }
+
+  
 }

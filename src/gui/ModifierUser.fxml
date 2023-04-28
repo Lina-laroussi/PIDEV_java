@@ -229,14 +229,6 @@
                </HBox>
                <HBox alignment="CENTER" prefHeight="61.0" prefWidth="498.0">
                   <children>
-                  <Button fx:id="button_bloquer" mnemonicParsing="false" onAction="#updateUser" onMouseClicked="#updateUser" style="-fx-background-color: #f1422e;" styleClass="my-button" text="Bloquer" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets bottom="30.0" />
-                     </HBox.margin>
-                  </Button>
                      <Label>
                         <HBox.margin>
                            <Insets top="5.0" />
@@ -253,7 +245,7 @@
                            <Font name="System Bold" size="14.0" />
                         </font>
                         <HBox.margin>
-                           <Insets bottom="30.0" right="60.0" />
+                           <Insets bottom="30.0" right="100.0" />
                         </HBox.margin>
                      </Button>
                   </children>

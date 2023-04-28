@@ -107,33 +107,14 @@ public class LoginController implements Initializable {
                         stageDashboard  .show();
                     
                     }else if(user.getEtat().equals("non vérifié") ){
-                          String randomString = UUID.randomUUID().toString();
-                          String verificationCode = Session.getInstance().getUser().getId() + "-" + randomString;
-                         
-                         try{
-                                 EmailUtils.sendVerificationCode(email, "Nouveau code de verification" , verificationCode);
-
-                         }catch(Exception e){
-                                System.out.println(e.getMessage());
-                        }  
                          Alert alert = new Alert(Alert.AlertType.ERROR);
                          alert.setHeaderText(null);
                          alert.setContentText("votre compte n'est pas vérifié,"
-                                    + "un code a été envoyé à votre email pour verifier votre compte");
+                                    + "vous devez entrer un code de vérification pour vérifier votre email");
                          alert.showAndWait();
                          
                           FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/VerifyCode.fxml"));
-                          Parent parent = loader.load();
-                          VerifyCodeController controller = (VerifyCodeController) loader.getController();
-                          System.out.println(verificationCode);
-                          controller.verifierEmail(verificationCode);
-                          try{
-                                 AdminService adminService = new AdminService();
-                                 controller.getUser( adminService.getUser(Session.getInstance().getUser()));
-                          }catch(SQLException e){
-                                System.out.println(e.getMessage());
-                          }
-                            
+                          Parent parent = loader.load();      
                           Scene sceneRegister = new Scene(parent);
                           Stage stageRegister  = (Stage)((Node)event.getSource()).getScene().getWindow();
                           stageRegister.hide();
@@ -145,6 +126,18 @@ public class LoginController implements Initializable {
                             alert.setHeaderText(null);
                             alert.setContentText("votre compte n'est pas validé par l'administrateur");
                             alert.showAndWait();
+                            
+                    }else if(user.getEtat().equals("deleted") ){
+                      Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setHeaderText(null);
+                            alert.setContentText("votre compte n'existe pas");
+                            alert.showAndWait();       
+                            
+                    }else if(user.isIs_blocked()==true ){
+                      Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setHeaderText(null);
+                            alert.setContentText("votre compte est bloqué , veuillez contactez l'admnistrateur pour plus d'informations ");
+                            alert.showAndWait();        
                             
                     }else if (user.getRoles().equals("[\"ROLE_MEDECIN\"]")){
                         Parent parentProfile = FXMLLoader.load(getClass().getResource("../gui/ProfileMedecin.fxml"));

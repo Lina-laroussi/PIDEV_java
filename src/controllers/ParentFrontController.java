@@ -64,7 +64,7 @@ public class ParentFrontController implements Initializable {
                 circleImg.setStroke(Color.TRANSPARENT);
 
             }else{
-                String imagePath = "c:/xampp/htdocs/uploads/" + currentUser.getImage();
+                String imagePath = "C:/Users/larou/Desktop/MedCare/PIDEV/public/uploads/utilisateurs/" + currentUser.getImage();
                 try {
                     File imageFile = new File(imagePath);
                     FileInputStream fileInputStream = new FileInputStream(imageFile);
@@ -98,7 +98,7 @@ public class ParentFrontController implements Initializable {
                 Image image = new Image(new FileInputStream(selectedFile));
                 circleImg.setFill(new ImagePattern(image));
                  // Copy the image to the destination directory
-                String destinationDirectoryPath = "c:/xampp/htdocs/uploads/"; 
+                String destinationDirectoryPath = "C:/Users/larou/Desktop/MedCare/PIDEV/public/uploads/utilisateurs/"; 
                 String imageName = selectedFile.getName(); 
                 Path source = selectedFile.toPath();
                 Path destination = new File(destinationDirectoryPath + imageName).toPath();

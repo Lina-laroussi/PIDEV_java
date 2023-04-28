@@ -9,6 +9,7 @@ import entities.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -55,10 +56,14 @@ public class RenvoiCodeVerifController implements Initializable {
                    alert.setContentText("Email incorrect");
                    alert.showAndWait();
            }else{
-               String randomString = UUID.randomUUID().toString();
-               String verificationCode = patient.getId() + "-" + randomString;
+               Random random = new Random();
+               int randomNumber = random.nextInt(800001) + 100000;
+               String verificationCode = Integer.toString(randomNumber);
+               User patient1 = new User(patient.getNom(),email,verificationCode);
+            
+               adminService.updateCodeUser(patient1);
                try{
-                    EmailUtils.sendVerificationCode(email, "Nouveau code de vérification" , verificationCode);
+                    EmailUtils.resendVerificationCode(email, "Nouveau code de vérification" , verificationCode,patient1);
 
                 }catch(Exception e){
                         System.out.println(e.getMessage());
@@ -71,10 +76,6 @@ public class RenvoiCodeVerifController implements Initializable {
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/VerifyCode.fxml"));
             Parent parent = loader.load();
-            VerifyCodeController controller = (VerifyCodeController) loader.getController();
-            System.out.println(verificationCode);
-            controller.verifierEmail(verificationCode);
-            controller.getUser(patient);
             Scene sceneRegister = new Scene(parent);
             Stage stageRegister  = (Stage)((Node)event.getSource()).getScene().getWindow();
             stageRegister.hide();

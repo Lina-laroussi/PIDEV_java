@@ -9,6 +9,7 @@ import entities.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -65,7 +66,7 @@ public class RegisterUserController implements Initializable {
     
     
      @FXML
-    private void RegisterPatientAction(ActionEvent event) throws IOException  {
+    private void RegisterPatientAction(ActionEvent event) throws IOException, SQLException  {
         
          if(tf_nom.getText().equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -145,10 +146,14 @@ public class RegisterUserController implements Initializable {
             AdminService adminService1 = new AdminService();
             
             
-            String randomString = UUID.randomUUID().toString();
-            String verificationCode = adminService1.getUser(patient).getId() + "-" + randomString;
+            Random random = new Random();
+            int randomNumber = random.nextInt(800001) + 100000;
+            String verificationCode = Integer.toString(randomNumber);
+            User patient1 = new User(nom,email,verificationCode);
+            
+            adminService1.updateCodeUser(patient1);
             try{
-                 EmailUtils.sendVerificationCode(email, "votre compte est crée avec succées" , verificationCode);
+                 EmailUtils.sendVerificationCode(email, "votre compte est crée avec succées" , verificationCode,patient1);
                  
             }catch(Exception e){
                 System.out.println(e.getMessage());
@@ -163,23 +168,13 @@ public class RegisterUserController implements Initializable {
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/VerifyCode.fxml"));
             Parent parent = loader.load();
-            VerifyCodeController controller = (VerifyCodeController) loader.getController();
-            System.out.println(verificationCode);
-            controller.verifierEmail(verificationCode);
-            try{
-                 User patient1= new User(nom,prenom,email,password);
-                 AdminService adminService = new AdminService();
-                 controller.getUser( adminService.getUser(patient1));
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-            }
             Scene sceneRegister = new Scene(parent);
             Stage stageRegister  = (Stage)((Node)event.getSource()).getScene().getWindow();
             stageRegister.hide();
             stageRegister.setScene(sceneRegister);
             stageRegister.show();
             
-        }catch(IOException | SQLException e){
+        }catch(IOException e){
             System.out.println(e.getMessage());
         }
                     
@@ -266,7 +261,7 @@ public class RegisterUserController implements Initializable {
             us.registerMedecin(medecin);    
             
             try{
-                 EmailUtils.sendEmail(email, "votre compte est crée avec succées",nom);
+                 EmailUtils.sendEmail(email, "votre compte est crée avec succées",medecin);
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
@@ -371,7 +366,7 @@ public class RegisterUserController implements Initializable {
             
             us.registerPharmacien(pharmacien);    
             try{
-                 EmailUtils.sendEmail(email, "votre compte a été crée avec succées",nom);
+                 EmailUtils.sendEmail(email, "votre compte a été crée avec succées",pharmacien);
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
@@ -477,7 +472,7 @@ public class RegisterUserController implements Initializable {
             us.registerAssureur(assureur);    
             
             try{
-                EmailUtils.sendEmail(email, "votre compte est crée avec succées",nom );
+                EmailUtils.sendEmail(email, "votre compte est crée avec succées",assureur );
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }

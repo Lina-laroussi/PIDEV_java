@@ -15,25 +15,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 
-public class MenuController implements Initializable {
+public class AccueilController implements Initializable {
 
     @FXML
-    private Button button_login;
+    private WebView web_accueil;
 
-    @FXML
-    private Button btn_accueil;
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        web_accueil.getEngine().load("http://127.0.0.1:8000/home");
     }    
-
-
-
+    
      @FXML
     private void loginAction(ActionEvent event) throws IOException {
         
@@ -60,4 +57,5 @@ public class MenuController implements Initializable {
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
     }
+    
 }

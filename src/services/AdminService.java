@@ -29,7 +29,7 @@ public class AdminService {
     }
     
     public ObservableList<User> ListUsers() throws SQLException {
-        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image,is_blocked FROM user WHERE (NOT(roles LIKE '%ROLE_ADMIN%') AND etat != 'deleted')";
+        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image,is_blocked,reset_token FROM user WHERE (NOT(roles LIKE '%ROLE_ADMIN%') AND etat != 'deleted')";
         ObservableList<User> UserList =  FXCollections.observableArrayList();
         try {
             PreparedStatement st2 = cnx.prepareStatement(request);
@@ -51,7 +51,8 @@ public class AdminService {
                 Date date_de_creation = resultSet.getDate("date_de_creation");  
                 String image= resultSet.getString("image");
                 Boolean is_blocked=resultSet.getBoolean("is_blocked");
-                User user = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image,is_blocked);               
+                String reset_token = resultSet.getString("reset_token");
+                User user = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image,is_blocked,reset_token);               
                 UserList.add(user);
             }
              
@@ -78,6 +79,8 @@ public class AdminService {
     }
     
     
+   
+    
      public void ValidateUser(User user) throws SQLException   {
        String request = "UPDATE user SET etat='valide' WHERE id=" + user.getId()+"" ;
         try{
@@ -90,6 +93,56 @@ public class AdminService {
         }     
     }
      
+     
+    public void updateCodeUser(User user) throws SQLException {
+        String request = "UPDATE user SET reset_token =\"" + user.getReset_token() + "\" WHERE email='" + user.getEmail() + "'";
+        try{
+           PreparedStatement st = cnx.prepareStatement(request);  
+            st.executeUpdate();
+            System.out.println("user updated");
+        }
+        catch(SQLException ex){
+            System.out.println("erreur update "+ex);
+        }
+    }
+    
+     public User getUserByCode(String userCode) throws SQLException {
+        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image,is_blocked,reset_token FROM user WHERE reset_token= ?" ;
+        User  user1 =  new User();
+        try {
+            PreparedStatement st2 = cnx.prepareStatement(request);
+            st2.setString(1,userCode);
+            ResultSet resultSet = st2.executeQuery();
+            
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nom = resultSet.getString("nom");
+                String prenom = resultSet.getString("prenom");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                Date dateNaissance = resultSet.getDate("date_de_naissance");
+                String sexe = resultSet.getString("sexe");
+                String adresse = resultSet.getString("adresse");
+                String tel = resultSet.getString("num_tel");
+                String specialite = resultSet.getString("specialite");
+                String etat = resultSet.getString("etat");
+                String roles = resultSet.getString("roles");
+                Date date_de_creation = resultSet.getDate("date_de_creation");  
+                String image= resultSet.getString("image");
+                Boolean is_blocked=resultSet.getBoolean("is_blocked");
+                String reset_token = resultSet.getString("reset_token");
+                user1 = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image,is_blocked,reset_token);
+            }
+             
+        } catch (SQLException ex) {
+            System.out.println(ex);
+                    
+        }
+        return user1;
+
+    }
+    
+        
      public void BlockUser(User user) throws SQLException   {
        String request = "UPDATE user SET is_blocked=? WHERE id=" + user.getId()+"" ;
         try{
@@ -146,7 +199,7 @@ public class AdminService {
     
     
      public User getUser(User user) throws SQLException {
-        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image,is_blocked FROM user WHERE email= ?" ;
+        String request = "SELECT id,nom,prenom,email,password,date_de_naissance,sexe,adresse,num_tel,specialite,etat,roles,date_de_creation,image,is_blocked,reset_token FROM user WHERE email= ?" ;
         User  user1 =  new User();
         try {
             PreparedStatement st2 = cnx.prepareStatement(request);
@@ -169,7 +222,8 @@ public class AdminService {
                 Date date_de_creation = resultSet.getDate("date_de_creation");  
                 String image= resultSet.getString("image");
                 Boolean is_blocked=resultSet.getBoolean("is_blocked");
-                user1 = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image,is_blocked);
+                String reset_token = resultSet.getString("reset_token");
+                user1 = new User(id,  nom,  prenom,  email,  password,  etat,  dateNaissance,  roles, adresse, sexe, tel, specialite, date_de_creation,image,is_blocked,reset_token);
             }
              
         } catch (SQLException ex) {

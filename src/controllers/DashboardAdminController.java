@@ -95,8 +95,7 @@ public class DashboardAdminController implements Initializable {
                 bigContainer.getChildren().clear();
                 bigContainer.getChildren().add(hbox);
                 bigContainer.getChildren().add(scrollp);
-                GridPane.setMargin(cardBox,new Insets(10));
-                
+                GridPane.setMargin(cardBox,new Insets(10));  
           }
         
         } catch (IOException ex) {

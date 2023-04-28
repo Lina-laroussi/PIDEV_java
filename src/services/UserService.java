@@ -162,7 +162,8 @@ public class UserService {
                                 rs.getString(13),//specialite
                                 rs.getDate(14),
                                 rs.getString(17),
-                                rs.getBoolean(21)
+                                rs.getBoolean(21),
+                                rs.getString(20)
                                 );
                            
                 

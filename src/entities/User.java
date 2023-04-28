@@ -25,6 +25,9 @@ public class User {
     private String roles;
     private String Image;
     private boolean is_blocked;
+    private String reset_token;
+
+
 
    
 
@@ -44,6 +47,15 @@ public class User {
     public User(String email) {
         this.email=email;
     }
+    
+    
+    public User(String nom ,String email,String reset_token) {
+        this.nom= nom;
+        this.email=email;
+        this.reset_token=reset_token;
+    }
+    
+    
     
      public User(String email, String password) {
         this.email = email;
@@ -113,7 +125,7 @@ public class User {
     
     
 
-    public User(int id, String nom, String prenom, String email, String password, String etat, Date date_de_naissance, String roles,String Adresse,String sexe,String tel,String specialite,Date date_de_creation,String image,Boolean is_blocked) {
+    public User(int id, String nom, String prenom, String email, String password, String etat, Date date_de_naissance, String roles,String Adresse,String sexe,String tel,String specialite,Date date_de_creation,String image,Boolean is_blocked, String reset_token) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -129,6 +141,7 @@ public class User {
         this.date_de_creation=date_de_creation;
         this.Image=image;
         this.is_blocked=is_blocked;
+        this.reset_token=reset_token;
         
     }
 
@@ -261,10 +274,18 @@ public class User {
     public void setIs_blocked(boolean is_blocked) {
         this.is_blocked = is_blocked;
     }
+    
+    public String getReset_token() {
+        return reset_token;
+    }
+
+    public void setReset_token(String reset_token) {
+        this.reset_token = reset_token;
+    }
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", email=" + email + ", nom=" + nom + ", prenom=" + prenom + ", password=" + password + ", date_de_naissance=" + date_de_naissance + ", sexe=" + sexe + ", Adresse=" + Adresse + ", tel=" + tel + ", specialit\u00e9=" + specialité + ", etat=" + etat + ", date_de_creation=" + date_de_creation + ", roles=" + roles + ", Image=" + Image + ", blocked=" + is_blocked  + '}';
+        return "User{" + "id=" + id + ", email=" + email + ", nom=" + nom + ", prenom=" + prenom + ", password=" + password + ", date_de_naissance=" + date_de_naissance + ", sexe=" + sexe + ", Adresse=" + Adresse + ", tel=" + tel + ", specialit\u00e9=" + specialité + ", etat=" + etat + ", date_de_creation=" + date_de_creation + ", roles=" + roles + ", Image=" + Image + ", blocked=" + is_blocked  + ", resetToken=" + reset_token  + '}';
     }
 
   

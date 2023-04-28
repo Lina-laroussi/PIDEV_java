@@ -6,16 +6,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
-    <Pane prefHeight="59.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
+<AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="750.0" translateZ="1.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccueilController">
+   <children>
+         <Pane prefHeight="670.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;" styleClass="parent" translateZ="1.0">
          <children>
+            <WebView fx:id="web_accueil" layoutY="63.0" prefHeight="606.0" prefWidth="750.0" />
             <ImageView fitHeight="49.0" fitWidth="117.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/logoMedB.png" />
                </image>
             </ImageView>
-            <Button fx:id="button_login" layoutX="634.0" layoutY="16.0" mnemonicParsing="false" onAction="#loginAction" onMouseClicked="#loginAction" style="-fx-background-color: #15558d;" styleClass="my-button" text="Se connecter" textFill="WHITE">
+            <Button fx:id="button_login" layoutX="631.0" layoutY="17.0" mnemonicParsing="false" onAction="#loginAction" onMouseClicked="#loginAction" style="-fx-background-color: #15558d;" styleClass="my-button" text="Se connecter" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -42,4 +45,5 @@
             </Button>
          </children>
       </Pane>
+   </children>
 </AnchorPane>
