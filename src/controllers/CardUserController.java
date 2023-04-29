@@ -33,7 +33,7 @@ import javafx.stage.Stage;
 import services.AdminService;
 
 
-public class CardController implements Initializable {
+public class CardUserController implements Initializable {
 
     @FXML
     private Circle circleImg;

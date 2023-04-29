@@ -130,7 +130,6 @@ public class EmailUtils {
          String prenom=user.getPrenom();
          String email = user.getEmail();
          htmlContent = htmlContent.replace("{nom}", nom);
-         htmlContent = htmlContent.replace("{prenom}", prenom);
          htmlContent = htmlContent.replace("{email}", email);
          htmlContent = htmlContent.replace("{verificationCode}", verificationCode);
          
@@ -191,7 +190,6 @@ public class EmailUtils {
          String prenom=user.getPrenom();
          String email = user.getEmail();
          htmlContent = htmlContent.replace("{nom}", nom);
-         htmlContent = htmlContent.replace("{prenom}", prenom);
          htmlContent = htmlContent.replace("{email}", email);
          htmlContent = htmlContent.replace("{verificationCode}", verificationCode);
          
