@@ -107,7 +107,7 @@ public class MedecinDashbordController implements Initializable {
     }
     
     public void afficherRdvs(){
-           rendezVousList = FXCollections.observableArrayList(showCards());
+        rendezVousList = FXCollections.observableArrayList(showCards());
         int column = 0;
         int row=1;
 

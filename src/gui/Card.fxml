@@ -31,7 +31,6 @@
                      <contextMenu>
                         <ContextMenu>
                           <items>
-                            <MenuItem mnemonicParsing="false" onAction="#editerRdv" text="modifier" />
                               <MenuItem mnemonicParsing="false" onAction="#archiverRdv" text="archiver" />
                           </items>
                         </ContextMenu>

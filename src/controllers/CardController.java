@@ -99,6 +99,21 @@ public class CardController implements Initializable {
     
     @FXML
     void annulerRdv(ActionEvent event) {
+        RendezVousService rdvService = new RendezVousService(); 
+        try{
+        rdvService.AnnulerRdv(rendezVous);
+        rendezVous.setEtat("annulé");
+        setData(rendezVous);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("rendez vous annulé avec succes");
+        alert.setHeaderText(null);
+        alert.setContentText("Rendez vous annulé avec succès");
+        alert.showAndWait();
+        }catch(RuntimeException ex){
+            System.out.println(ex);
+            Alert alert = new Alert(Alert.AlertType.ERROR,"erreur",ButtonType.CLOSE);
+            alert.showAndWait();
+        }
 
     }
 
@@ -122,6 +137,7 @@ public class CardController implements Initializable {
         
         
     }
+    
     
     
     @FXML
@@ -181,6 +197,8 @@ public class CardController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+    public RendezVous getRendezVous(){
+        return this.rendezVous;
+    }
  
 }

@@ -126,6 +126,18 @@ public class RendezVousService {
              System.out.println ("service confim erreur");
         }
     }
+    
+        public void AnnulerRdv (RendezVous rdv){
+        String request = "UPDATE rendez_vous SET etat =\""+"annulé"+"\"where id="+rdv.getIdRdv()+"";    
+        try {
+            preparedStatement = cnx.prepareStatement(request);
+            preparedStatement.executeUpdate();
+             System.out.println("rendez Vous annulé");
+         } catch (SQLException ex) {
+             System.out.println(ex);
+             System.out.println ("service annule erreur");
+        }
+    }
     public void archiverRdv (RendezVous rdv){
         String request = "UPDATE rendez_vous SET etat =\""+"archivé"+"\"where id="+rdv.getIdRdv()+"";    
         try {

@@ -84,7 +84,7 @@ public class FullCalendarView{
         for (int i = 0; i < daysOfWeek.length; i++) {
             Text dayLabel = new Text(daysOfWeek[i].getDisplayName(TextStyle.SHORT, Locale.getDefault()));
             calendar.add(dayLabel, i, 0);
-            dayLabel.setStyle("-fx-font-weight: bold;");
+            dayLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16px;");
             GridPane.setHalignment(dayLabel, HPos.CENTER);
 
         }
@@ -92,16 +92,22 @@ public class FullCalendarView{
         // Create calendarTitle and buttons to change current week
         calendarTitle = new Text();
         Button previousWeek = new Button("<<");
+        previousWeek.setStyle("-fx-background-color: transparent; -fx-font-weight: bold;-fx-font-size: 16px;");
+
         previousWeek.setOnAction(e -> previousWeek());
         Button nextWeek = new Button(">>");
+        nextWeek.setStyle("-fx-background-color: transparent; -fx-font-weight: bold; -fx-font-size: 16px;");
+
         nextWeek.setOnAction(e -> nextWeek());
+        calendarTitle.setStyle(" -fx-font-size: 16px;");
+
         HBox titleBar = new HBox(previousWeek, calendarTitle, nextWeek);
         titleBar.setAlignment(Pos.BASELINE_CENTER);
         // Populate calendar with the appropriate day numbers
         populateCalendar();
         // Create the week view
-        
-        
+  
+
        view = new VBox(titleBar,calendarWrapper);
     }
 
@@ -131,23 +137,27 @@ public class FullCalendarView{
             VBox vbox = new VBox();
             vbox.setSpacing(5.0); // Set spacing between nodes
             Text txt = new Text(String.valueOf(calendarDate.getDayOfMonth()));
-            vbox.getChildren().add(txt);
-
-
+            HBox ht = new HBox(txt);
+           // ht.setAlignment(Pos.BASELINE_CENTER);
+            vbox.getChildren().add(ht);
             ap.getChildren().add(vbox);
             ap.setDate(calendarDate);
             Planning p =pService.findByDate(ap.getDate());
             ap.setPlanningId(p.getIdPlanning());
             if(p.getIdPlanning()==0){
+                if(calendarDate.equals(LocalDate.now())){
+                ap.setStyle("-fx-background-color: rgb(255,228,181);");
+            }else{
               ap.setStyle("-fx-background-color: white;");
+                }
             }else if(p.getIdPlanning()!=0){
               ap.setStyle("-fx-background-color: rgba(143, 223, 130, 0.3);");
               ap.setOnMouseClicked(e -> {
         
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterRdv.fxml"));
                 Parent parent;
-                  try {
-                      parent = loader.load();
+                try {
+                parent = loader.load();
                  
                 AjouterRdvController controller = (AjouterRdvController) loader.getController();
                 controller.setPlanningId(p);
@@ -193,7 +203,7 @@ public class FullCalendarView{
                 }else if(rdv.getEtat().equals("confirmé")){
                     event.setStyle("-fx-background-color: rgb(130, 205, 71);-fx-background-radius: 10px;-fx-text-fill: white;");
                 }
-                else if(rdv.getEtat().equals("archivé")){
+                else if(rdv.getEtat().equals("archivé")|| rdv.getEtat().equals("annulé")){
                     event.setStyle("-fx-background-color: red;-fx-background-radius: 10px;-fx-text-fill: white;");
                 }
             event.setOnDragDetected(e -> {
@@ -207,6 +217,42 @@ public class FullCalendarView{
                 // Remove event from current anchor pane
                 ((VBox) event.getParent()).getChildren().remove(event);
                 
+            });
+            event.setOnMouseClicked(c->{
+            try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/Card.fxml"));
+            Parent parent = loader.load();
+            CardController controller = (CardController) loader.getController();
+            controller.setData(rdv);
+
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Rendez vous");
+            stage.setScene(new Scene(parent));
+            stage.show();
+            stage.setOnHiding((e) -> {
+                String etatRdv = controller.getRendezVous().getEtat();
+                RendezVous rdv1=controller.getRendezVous();
+                event.setText(rdv1.getHeureDebut().toString().substring(0, 5)+"-"+rdv1.getHeureFin().toString().substring(0, 5)+"\n"+rdv1.getEtat());
+                if(etatRdv.equals("en attente")){
+                    event.setStyle("-fx-background-color: rgb(244, 164, 66);-fx-background-radius: 10px;-fx-text-fill: white;");
+                }else if(etatRdv.equals("confirmé")){
+                    event.setStyle("-fx-background-color: rgb(130, 205, 71);-fx-background-radius: 10px;-fx-text-fill: white;");
+                }
+                else if(etatRdv.equals("archivé")|| rdv.getEtat().equals("annulé")){
+                    event.setStyle("-fx-background-color: red;-fx-background-radius: 10px;-fx-text-fill: white;");
+                }
+                
+            });
+            
+            // Hide this current window (if this is what you want)
+           // ((Node)(event.getSource())).getScene().getWindow().hide();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+                        
+                        
+                        
             });
                 vbox.getChildren().add(event);
             }
