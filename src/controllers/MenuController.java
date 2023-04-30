@@ -32,12 +32,13 @@ public class MenuController implements Initializable {
    
     @FXML
     private Button button_medecins;
+    User currentUser;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-         User currentUser = Session.getInstance().getUser();
+       currentUser = Session.getInstance().getUser();
         button_login.setOnAction(event->{
             if(currentUser == null){
                 try {
