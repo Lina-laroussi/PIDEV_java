@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="563.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherPlanningController">
+    <children>
+        <fx:include source="ParentFront.fxml" />  
+        <TableView fx:id="table_planning" layoutX="282.0" layoutY="165.0" prefHeight="512.0" prefWidth="776.0">
+          
+            <columns>
+                <TableColumn fx:id="id" prefWidth="114.0" text="ID" visible="false" />
+                <TableColumn fx:id="date_debut" prefWidth="96.0" text="Date Debut" />
+                <TableColumn fx:id="date_fin" prefWidth="128.0" text="Date Fin" />
+                <TableColumn fx:id="heure_debut" prefWidth="150.0" text="Heure Debut " />
+            <TableColumn fx:id="heure_fin" prefWidth="129.0" text="Heure Fin" />
+            <TableColumn fx:id="etat" prefWidth="119.0" text="Etat" />
+            <TableColumn fx:id="description" prefWidth="173.0" text="Description" />
+            </columns>
+            <columnResizePolicy>
+              
+            </columnResizePolicy>
+            <contextMenu>
+                <ContextMenu>
+                    <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ajouterRdv" text="Ajouter rendez vous" />
+                        
+                        <MenuItem mnemonicParsing="false" onAction="#editerPlanning" text="Edit" />
+                        <MenuItem mnemonicParsing="false" onAction="#archiverP" text="archiver" />
+                    </items>
+                                                                   
+                </ContextMenu>
+            </contextMenu>
+        </TableView>
+      <Button fx:id="button_ajouter_planning" layoutX="921.0" layoutY="116.0" onAction="#ajouterPlanningAction" prefHeight="25.0" prefWidth="125.0" text="Ajouter Planning" />
+      <TextField fx:id="tf_rechercher_planning" layoutX="282.0" layoutY="116.0" onKeyReleased="#rechercherPlanning" prefHeight="25.0" prefWidth="202.0" promptText="rechercher" />
+    </children>
+</AnchorPane>

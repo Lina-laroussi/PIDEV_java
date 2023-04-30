@@ -82,11 +82,11 @@ public class DashboardAdminController implements Initializable {
      try{
         for(int i=0;i<listUsers.size();i++){
                  FXMLLoader fxmlLoader = new FXMLLoader();
-                 fxmlLoader.setLocation(getClass().getResource("../gui/Card.fxml"));
+                 fxmlLoader.setLocation(getClass().getResource("../gui/CardUser.fxml"));
                  VBox cardBox = fxmlLoader.load();
                  CardUserController cardController = fxmlLoader.getController();
                  cardController.setData(listUsers.get(i));
-                 if(column ==8){
+                 if(column ==5){
                      column=0;
                      ++row;
                    }
@@ -113,12 +113,12 @@ public class DashboardAdminController implements Initializable {
         UserContainer.getChildren().clear();
         for(int i=0;i<users.size();i++){
                  FXMLLoader fxmlLoader = new FXMLLoader();
-                 fxmlLoader.setLocation(getClass().getResource("../gui/Card.fxml"));
+                 fxmlLoader.setLocation(getClass().getResource("../gui/CardUser.fxml"));
                  VBox cardBox = fxmlLoader.load();
                  CardUserController cardController = fxmlLoader.getController();
                  cardController.setData(users.get(i));
                  UserContainer.add(cardBox, column++, row);
-                 if(column ==8){
+                 if(column ==5){
                      column=0;
                      ++row;
                    }

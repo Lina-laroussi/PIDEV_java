@@ -13,39 +13,39 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ParentFrontController">
-     <Pane prefHeight="613.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
+     <Pane prefHeight="700.0" prefWidth="1060.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
          <children>
             <ImageView fitHeight="49.0" fitWidth="117.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/logoMedB.png" />
                </image>
             </ImageView>
-            <Button fx:id="button_deconnect" layoutX="615.0" layoutY="16.0" mnemonicParsing="false" onAction="#deconnectAction" onMouseClicked="#deconnectAction" style="-fx-background-color: #15558d;" styleClass="my-button" text="Se déconnecter" textFill="WHITE">
+            <Button fx:id="button_deconnect" layoutX="893.0" layoutY="16.0" mnemonicParsing="false" onAction="#deconnectAction" onMouseClicked="#deconnectAction" style="-fx-background-color: #15558d;" styleClass="my-button" text="Se déconnecter" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="156.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Accueil">
+            <Button fx:id="button_accueil" layoutX="156.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Accueil">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="226.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Médecins">
+            <Button fx:id="button_medecins" layoutX="265.0" layoutY="21.0" mnemonicParsing="false" onAction="#medecinsAction" style="-fx-background-color: transparent;" text="Médecins">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="304.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Pharmacies">
+            <Button layoutX="385.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Pharmacies">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="391.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Doctoshop">
+            <Button layoutX="524.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Doctoshop">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-         <VBox layoutX="11.0" layoutY="77.0" prefHeight="526.0" prefWidth="224.0" spacing="15.0" style="-fx-background-color: #eaeaea;">
+         <VBox layoutX="11.0" layoutY="54.0" prefHeight="613.0" prefWidth="255.0" spacing="15.0" style="-fx-background-color: #eaeaea;">
             <children>
                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                   <VBox.margin>
@@ -98,6 +98,60 @@
                      </HBox>
                   </children>
                </VBox>
+               <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
+                  <children>
+                     <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@images/iconUser.png" />
+                        </image>
+                     </ImageView>
+                     <Button fx:id="button_planning" mnemonicParsing="false" onAction="#Planning" style="-fx-background-color: transparent;" text="Planning">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin>
+                     </Button>
+                  </children>
+                  <VBox.margin>
+                     <Insets left="40.0" />
+                  </VBox.margin>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
+                  <children>
+                     <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@images/iconUser.png" />
+                        </image>
+                     </ImageView>
+                     <Button fx:id="button_rendezVous" mnemonicParsing="false" onAction="#RendezVous" style="-fx-background-color: transparent;" text="Rendez-vous">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </Button>
+                  </children>
+                  <VBox.margin>
+                     <Insets left="40.0" />
+                  </VBox.margin>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
+                  <children>
+                     <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@images/iconUser.png" />
+                        </image>
+                     </ImageView>
+                     <Button fx:id="button_cal" mnemonicParsing="false" onAction="#Calendrier" style="-fx-background-color: transparent;" text="Calendrier">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </Button>
+                  </children>
+                  <VBox.margin>
+                     <Insets left="40.0" />
+                  </VBox.margin>
+               </HBox>
                <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="250.0">
                   <children>
                      <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
@@ -108,7 +162,7 @@
                            <Insets />
                         </HBox.margin>
                      </ImageView>
-                     <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Fiche médicale">
+                     <Button fx:id="button_fiche" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Fiche médicale">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -128,7 +182,7 @@
                            <Image url="@images/iconUser.png" />
                         </image>
                      </ImageView>
-                     <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Consultations">
+                     <Button fx:id="button_consul" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Consultations">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -145,7 +199,7 @@
                            <Image url="@images/iconUser.png" />
                         </image>
                      </ImageView>
-                     <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Ordonnances">
+                     <Button fx:id="butt_ord" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Ordonnances">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -157,7 +211,7 @@
                </HBox>
                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
                   <children>
-                     <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="icon_password" fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@images/iconUser.png" />
                         </image>
@@ -177,7 +231,7 @@
                </HBox>
                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
                   <children>
-                     <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="icon_deconnect" fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@images/iconUser.png" />
                         </image>
@@ -194,7 +248,7 @@
                </HBox>
             </children>
          </VBox>
-         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="250.0" />
+         <HBox alignment="CENTER" layoutX="14.0" layoutY="12.0" prefHeight="42.0" prefWidth="139.0" />
          </children>
       </Pane>
    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Fiche médicale" textFill="WHITE">

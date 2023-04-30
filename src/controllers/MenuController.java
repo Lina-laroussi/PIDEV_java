@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import entities.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,8 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import utils.Session;
 
 
 public class MenuController implements Initializable {
@@ -27,14 +30,55 @@ public class MenuController implements Initializable {
     @FXML
     private Button btn_accueil;
    
+    @FXML
+    private Button button_medecins;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+         User currentUser = Session.getInstance().getUser();
+        button_login.setOnAction(event->{
+            if(currentUser == null){
+                try {
+                    Parent parentLogin = FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+                    Scene sceneRegister = new Scene(parentLogin);
+                    Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+                     stageRegister .hide();
+        
+                      stageRegister .setScene(sceneRegister);
+                       stageRegister .show();
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            
+        }else{
+                button_login.setText("se déconnecter");
+                try {
+                    Session.getInstance().clear();
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setHeaderText(null);
+                    alert.setContentText("deconnexion réussie ");
+                    alert.showAndWait();   
+                    Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+                    Scene sceneRegister = new Scene(parentLogin);
+                    Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                    stageRegister .hide();
+
+                    stageRegister .setScene(sceneRegister);
+                    stageRegister .show();
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());
+                }
+        }
+        });
     }    
 
 
 
-     @FXML
+   /*  @FXML
     private void loginAction(ActionEvent event) throws IOException {
         
             Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/login.fxml"));
@@ -45,13 +89,26 @@ public class MenuController implements Initializable {
         
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
-    }
+    }*/
     
     
       @FXML
     private void AccueilAction(ActionEvent event) throws IOException {
         
             Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Accueil.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
+    
+    
+    @FXML
+    void medecinsAction(ActionEvent event) throws IOException {
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Medecins.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
             Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
        
