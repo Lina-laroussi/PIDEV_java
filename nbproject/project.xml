@@ -3,7 +3,11 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
+<<<<<<< HEAD
             <name>PIDEV</name>
+=======
+            <name>Pidev</name>
+>>>>>>> cd6e769d1b2617ce7af9659d039f19a1d034cf3b
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

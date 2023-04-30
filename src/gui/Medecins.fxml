@@ -10,25 +10,25 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="1052.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardAdminController">
-    <Pane prefHeight="700.0" prefWidth="1070.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controllers.MedecinControllerController">
+    <Pane prefHeight="700.0" prefWidth="750.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
      <children>
-         <fx:include source="ParentBack.fxml" />  
-         <VBox fx:id="bigContainer" layoutX="236.0" layoutY="1.0" prefHeight="613.0" prefWidth="823.0">
+         <fx:include source="Menu.fxml" />  
+         <VBox fx:id="bigContainer" layoutX="13.0" layoutY="94.0" prefHeight="593.0" prefWidth="724.0">
             <children>
-               <HBox fx:id="hbox" alignment="BOTTOM_RIGHT" prefHeight="110.0" prefWidth="795.0">
+               <HBox fx:id="hbox" alignment="BOTTOM_RIGHT" prefHeight="10.0" prefWidth="711.0">
                   <VBox.margin>
                      <Insets />
                   </VBox.margin>
                   <children>
-                     <TextField fx:id="rechercher" onKeyReleased="#rechercherUsers" prefHeight="31.0" prefWidth="208.0" promptText="Rechercher">
+                     <TextField fx:id="rechercher" prefHeight="31.0" prefWidth="208.0" promptText="Rechercher">
                         <HBox.margin>
                            <Insets bottom="30.0" right="30.0" />
                         </HBox.margin>
                      </TextField>
                   </children>
                </HBox>
-               <ScrollPane fx:id="scrollp" prefHeight="493.0" prefWidth="806.0">
+               <ScrollPane fx:id="scrollp" prefHeight="530.0" prefWidth="724.0">
                   <content>
                      <GridPane fx:id="UserContainer" prefHeight="38.0" prefWidth="0.0">
                        <columnConstraints>

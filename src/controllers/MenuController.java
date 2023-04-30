@@ -27,6 +27,9 @@ public class MenuController implements Initializable {
     @FXML
     private Button btn_accueil;
    
+    @FXML
+    private Button button_medecins;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -52,6 +55,19 @@ public class MenuController implements Initializable {
     private void AccueilAction(ActionEvent event) throws IOException {
         
             Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Accueil.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
+    
+    
+    @FXML
+    void medecinsAction(ActionEvent event) throws IOException {
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Medecins.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
             Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
        

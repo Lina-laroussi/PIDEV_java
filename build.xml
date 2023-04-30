@@ -7,8 +7,13 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
+<<<<<<< HEAD
 <project name="PIDEV" default="default" basedir=".">
     <description>Builds, tests, and runs the project PIDEV.</description>
+=======
+<project name="Pidev" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Pidev.</description>
+>>>>>>> cd6e769d1b2617ce7af9659d039f19a1d034cf3b
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -58,7 +63,11 @@
 
     An example of overriding the target for project execution could look like this:
 
+<<<<<<< HEAD
         <target name="run" depends="PIDEV-impl.jar">
+=======
+        <target name="run" depends="Pidev-impl.jar">
+>>>>>>> cd6e769d1b2617ce7af9659d039f19a1d034cf3b
             <exec dir="bin" executable="launcher.exe">
                 <arg file="${dist.jar}"/>
             </exec>

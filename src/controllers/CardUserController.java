@@ -35,7 +35,9 @@ import services.AdminService;
 
 public class CardUserController implements Initializable {
 
-    @FXML
+    
+    
+      @FXML
     private Circle circleImg;
     @FXML
     private Label username;
@@ -56,6 +58,7 @@ public class CardUserController implements Initializable {
     
 
     User user;
+ 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -140,8 +143,7 @@ public class CardUserController implements Initializable {
         }
      }
      
-     
-    @FXML
+    @FXML 
     void deleteUser(ActionEvent event) throws SQLException, IOException {
         AdminService adminService = new AdminService();
        try{
@@ -160,9 +162,8 @@ public class CardUserController implements Initializable {
         }
     }
     
-    
-     @FXML
-    void validerUser(ActionEvent event) throws SQLException {
+    @FXML
+     void validerUser(ActionEvent event) throws SQLException {
         AdminService adminService = new AdminService();
        try{
         if(user.getEtat().equals("non valide")){  
@@ -199,8 +200,7 @@ public class CardUserController implements Initializable {
     }
     
     
-     
-    @FXML
+    @FXML 
     void modifierUser(ActionEvent event) throws SQLException, Exception  {
           try {
             if(user.getRoles().equals("[\"ROLE_MEDECIN\"]")){

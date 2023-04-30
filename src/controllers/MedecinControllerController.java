@@ -6,7 +6,6 @@
 package controllers;
 
 import entities.User;
-import javafx.geometry.Insets;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -14,79 +13,69 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import services.AdminService;
-import utils.Session;
 
 
-public class DashboardAdminController implements Initializable {
-    
-     @FXML
+public class MedecinControllerController implements Initializable {
+
+    @FXML
     private VBox bigContainer;
-
     @FXML
     private HBox hbox;
-
+    @FXML
+    private TextField rechercher;
     @FXML
     private ScrollPane scrollp;
-
     @FXML
     private GridPane UserContainer;
     
-    @FXML
-    private TextField rechercher;
+    
+    private ObservableList<User> listMedecins =  FXCollections.observableArrayList();
+    public List<User> medecins;
 
-    User userAction =null;
-    private ObservableList<User> listUsers =  FXCollections.observableArrayList();
-    public List<User> users;
-     
-    
-    
-    
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        afficherUsers();
-    }
+        afficherMedecins();
+    }    
     
     
-    private ObservableList<User> showUsers(){
+    
+     private ObservableList<User> showMedecins(){
         AdminService adminService = new AdminService();
         try {
-            listUsers = adminService.ListUsers();
+            listMedecins = adminService.ListMedecins();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-             return listUsers;
+             return listMedecins;
     }
 
     
-    public void afficherUsers(){
-        listUsers = FXCollections.observableArrayList(showUsers());
-        System.out.println(listUsers);
+    public void afficherMedecins(){
+        listMedecins = FXCollections.observableArrayList(showMedecins());
+        System.out.println(listMedecins);
         int column = 0;
         int row=1;
      try{
-        for(int i=0;i<listUsers.size();i++){
+        for(int i=0;i<listMedecins.size();i++){
                  FXMLLoader fxmlLoader = new FXMLLoader();
-                 fxmlLoader.setLocation(getClass().getResource("../gui/CardUser.fxml"));
+                 fxmlLoader.setLocation(getClass().getResource("../gui/CardMedecins.fxml"));
                  VBox cardBox = fxmlLoader.load();
-                 CardUserController cardController = fxmlLoader.getController();
-                 cardController.setData(listUsers.get(i));
-                 if(column ==5){
+                 CardMedecinsController cardController = fxmlLoader.getController();
+                 cardController.setData(listMedecins.get(i));
+                 if(column ==3){
                      column=0;
                      ++row;
                    }
@@ -104,21 +93,21 @@ public class DashboardAdminController implements Initializable {
     }
     
    @FXML
-    private void rechercherUsers() {
+    private void rechercherMedecins() {
     try{   
-        users = new AdminService().search(rechercher.getText());
-        System.out.println(users);
+        medecins = new AdminService().search(rechercher.getText());
+        System.out.println(medecins);
         int column = 0;
         int row=1;
         UserContainer.getChildren().clear();
-        for(int i=0;i<users.size();i++){
+        for(int i=0;i<medecins.size();i++){
                  FXMLLoader fxmlLoader = new FXMLLoader();
-                 fxmlLoader.setLocation(getClass().getResource("../gui/CardUser.fxml"));
+                 fxmlLoader.setLocation(getClass().getResource("../gui/CardMedecins.fxml"));
                  VBox cardBox = fxmlLoader.load();
                  CardUserController cardController = fxmlLoader.getController();
-                 cardController.setData(users.get(i));
+                 cardController.setData(medecins.get(i));
                  UserContainer.add(cardBox, column++, row);
-                 if(column ==5){
+                 if(column == 3){
                      column=0;
                      ++row;
                    }
@@ -134,15 +123,6 @@ public class DashboardAdminController implements Initializable {
      }
         
     }
-           
+        
     
-    
- 
-    
-}    
-    
-   
-    
-    
-
-
+}
