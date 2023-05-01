@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utils.Session;
@@ -26,6 +27,15 @@ public class ParentBackController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    
+     @FXML
+    private Button button_prod;
+
+    @FXML
+    private Button button_categ;
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -41,6 +51,47 @@ public class ParentBackController implements Initializable {
             alert.setContentText("deconnexion réussie ");
             alert.showAndWait();   
             Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
+    
+    
+         @FXML
+    private void ProductAction(ActionEvent event) throws IOException {
+        
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/produit.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
+    
+    
+         @FXML
+    private void CategorieAction(ActionEvent event) throws IOException {
+        
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Categorie.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
+    
+          @FXML
+    private void userAction(ActionEvent event) throws IOException {
+        
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/DashboardAdmin.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
             Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
        

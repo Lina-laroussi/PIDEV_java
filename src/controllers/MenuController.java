@@ -119,4 +119,16 @@ public class MenuController implements Initializable {
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
     }
+    
+    @FXML
+    void DoctoshopAction(ActionEvent event) throws IOException {
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/FrontCategorie.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
 }

@@ -190,14 +190,23 @@ public class ParentFrontController implements Initializable {
             
             
       if(currentUser.getRoles().equals("[\"ROLE_PATIENT\"]")){
+        Image imageRv = new Image(getClass().getResourceAsStream("../gui/images/rendezVous.png")); // Replace with the path to your actual image file
+
           button_planning.setText("Rendez-vous");
+          icon_planning.setId("icon_rendez");
           button_rendezVous.setText("Fiche médicale");
-          button_cal.setText("consultations");
+          //icon_rendez.setId(icon_fiche.toString());
+          button_cal.setText("Consultations");
+          //icon_cal.setId(icon_consul.toString());
           button_fiche.setText("Ordonannaces");
-          button_consul.setText("Changer mot de passe");
-          butt_ord.setText("Se déconnecter");
+         // icon_fiche.setId(icon_ord.toString());
+          button_consul.setText("Se déconnecter");
+         // icon_consul.setId(icon_deconnect.toString());
+          butt_ord.setVisible(false);
           button_deconnect1.setVisible(false);  
           icon_deconnect.setVisible(false);
+          icon_ord.setVisible(false);
+          
        }else if(currentUser.getRoles().equals("[\"ROLE_ASSUREUR\"]")){
            button_planning.setText("Fiche Assurance");
            button_rendezVous.setText("Remboursement");

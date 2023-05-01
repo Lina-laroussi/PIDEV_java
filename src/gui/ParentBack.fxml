@@ -28,7 +28,7 @@
                   <children>
                      <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@images/iconUser.png" />
+                           <Image url="@images/accueil.png" />
                         </image>
                      </ImageView>
                      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: transparent;" text="Accueil">
@@ -45,10 +45,10 @@
                   <children>
                      <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@images/iconUser.png" />
+                           <Image url="@images/users.png" />
                         </image>
                      </ImageView>
-                     <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Utilisateurs">
+                     <Button mnemonicParsing="false" style="-fx-background-color: transparent;" onAction="#userAction" text="Utilisateurs">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -62,7 +62,7 @@
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/iconUser.png" />
+                              <Image url="@images/rendezVous.png" />
                            </image>
                         </ImageView>
                         <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Rendez-vous">
@@ -79,7 +79,7 @@
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/iconUser.png" />
+                              <Image url="@images/consultation.png" />
                            </image>
                         </ImageView>
                         <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Consultations">
@@ -96,7 +96,7 @@
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/iconUser.png" />
+                              <Image url="@images/ordonnance%20(2).png" />
                            </image>
                         </ImageView>
                         <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Ordonnances">
@@ -113,10 +113,10 @@
             <children>
                <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@images/iconUser.png" />
+                     <Image url="@images/pharmacie%20(1).png" />
                   </image>
                </ImageView>
-               <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Pharmacie">
+               <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Pharmacies">
                   <font>
                      <Font size="14.0" />
                   </font>
@@ -130,10 +130,10 @@
             <children>
                <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@images/iconUser.png" />
+                     <Image url="@images/produit.png" />
                   </image>
                </ImageView>
-               <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Produits">
+               <Button fx:id="button_prod" mnemonicParsing="false" onAction="#ProductAction" style="-fx-background-color: transparent;" text="Produits">
                   <font>
                      <Font size="14.0" />
                   </font>
@@ -147,10 +147,10 @@
             <children>
                <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@images/iconUser.png" />
+                     <Image url="@images/categorie.png" />
                   </image>
                </ImageView>
-               <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Catégorie">
+               <Button fx:id="button_categ" mnemonicParsing="false" onAction="#CategorieAction" style="-fx-background-color: transparent;" text="Catégorie">
                   <font>
                      <Font size="14.0" />
                   </font>
@@ -164,10 +164,10 @@
             <children>
                <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@images/iconUser.png" />
+                     <Image url="@images/bouclier.png" />
                   </image>
                </ImageView>
-               <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Assurance">
+               <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Assurances">
                   <font>
                      <Font size="14.0" />
                   </font>
@@ -181,7 +181,7 @@
                   <children>
                      <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@images/iconUser.png" />
+                           <Image url="@images/se-deconnecter.png" />
                         </image>
                      </ImageView>
                      <Button mnemonicParsing="false" onAction="#deconnectAction" onMouseClicked="#deconnectAction" style="-fx-background-color: transparent;" text="Se déconnecter">

@@ -1,0 +1,39 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+.alert {
+    -fx-background-color: #ffffff; /* couleur de fond blanche pour le contenu */
+}
+
+.alert .header-panel {
+    -fx-background-color: #3498db; /* couleur de fond bleue pour l'en-tête */
+    -fx-text-fill: #ffffff; /* texte blanc pour l'en-tête */
+}
+
+.alert .button-bar {
+    -fx-background-color: #2ecc71; /* couleur de fond verte pour le pied de page */
+}
+
+}
+
+.table-view{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: linear-gradient(to bottom right, #0f6789, #286155);
+    -fx-border-radius: 5px;
+    -fx-border-width: 1.5px;
+}
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom right, #0f6789, #286155);
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-background-insets: 0 0 0 0;
+}
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+.table-view .column-header .label{
+    -fx-text-fill: #fff;
+}

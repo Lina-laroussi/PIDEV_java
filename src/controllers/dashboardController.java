@@ -56,12 +56,7 @@ import studentmanagementsystem.getData;
 import studentmanagementsystem.studentData;
 import utils.MyConnection;
 
-/**
- *
- * SUBSCRIBE OUR YOUTUBE CHANNEL ->
- * https://www.youtube.com/channel/UCPgcmw0LXToDn49akUEJBkQ THANKS FOR YOUR
- * SUPPORT : )
- */
+
 public class dashboardController implements Initializable {
 
     @FXML

@@ -1,0 +1,19 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+.alert {
+    -fx-background-color: #ffffff; /* couleur de fond blanche pour le contenu */
+}
+
+.alert .header-panel {
+    -fx-background-color: #3498db; /* couleur de fond bleue pour l'en-tête */
+    -fx-text-fill: #ffffff; /* texte blanc pour l'en-tête */
+}
+
+.alert .button-bar {
+    -fx-background-color: #2ecc71; /* couleur de fond verte pour le pied de page */
+}
+
+}
