@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="563.0" prefWidth="810.0" style="-fx-background-color: #FFFFFF" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherFacture">
+           <fx:include source="ParentFront.fxml" />  
+        <TabPane fx:id="admintabpane" layoutX="309.0" layoutY="100.0" prefHeight="551.0" prefWidth="676.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="home" text="Liste des factures">
+            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="654.0">
+
+                                     <children>
+        
+        <TableView fx:id="table_Facture" layoutX="30.0" layoutY="15.0" prefHeight="507.0" prefWidth="543.0">
+          
+            <columns>
+           <TableColumn fx:id="date" minWidth="0.0" prefWidth="147.0" text="Date" />
+           <TableColumn fx:id="montant" minWidth="0.0" prefWidth="229.0" text="Montant" />
+          <TableColumn fx:id="etat" minWidth="0.0" prefWidth="166.0" text="Etat" />
+             <TableColumn fx:id="idph" minWidth="0.0" prefWidth="0.0" text="Id Pharmacie" />
+         <TableColumn fx:id="image_signature" minWidth="0.0" prefWidth="0.0" text="image_signature" />
+
+
+
+
+
+            </columns>
+            <columnResizePolicy>
+              
+            </columnResizePolicy>
+           <contextMenu>
+                <ContextMenu>
+                    <items>
+                   <MenuItem mnemonicParsing="false" onAction="#EditFacture" text="Edit" />
+
+                   <MenuItem mnemonicParsing="false" onAction="#supprimerFacture" text="Supprimer" />
+
+
+                    </items>
+                                                                   
+                </ContextMenu>
+            </contextMenu>
+        </TableView>
+                 </children></AnchorPane>
+
+         </content>
+
+          </Tab>
+        <Tab fx:id="flous" text="Factures Par jour">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="labelstat2" layoutX="6.0" prefHeight="56.0" prefWidth="718.0" text="BarChart" textFill="#87CEFA">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+        <BarChart fx:id="barChart" alternativeColumnFillVisible="true" layoutX="-2.0" layoutY="81.0" legendSide="RIGHT" prefHeight="279.0" prefWidth="544.0" stylesheets="@styles.css" title="Factures par jours">
+                    <xAxis>
+                    <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                    <NumberAxis side="LEFT" />
+                    </yAxis>
+                    </BarChart>
+                          </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="factures" text="Stats">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  
+                     <children>
+                        <PieChart fx:id="chart" layoutX="2.0" layoutY="6.0" prefHeight="438.0" prefWidth="568.0" />
+                        <Label fx:id="labelstat" layoutX="6.0" layoutY="14.0" prefHeight="56.0" prefWidth="718.0" text="PieChart" textFill="#87CEFA">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+           <Tab fx:id="croissance" text="Revenu">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>  
+
+                        <Label fx:id="labelstat3" layoutX="6.0" layoutY="14.0" prefHeight="56.0" prefWidth="718.0" text="LineChart" textFill="#87CEFA">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+ <LineChart fx:id="LineChart" alternativeColumnFillVisible="true" layoutX="-2.0" layoutY="81.0" legendSide="RIGHT" prefHeight="279.0" prefWidth="544.0" stylesheets="@styles.css" title="Croissance de Revenu">
+                    <xAxis>
+                    <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                    <NumberAxis side="LEFT" />
+                    </yAxis>
+                    </LineChart>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        
+            
+        </tabs>
+      </TabPane>
+</AnchorPane>

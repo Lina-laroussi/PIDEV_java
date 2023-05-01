@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1060.0" style="-fx-background-color: #FFFFFF" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardAdmin2">
+     <Pane prefHeight="59.0" prefWidth="752.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
+
+    <children>
+            <fx:include source="ParentBack.fxml" />
+    </children>
+    </Pane>
+             
+
+        <TabPane fx:id="admintabpane" layoutX="268.0" layoutY="100.0" prefHeight="524.0" prefWidth="736.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="home" text="Liste des pharmacies">
+            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="476.0" prefWidth="774.0">
+
+                                     <children>
+
+                <TableView fx:id="table_pharmacie" layoutX="-58.0" layoutY="3.0" prefHeight="502.0" prefWidth="835.0">
+          
+            <columns>
+                <TableColumn fx:id="nom" minWidth="0.0" prefWidth="57.0" text="Nom" />
+                <TableColumn fx:id="adresse" prefWidth="103.0" text="Adresse" />
+                <TableColumn fx:id="gouvernorat" minWidth="0.0" prefWidth="105.0" text="Gouvernorat" />
+            <TableColumn fx:id="num_tel" prefWidth="150.0" text="Numéro de Telephone" />
+            <TableColumn fx:id="etat" minWidth="0.0" prefWidth="50.0" text="Etat" />
+            <TableColumn fx:id="horaire" minWidth="0.0" prefWidth="100.0" text="Horaire" />
+          <TableColumn fx:id="services" maxWidth="100.0" minWidth="0.0" prefWidth="100.0" text="Services" />
+          
+
+            </columns>
+            <columnResizePolicy>
+              
+            </columnResizePolicy>
+            <contextMenu>
+                <ContextMenu>
+                    <items>
+                   <MenuItem mnemonicParsing="false" onAction="#supprimerPharmacie" text="Supprimer" />
+
+                 <MenuItem mnemonicParsing="false" onAction="#EditPharmacie" text="Edit" />
+                 <MenuItem mnemonicParsing="false" onAction="#OnClickedPrint" text="Imprimer" />
+
+                    </items>
+                                                                   
+                </ContextMenu>
+            </contextMenu>
+        </TableView>
+                             </children></AnchorPane>
+
+         </content>
+
+          </Tab>
+           <Tab fx:id="flous" text="Statistiques">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="labelstat2" layoutX="6.0" prefHeight="56.0" prefWidth="718.0" text="BarChart" textFill="#87CEFA">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                        <BarChart fx:id="barChart" layoutX="5.0" layoutY="43.0" prefHeight="372.0" prefWidth="552.0" stylesheets="@styles.css">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        
+            
+        </tabs>
+      </TabPane>
+    
+      <TextField fx:id="tf_rechercher_pharmacie" layoutX="268.0" layoutY="59.0" onKeyReleased="#rechercherPharmacie" prefHeight="25.0" prefWidth="199.0" promptText="rechercher" />  
+      <Button fx:id="printbtn" layoutX="900.0" layoutY="16.0" mnemonicParsing="false" onAction="#OnClickedPrint" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: #15558d;" styleClass="my-button" text="imprimer" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Button>
+
+            <Button fx:id="button_ajouter_pharmacie" layoutX="752.0" layoutY="16.0" onAction="#ajouterPharmacieAction" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #15558d;" styleClass="my-button" text="Ajouter Pharmacie" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Button>
+                 
+      </AnchorPane>

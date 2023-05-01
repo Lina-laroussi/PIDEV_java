@@ -219,6 +219,18 @@ public class ParentFrontController implements Initializable {
            icon_password.setVisible(false);
            icon_deconnect.setVisible(false);
            icon_ord.setVisible(false);
+           
+       }else if(currentUser.getRoles().equals("[\"ROLE_PHARMACIEN\"]")){
+           button_planning.setText("Pharmacies");
+           button_rendezVous.setText("Factures");
+           button_cal.setText("Statistique");
+           button_fiche.setText("Se déconnecter");
+           button_consul.setVisible(false);
+           butt_ord.setVisible(false);
+           button_deconnect1.setVisible(false);  
+           icon_deconnect.setVisible(false);
+           icon_ord.setVisible(false);
+           icon_consul.setVisible(false) ;
        }  
     }    
 
@@ -329,7 +341,16 @@ public class ParentFrontController implements Initializable {
         
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
-        }    
+        }else if(currentUser.getRoles().equals("[\"ROLE_PHARMACIEN\"]")){
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/AfficherPharmacie.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+        }       
     }
     
     
@@ -347,7 +368,17 @@ public class ParentFrontController implements Initializable {
         
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
-        } 
+            
+        }else if(currentUser.getRoles().equals("[\"ROLE_PHARMACIEN\"]")){
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/AfficherFacture.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
     }
     
     
@@ -410,6 +441,28 @@ public class ParentFrontController implements Initializable {
             stageRegister .show();
     }
 
+    @FXML
+    void DoctoshopAction(ActionEvent event) throws IOException {
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/FrontCategorie.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
 
+    @FXML
+    void PharmaciesAction(ActionEvent event) throws IOException {
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/PharmacieConnect.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
     
 }

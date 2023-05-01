@@ -5,10 +5,12 @@
  */
 package controllers;
 
+import entities.Pharmacie;
 import entities.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -22,20 +24,26 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import services.AdminService;
+import services.PharmacieService;
 import utils.Session;
 
 
-public class MedecinsConnectController implements Initializable {
+public class PharmacieConnectController implements Initializable {
 
+    @FXML
+    private Button button_accueil;
+    @FXML
+    private Button button_medecins;
     @FXML
     private VBox bigContainer;
     @FXML
@@ -45,20 +53,22 @@ public class MedecinsConnectController implements Initializable {
     @FXML
     private ScrollPane scrollp;
     @FXML
-    private GridPane UserContainer;
-    
+    private GridPane rdvContainer;
     @FXML
     private MenuButton btn_menu;
-    
-    private ObservableList<User> listMedecins =  FXCollections.observableArrayList();
-    public List<User> medecins;
 
+     ObservableList<Pharmacie> pharmacieList;
+        public List<Pharmacie> pharmacies;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        User currentUser = Session.getInstance().getUser();
+        
+        // TODO
+            afficherPhs();
+            
+            User currentUser = Session.getInstance().getUser();
          btn_menu.setText(currentUser.getNom().substring(0, 1).toUpperCase() +currentUser.getNom().substring(1) +" "+ currentUser.getPrenom().substring(0, 1).toUpperCase() +currentUser.getPrenom().substring(1));
         
            MenuItem deconnect = btn_menu.getItems().get(1);
@@ -117,70 +127,82 @@ public class MedecinsConnectController implements Initializable {
         }    
                   
            });
-
-        afficherMedecins();
     }    
     
     
-    
-     private ObservableList<User> showMedecins(){
-        AdminService adminService = new AdminService();
+     private ObservableList<Pharmacie> showCards(){
+        List<Pharmacie> phList = new ArrayList<>();
+        ObservableList<Pharmacie> listPharmacie =  FXCollections.observableArrayList();
+        PharmacieService phaService = new PharmacieService();
         try {
-            listMedecins = adminService.ListMedecins();
+            listPharmacie = phaService.showPharmacie();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-             return listMedecins;
+             return listPharmacie;
     }
-
+ 
     
-    public void afficherMedecins(){
-        listMedecins = FXCollections.observableArrayList(showMedecins());
+    public void afficherPhs(){
+        pharmacieList = FXCollections.observableArrayList(showCards());
         int column = 1;
         int row=0;
-     try{
-        for(int i=0;i<listMedecins.size();i++){
-                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/CardMedecin.fxml"));
-                 VBox cardBox = fxmlLoader.load();
-                 CardMedecinController cardController = fxmlLoader.getController();
-                 cardController.setData(listMedecins.get(i));
-                 UserContainer.add(cardBox, column++, row);
-                 if(column ==5){
-                    column=1;
-                     ++row;
-                   }
-                scrollp.setContent(UserContainer);
-                bigContainer.getChildren().clear();
-                bigContainer.getChildren().addAll(hbox);
-                bigContainer.getChildren().addAll(scrollp);
-                GridPane.setMargin(cardBox,new Insets(10));  
+
+         try {
+
+        for(int i=0;i<pharmacieList.size();i++){
+        PharmacieService phService = new PharmacieService();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../gui/CardPharmacie.fxml"));
+        VBox cardBox = fxmlLoader.load();
+        CardPharmacie cardController = fxmlLoader.getController();
+        cardController.setData(pharmacieList.get(i));
+         rdvContainer.add(cardBox, column++, row);
+
+        if(column ==3){
+            column=1;
+            ++row;
+        }
+        scrollp.setContent(rdvContainer);
+        bigContainer.getChildren().clear();
+        bigContainer.getChildren().add(hbox);
+        bigContainer.getChildren().add(scrollp);
+        //rdvContainer.add(cardBox, column++, row);
+        //rdvContainer.getChildren().add(cardBox,column row);
+        GridPane.setMargin(cardBox,new Insets(10));
           }
-        
-        } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
+        }
+
+        catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
-    
    @FXML
-    private void rechercherMedecins() {
+   void showPharmacies(ActionEvent event) {
+     
+        afficherPhs();
+    }
+    @FXML
+    private void rechercherPharmacies() {
     try{   
-        medecins = new AdminService().search(rechercher.getText());
-        System.out.println(medecins);
-        int column = 0;
+        pharmacies = new PharmacieService().search(rechercher.getText());
+        System.out.println(pharmacies);
+        int column = 1;
         int row=1;
-        UserContainer.getChildren().clear();
-        for(int i=0;i<medecins.size();i++){
+        rdvContainer.getChildren().clear();
+        for(int i=0;i<pharmacies.size();i++){
                  FXMLLoader fxmlLoader = new FXMLLoader();
-                 fxmlLoader.setLocation(getClass().getResource("../gui/CardMedecin.fxml"));
+                 fxmlLoader.setLocation(getClass().getResource("../gui/CardPharmacie.fxml"));
                  VBox cardBox = fxmlLoader.load();
-                 CardUserController cardController = fxmlLoader.getController();
-                 cardController.setData(medecins.get(i));
-                 UserContainer.add(cardBox, column++, row);
-                 if(column == 5){
+                 CardPharmacie cardController = fxmlLoader.getController();
+                 cardController.setData(pharmacies.get(i));
+                 rdvContainer.add(cardBox, column++, row);
+                 if(column ==8){
                      column=0;
                      ++row;
                    }
-                scrollp.setContent(UserContainer);
+                scrollp.setContent(rdvContainer);
                 bigContainer.getChildren().clear();
                 bigContainer.getChildren().add(hbox);
                 bigContainer.getChildren().add(scrollp);
@@ -194,26 +216,8 @@ public class MedecinsConnectController implements Initializable {
     }
     
     
-      @FXML
-    private void deconnectAction(ActionEvent event) throws IOException {
-        
-            
-            Session.getInstance().clear();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("deconnexion réussie ");
-            alert.showAndWait();   
-            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
-            Scene sceneRegister = new Scene(parentLogin);
-            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
-       
-            stageRegister .hide();
-        
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
-    }
-    
-      @FXML
+
+    @FXML
     void medecinsAction(ActionEvent event) throws IOException {
             Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/MedecinsConnect.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
@@ -224,8 +228,9 @@ public class MedecinsConnectController implements Initializable {
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
     }
-        
-       @FXML
+    
+    
+    @FXML
     private void PharmaciesAction(ActionEvent event) throws IOException {
             Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/PharmacieConnect.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
@@ -237,5 +242,12 @@ public class MedecinsConnectController implements Initializable {
             stageRegister .show();
     }
     
+    
+    
+
+    @FXML
+    private void DoctoshopAction(ActionEvent event) {
+    }
+
     
 }

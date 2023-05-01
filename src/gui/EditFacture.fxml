@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="533.0" prefWidth="487.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditerFacture">
+        <children>
+<Button fx:id="valider" layoutX="86.0" layoutY="419.0" mnemonicParsing="false" onAction="#Valider" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #15558d;" styleClass="my-button" text="Modifier" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="14.0" />
+                        </font>
+                      
+                     </Button>
+
+      <Label layoutX="170.0" layoutY="46.0" text="Modifier Facture" textFill="#55a2eb">
+          
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="256.0" text="Etat" />
+      <TextField fx:id="tf_etat" layoutX="191.0" layoutY="252.0" prefHeight="25.0" prefWidth="129.0" />
+      <Label layoutX="58.0" layoutY="136.0" text="Montant" />
+      <TextField fx:id="tf_montant" layoutX="191.0" layoutY="132.0" prefHeight="25.0" prefWidth="129.0" />
+      <Label layoutX="58.0" layoutY="178.0" text="Num Facture" />
+      <TextField fx:id="tf_num_facture" layoutX="192.0" layoutY="171.0" prefHeight="25.0" prefWidth="129.0" />
+      <Label layoutX="60.0" layoutY="218.0" text="Image" />
+      <TextField fx:id="tf_image_signature" layoutX="192.0" layoutY="214.0" prefHeight="25.0" prefWidth="129.0" />
+      <DatePicker fx:id="tf_date" layoutX="179.0" layoutY="331.0" />
+      <Label layoutX="61.0" layoutY="334.0" text="Date" />
+      <TextField fx:id="tf_ordonnance" layoutX="192.0" layoutY="293.0" prefHeight="25.0" prefWidth="129.0" />
+      <Label layoutX="60.0" layoutY="297.0" text="Ordonnance" />
+      <Button fx:id="printbtn" layoutX="284.0" layoutY="419.0" mnemonicParsing="false" onAction="#printbtnActionPerformed" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #15558d;" styleClass="my-button" text="Imprimer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      
+   </children>
+</AnchorPane>

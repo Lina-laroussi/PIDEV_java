@@ -33,12 +33,12 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="385.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Pharmacies">
+            <Button layoutX="385.0" layoutY="20.0" mnemonicParsing="false" onAction="#PharmaciesAction" style="-fx-background-color: transparent;" text="Pharmacies">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="524.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Doctoshop">
+            <Button layoutX="524.0" layoutY="20.0" mnemonicParsing="false" onAction="#DoctoshopAction" style="-fx-background-color: transparent;" text="Doctoshop">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -81,7 +81,7 @@
                                  <Insets />
                               </HBox.margin>
                            </ImageView>
-                           <Button fx:id="button_profile" mnemonicParsing="false" onAction="#Profile" prefHeight="30.0" prefWidth="67.0" style="-fx-background-color: transparent;" text="Profile">
+                           <Button fx:id="button_profile" mnemonicParsing="false" onAction="#Profile" prefHeight="30.0" prefWidth="76.0" style="-fx-background-color: transparent;" text="Profile">
                               <font>
                                  <Font size="14.0" />
                               </font>
@@ -103,7 +103,7 @@
                            <Image url="@images/plan.png" />
                         </image>
                      </ImageView>
-                     <Button fx:id="button_planning" mnemonicParsing="false" onAction="#Planning" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: transparent;" text="Planning">
+                     <Button fx:id="button_planning" mnemonicParsing="false" onAction="#Planning" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: transparent;" text="Planning">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -123,7 +123,7 @@
                            <Image url="@images/rendezVous.png" />
                         </image>
                      </ImageView>
-                     <Button fx:id="button_rendezVous" mnemonicParsing="false" onAction="#RendezVous" prefHeight="30.0" prefWidth="112.0" style="-fx-background-color: transparent;" text="Rendez-vous">
+                     <Button fx:id="button_rendezVous" mnemonicParsing="false" onAction="#RendezVous" prefHeight="30.0" prefWidth="104.0" style="-fx-background-color: transparent;" text="Rendez-vous">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -140,7 +140,7 @@
                            <Image url="@images/calendrier.png" />
                         </image>
                      </ImageView>
-                     <Button fx:id="button_cal" mnemonicParsing="false" onAction="#Calendrier" style="-fx-background-color: transparent;" text="Calendrier">
+                     <Button fx:id="button_cal" mnemonicParsing="false" onAction="#Calendrier" prefHeight="30.0" prefWidth="95.0" style="-fx-background-color: transparent;" text="Calendrier">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -160,7 +160,7 @@
                            <Insets />
                         </HBox.margin>
                      </ImageView>
-                     <Button fx:id="button_fiche" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Fiche médicale">
+                     <Button fx:id="button_fiche" mnemonicParsing="false" prefHeight="30.0" prefWidth="121.0" style="-fx-background-color: transparent;" text="Fiche médicale">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -180,7 +180,7 @@
                            <Image url="@images/consultation.png" />
                         </image>
                      </ImageView>
-                     <Button fx:id="button_consul" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Consultations">
+                     <Button fx:id="button_consul" mnemonicParsing="false" prefHeight="30.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="Consultations">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -197,7 +197,7 @@
                            <Image url="@images/ordonnance%20(2).png" />
                         </image>
                      </ImageView>
-                     <Button fx:id="butt_ord" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Ordonnances">
+                     <Button fx:id="butt_ord" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: transparent;" text="Ordonnances">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -227,7 +227,7 @@
             </children>
          </VBox>
          <HBox alignment="CENTER" layoutX="14.0" layoutY="12.0" prefHeight="42.0" prefWidth="139.0" />
-         <MenuButton fx:id="btn_menu" layoutX="893.0" layoutY="17.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" style="-fx-background-color: #15558d;" styleClass="my_button" text="MenuButton" textFill="WHITE">
+         <MenuButton fx:id="btn_menu" layoutX="852.0" layoutY="17.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="180.0" style="-fx-background-color: #15558d;" styleClass="my_button" text="MenuButton" textFill="WHITE">
            <items>
              <MenuItem mnemonicParsing="false" text="Profile" />
              <MenuItem mnemonicParsing="false" text="Se déconnecter" />

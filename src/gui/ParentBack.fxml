@@ -116,7 +116,7 @@
                      <Image url="@images/pharmacie%20(1).png" />
                   </image>
                </ImageView>
-               <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Pharmacies">
+               <Button mnemonicParsing="false" onAction="#PharmacieAction" style="-fx-background-color: transparent;" text="Pharmacies">
                   <font>
                      <Font size="14.0" />
                   </font>

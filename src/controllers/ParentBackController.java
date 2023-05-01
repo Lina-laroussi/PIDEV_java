@@ -100,4 +100,19 @@ public class ParentBackController implements Initializable {
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
     }
+    
+    
+        @FXML
+    private void PharmacieAction(ActionEvent event) throws IOException {
+        
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/DashboardAdmin2.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
+    
 }
