@@ -39,6 +39,7 @@ public class MenuController implements Initializable {
         // TODO
         
        currentUser = Session.getInstance().getUser();
+        System.out.println(currentUser);
         button_login.setOnAction(event->{
             if(currentUser == null){
                 try {
@@ -54,7 +55,7 @@ public class MenuController implements Initializable {
                     System.out.println(ex.getMessage());
                 }
             
-        }else{
+        }else if(currentUser != null){
                 button_login.setText("se déconnecter");
                 try {
                     Session.getInstance().clear();

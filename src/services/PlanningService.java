@@ -147,11 +147,14 @@ public class PlanningService {
                 .collect(Collectors.toList());
         
 }
-        public Planning findByDate(LocalDate date) {
-        String request = "SELECT * FROM planning WHERE date_debut <= '" + java.sql.Date.valueOf(date) + "' AND date_fin >= '" + java.sql.Date.valueOf(date) + "'";
+        public Planning findByDate(LocalDate date,int medecin_id) {
+        String request = "SELECT * FROM planning WHERE date_debut <= ? AND date_fin >= ? AND medecin_id = ?";
         Planning planning = new Planning();
         try {
         preparedStatement = cnx.prepareStatement(request);
+        preparedStatement.setDate(1, java.sql.Date.valueOf(date));
+        preparedStatement.setDate(2, java.sql.Date.valueOf(date));
+        preparedStatement.setInt(3, medecin_id);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             

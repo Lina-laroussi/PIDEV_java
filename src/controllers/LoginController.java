@@ -149,6 +149,14 @@ public class LoginController implements Initializable {
 
                         stageProfile.setScene(sceneProfile);
                         stageProfile.show();
+                        
+                     }else if(user.getRoles().equals("[\"ROLE_ASSUREUR\"]")){
+                        Parent parentProfile = FXMLLoader.load(getClass().getResource("../gui/dashboard.fxml"));
+                        Scene sceneProfile= new Scene(parentProfile);
+                        Stage stageProfile  = (Stage)((Node)event.getSource()).getScene().getWindow();
+                        stageProfile.hide();
+                        stageProfile.setScene(sceneProfile);
+                        stageProfile.show();
                      }
                     else{
                       Parent parentProfile= FXMLLoader.load(getClass().getResource("../gui/ProfileUser.fxml"));

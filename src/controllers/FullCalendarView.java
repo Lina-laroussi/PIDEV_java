@@ -42,8 +42,10 @@ import javafx.stage.StageStyle;
 import services.PlanningService;
 import services.RendezVousService;
 import entities.RendezVous;
+import entities.User;
 import java.text.SimpleDateFormat;
 import javafx.scene.input.DataFormat;
+import utils.Session;
 
 
 public class FullCalendarView{
@@ -56,11 +58,13 @@ public class FullCalendarView{
     public PlanningService pService = new PlanningService();
     SimpleDateFormat heureFormatPicker = new SimpleDateFormat("HH:mm");
 
-   private static final DataFormat RDV_FORMAT = new DataFormat("application/x-java-serialized-object");
-
-
+    private static final DataFormat RDV_FORMAT = new DataFormat("application/x-java-serialized-object");
+    User currentUser;
+    private int medecin_id;
     public FullCalendarView(LocalDate date) {
+        currentUser = Session.getInstance().getUser();
         currentDate = date;
+
         // Create the calendar grid pane
         calendar = new GridPane();
         calendar.setPrefSize(600, 600);
@@ -124,6 +128,9 @@ public class FullCalendarView{
     public VBox getView() {
         return view;
     }
+    public void setMedecinId(int medecin_id){
+        this.medecin_id = medecin_id;
+    }
 
 
     private void populateCalendar() {
@@ -142,7 +149,7 @@ public class FullCalendarView{
             vbox.getChildren().add(ht);
             ap.getChildren().add(vbox);
             ap.setDate(calendarDate);
-            Planning p =pService.findByDate(ap.getDate());
+            Planning p =pService.findByDate(ap.getDate(),medecin_id);
             ap.setPlanningId(p.getIdPlanning());
             if(p.getIdPlanning()==0){
                 if(calendarDate.equals(LocalDate.now())){
@@ -194,9 +201,12 @@ public class FullCalendarView{
             ap.setLeftAnchor(vbox, 5.0);
 
             try {
-                List<RendezVous>rdvList = rdvService.findByDate(calendarDate);
+                if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){
+                this.setMedecinId(currentUser.getId());
+                }
+                List<RendezVous>rdvList = rdvService.findByDate(calendarDate,medecin_id);
             
-            for (RendezVous rdv: rdvList) { // Add two event nodes for demonstration purposes
+            for(RendezVous rdv: rdvList) { // Add two event nodes for demonstration purposes
                 Button event = new Button(rdv.getHeureDebut().toString().substring(0, 5)+"-"+rdv.getHeureFin().toString().substring(0, 5)+"\n"+rdv.getEtat());
                 if(rdv.getEtat().equals("en attente")){
                     event.setStyle("-fx-background-color: rgb(244, 164, 66);-fx-background-radius: 10px;-fx-text-fill: white;");

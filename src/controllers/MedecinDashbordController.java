@@ -68,6 +68,7 @@ public class MedecinDashbordController implements Initializable {
     ObservableList<RendezVous> rendezVousList;
     User currentUser;
     PlanningService p;
+    FullCalendarView fv;
     /**
      * Initializes the controller class.
      */
@@ -104,7 +105,7 @@ public class MedecinDashbordController implements Initializable {
     
     public void afficherRdvs(){
         rendezVousList = FXCollections.observableArrayList(showCards());
-        int column = 0;
+        int column = 1;
         int row=0;
 
          try {
@@ -127,15 +128,18 @@ public class MedecinDashbordController implements Initializable {
         VBox cardBox = fxmlLoader.load();
         CardController cardController = fxmlLoader.getController();
         cardController.setData(rendezVousList.get(i));
-        if(column ==7){
-            column=0;
+        rdvContainer.add(cardBox, column++, row);
+
+       
+        if(column ==4){
+            column=1;
             ++row;
         }
-        rdvContainer.add(cardBox, column++, row);
         scrollp.setContent(rdvContainer);
         bigContainer.getChildren().clear();
         bigContainer.getChildren().add(hbox);
         bigContainer.getChildren().add(scrollp);
+        
         //rdvContainer.add(cardBox, column++, row);
         //rdvContainer.getChildren().add(cardBox,column row);
         GridPane.setMargin(cardBox,new Insets(10));
@@ -156,9 +160,8 @@ public class MedecinDashbordController implements Initializable {
     void showCalendar(ActionEvent event) {
 
            bigContainer.getChildren().clear();
-           bigContainer.getChildren().add(new FullCalendarView(LocalDate.now()).getView());
-            
-
+           this.fv= new FullCalendarView(LocalDate.now());
+           bigContainer.getChildren().add(fv.getView());
 
     }
 

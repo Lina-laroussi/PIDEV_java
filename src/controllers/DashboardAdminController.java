@@ -108,8 +108,8 @@ public class DashboardAdminController implements Initializable {
     try{   
         users = new AdminService().search(rechercher.getText());
         System.out.println(users);
-        int column = 0;
-        int row=1;
+        int column = 1;
+        int row=0;
         UserContainer.getChildren().clear();
         for(int i=0;i<users.size();i++){
                  FXMLLoader fxmlLoader = new FXMLLoader();
@@ -118,10 +118,10 @@ public class DashboardAdminController implements Initializable {
                  CardUserController cardController = fxmlLoader.getController();
                  cardController.setData(users.get(i));
                  UserContainer.add(cardBox, column++, row);
-                 if(column ==5){
-                     column=0;
-                     ++row;
-                   }
+                  if(column ==4){
+                    column=1;
+                    ++row;
+                }
                 scrollp.setContent(UserContainer);
                 bigContainer.getChildren().clear();
                 bigContainer.getChildren().add(hbox);

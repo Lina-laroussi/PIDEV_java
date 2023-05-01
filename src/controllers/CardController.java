@@ -8,10 +8,14 @@ package controllers;
 import entities.Planning;
 import entities.RendezVous;
 import entities.User;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,16 +74,73 @@ public class CardController implements Initializable {
         Image im = new Image("./utils/img/patient.jpg",false);
         circleImg.setFill(new ImagePattern(im));
         
+        if(currentUser.getRoles().equals("[\"ROLE_PATIENT\"]")){
+            confirmBt.setVisible(false);
+            annuleBt.setVisible(false);
+        }
+        
        
     }  
     
     public void setData(RendezVous rdv){
         this.rendezVous = rdv;
-
+        User patient = null;
+        User medecin = null;
         System.out.println(rendezVous.getIdRdv());
         int maxLength = 20; // set the maximum length of the text
-        circleImg.setStroke(Color.SEAGREEN);
-        Image im = new Image("./utils/img/patient.jpg",false);
+        //circleImg.setStroke(Color.SEAGREEN);
+        if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){
+          RendezVousService rdvService = new RendezVousService(); 
+            try {
+                 patient = rdvService.findPatient(rdv.getIdPatient());
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            Image image = new Image(getClass().getResourceAsStream("../gui/images/pngegg.png")); // Replace with the path to your actual image file
+            if(patient.getImage()== null){
+                circleImg.setFill(new ImagePattern(image));
+                circleImg.setStroke(Color.TRANSPARENT);
+
+            }else{
+                String imagePath = "C:/Users/larou/Desktop/MedCare/PIDEV/public/uploads/utilisateurs/" + patient.getImage();
+                try {
+                    File imageFile = new File(imagePath);
+                    FileInputStream fileInputStream = new FileInputStream(imageFile);
+                    Image imageUser = new Image(fileInputStream);
+                     circleImg.setFill(new ImagePattern(imageUser));
+                     circleImg.setStroke(Color.TRANSPARENT);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            
+        }else if(currentUser.getRoles().equals("[\"ROLE_PATIENT\"]")){
+            RendezVousService rdvService = new RendezVousService(); 
+            try {
+                 medecin = rdvService.findMedecin(rdv.getIdPlanning());
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+            Image image = new Image(getClass().getResourceAsStream("../gui/images/pngegg.png")); // Replace with the path to your actual image file
+            if(medecin.getImage()== null){
+                circleImg.setFill(new ImagePattern(image));
+                circleImg.setStroke(Color.TRANSPARENT);
+
+            }else{
+                String imagePath = "C:/Users/larou/Desktop/MedCare/PIDEV/public/uploads/utilisateurs/" + medecin.getImage();
+                try {
+                    File imageFile = new File(imagePath);
+                    FileInputStream fileInputStream = new FileInputStream(imageFile);
+                    Image imageUser = new Image(fileInputStream);
+                     circleImg.setFill(new ImagePattern(imageUser));
+                     circleImg.setStroke(Color.TRANSPARENT);
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+        }
+        }
+        
+        //Image im = new Image("./utils/img/patient.jpg",false);
         etatLb.setText(rdv.getEtat());
           if(rdv.getEtat().equals("en attente")){
             etatLb.setTextFill(Color.ORANGE); // set the text color to red    
@@ -89,8 +150,8 @@ public class CardController implements Initializable {
             etatLb.setTextFill(Color.RED); // set the text color to red    
 
     }
-        circleImg.setFill(new ImagePattern(im));
-        nameLb.setText(rdv.getFullName());
+        //circleImg.setFill(new ImagePattern(im));
+        nameLb.setText(rdv.getFullName().substring(0, 1).toUpperCase() +rdv.getFullName().substring(1));
         dateLb.setText(rdv.getDate().toString());
         heureLb.setText(rdv.getHeureDebut().toString().substring(0, 5)+"-" + rdv.getHeureFin().toString().substring(0, 5));
         symptomesLb.setText(rdv.getSymptomes().substring(0, Math.min(rdv.getSymptomes().length(), maxLength)));

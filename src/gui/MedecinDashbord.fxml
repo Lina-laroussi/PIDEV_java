@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1060.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MedecinDashbordController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1060.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MedecinDashbordController">
          <children>
           <fx:include source="ParentFront.fxml" />  
   
@@ -131,7 +131,7 @@
             </children>
          </VBox>-->
          <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="42.0" prefWidth="250.0" />
-         <VBox fx:id="bigContainer" layoutX="249.0" layoutY="60.0" prefHeight="563.0" prefWidth="810.0">
+         <VBox fx:id="bigContainer" layoutX="290.0" layoutY="80.0" prefHeight="600.0" prefWidth="750.0" >
             <children>
                <HBox fx:id="hbox" prefHeight="153.0" prefWidth="810.0">
                   <VBox.margin>

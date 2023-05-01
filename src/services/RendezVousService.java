@@ -6,6 +6,7 @@
 package services;
 
 import entities.RendezVous;
+import entities.User;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -163,6 +164,7 @@ public class RendezVousService {
     }
     public RendezVous findRdvById(int rdvId) throws SQLException{
         String request = "SELECT * FROM rendez_vous where id="+rdvId+"";
+        
         RendezVous rdv = null;
          try {
          preparedStatement = cnx.prepareStatement(request);
@@ -180,8 +182,13 @@ public class RendezVousService {
          return rdv;
     }
     
-    public List<RendezVous> findByDate(LocalDate date) throws SQLException{
-        String request = "SELECT * FROM rendez_vous WHERE date='" + java.sql.Date.valueOf(date) + "'ORDER BY heure_debut";
+    public List<RendezVous> findByDate(LocalDate date,int user_id) throws SQLException{
+            String request = "SELECT rv.* " +
+                       "FROM rendez_vous rv " +
+                       "JOIN planning p ON rv.planning_id = p.id " +
+                       "WHERE p.medecin_id ="+user_id +
+                       "AND rv.date="+date;
+        
         List<RendezVous> rendezVousList =new ArrayList<>();
         try {
             preparedStatement = cnx.prepareStatement(request);
@@ -205,5 +212,56 @@ public class RendezVousService {
         return rendezVousList;
 
     }
+    
+       public User findPatient(int patientId) throws SQLException{
+        String request = "SELECT u.* " +
+                       "FROM User u " +
+                       "JOIN rendez_vous rv ON u.id = rv.patient_id " +
+                       "WHERE rv.patient_id ="+ patientId ;
+        
+        User user = null;
+         try {
+         preparedStatement = cnx.prepareStatement(request);
+         ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            
+            System.out.println("resultSet"+resultSet.getInt("id"));
+            user = new User(resultSet.getInt("id"), resultSet.getString("nom"), resultSet.getString("prenom"), resultSet.getString("email"), resultSet.getTime("date_de_naissance"), resultSet.getString("sexe"), resultSet.getString("num_tel"), resultSet.getString("adresse"),resultSet.getString("image"));
+
+        }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+                    
+        }
+           System.out.println(user);
+         return user;
+    }
+       
+       
+     public User findMedecin(int planningId) throws SQLException{
+        String request = "SELECT u.* " +
+                       "FROM User u " +
+                       "JOIN planning p ON u.id = p.medecin_id " +
+                       "JOIN rendez_vous rv ON p.id = rv.planning_id " +
+                       "WHERE rv.planning_id ="+ planningId ;
+        
+        User user = null;
+         try {
+         preparedStatement = cnx.prepareStatement(request);
+         ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            
+            System.out.println("resultSet"+resultSet.getInt("id"));
+            user = new User(resultSet.getInt("id"), resultSet.getString("nom"), resultSet.getString("prenom"), resultSet.getString("email"), resultSet.getTime("date_de_naissance"), resultSet.getString("sexe"), resultSet.getString("num_tel"), resultSet.getString("adresse"),resultSet.getString("specialite"),resultSet.getString("image"));
+
+        }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+                    
+        }
+           System.out.println(user);
+         return user;
+    }   
+    
 
 }

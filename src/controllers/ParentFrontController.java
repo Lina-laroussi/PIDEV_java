@@ -14,6 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -75,11 +79,95 @@ public class ParentFrontController implements Initializable {
     private ImageView icon_deconnect;
        
     @FXML
-    private ImageView icon_password;    
+    private ImageView icon_password;   
+    
+    @FXML
+    private Button button_accueil;
+    
+    @FXML
+    private Button button_medecins;
+    
+    @FXML
+    private ImageView icon_profile;
+    @FXML
+    private ImageView icon_planning;
+    @FXML
+    private ImageView icon_rendez;
+    @FXML
+    private ImageView icon_cal;
+    @FXML
+    private ImageView icon_fiche;
+    @FXML
+    private ImageView icon_consul;
+    @FXML
+    private ImageView icon_ord;
+    
+    @FXML
+    private MenuButton btn_menu;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         User currentUser = Session.getInstance().getUser();
         System.out.println(currentUser);
+        btn_menu.setText(currentUser.getNom().substring(0, 1).toUpperCase() +currentUser.getNom().substring(1) +" "+ currentUser.getPrenom().substring(0, 1).toUpperCase() +currentUser.getPrenom().substring(1));
+        
+           MenuItem deconnect = btn_menu.getItems().get(1);
+         
+           deconnect.setOnAction(event->{
+                  Session.getInstance().clear();
+                  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                  alert.setHeaderText(null);
+                  alert.setContentText("deconnexion réussie ");
+                  alert.showAndWait();   
+                  Parent parentLogin;
+            try {
+                parentLogin = FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+                Scene sceneRegister = new Scene(parentLogin);
+                  Stage stageRegister = (Stage) btn_menu.getScene().getWindow();
+
+                  stageRegister .hide();
+
+                  stageRegister .setScene(sceneRegister);
+                  stageRegister .show();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+                  
+           });
+           
+            MenuItem profile = btn_menu.getItems().get(0);
+             profile.setOnAction(event->{
+             if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){
+                 try {
+                     Parent parentLogin = FXMLLoader.load(getClass().getResource("../gui/ProfileMedecin.fxml"));
+                     Scene sceneRegister = new Scene(parentLogin);
+                     Stage stageRegister = (Stage) btn_menu.getScene().getWindow();
+
+                     stageRegister .hide();
+
+                     stageRegister .setScene(sceneRegister);
+                     stageRegister .show();
+                 } catch (IOException ex) {
+                     System.out.println(ex.getMessage());
+                 }
+                        
+        }else{
+                 try {
+                     Parent parentLogin = FXMLLoader.load(getClass().getResource("../gui/ProfileUser.fxml"));
+                     Scene sceneRegister = new Scene(parentLogin);
+                    Stage stageRegister = (Stage) btn_menu.getScene().getWindow();
+
+                    stageRegister .hide();
+
+                    stageRegister .setScene(sceneRegister);
+                    stageRegister .show();
+                 } catch (IOException ex) {
+                     System.out.println(ex.getMessage()); 
+                 }       
+        }    
+                  
+           });
+           
+       
         username.setText(currentUser.getNom().substring(0, 1).toUpperCase() +currentUser.getNom().substring(1) +" "+ currentUser.getPrenom().substring(0, 1).toUpperCase() +currentUser.getPrenom().substring(1));
            
          Image image = new Image(getClass().getResourceAsStream("../gui/images/pngegg.png")); // Replace with the path to your actual image file
@@ -108,11 +196,21 @@ public class ParentFrontController implements Initializable {
           button_fiche.setText("Ordonannaces");
           button_consul.setText("Changer mot de passe");
           butt_ord.setText("Se déconnecter");
-          button_password.setVisible(false);
           button_deconnect1.setVisible(false);  
-          icon_password.setVisible(false);
           icon_deconnect.setVisible(false);
-       }     
+       }else if(currentUser.getRoles().equals("[\"ROLE_ASSUREUR\"]")){
+           button_planning.setText("Fiche Assurance");
+           button_rendezVous.setText("Remboursement");
+           button_cal.setText("Statistique");
+           button_fiche.setText("Changer mot de passe");
+           button_consul.setText("Se déconnecter");
+           butt_ord.setVisible(false);
+           button_password.setVisible(false);
+           button_deconnect1.setVisible(false);  
+           icon_password.setVisible(false);
+           icon_deconnect.setVisible(false);
+           icon_ord.setVisible(false);
+       }  
     }    
 
     
@@ -293,7 +391,7 @@ public class ParentFrontController implements Initializable {
     
     @FXML
     void medecinsAction(ActionEvent event) throws IOException {
-            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Medecins.fxml"));
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/MedecinsConnect.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
             Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
        
@@ -302,6 +400,7 @@ public class ParentFrontController implements Initializable {
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
     }
-    
+
+
     
 }
