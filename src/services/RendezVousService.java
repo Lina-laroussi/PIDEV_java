@@ -184,10 +184,11 @@ public class RendezVousService {
     
     public List<RendezVous> findByDate(LocalDate date,int user_id) throws SQLException{
             String request = "SELECT rv.* " +
-                       "FROM rendez_vous rv " +
-                       "JOIN planning p ON rv.planning_id = p.id " +
-                       "WHERE p.medecin_id ="+user_id +
-                       "AND rv.date="+date;
+                 "FROM rendez_vous rv " +
+                 "JOIN planning p ON rv.planning_id = p.id " +
+                 "WHERE p.medecin_id = " + user_id +
+                 " AND rv.date = '" + date + "'";
+
         
         List<RendezVous> rendezVousList =new ArrayList<>();
         try {
@@ -201,7 +202,10 @@ public class RendezVousService {
                 Time heureDebut = resultSet.getTime("heure_debut");
                 Time heureFin = resultSet.getTime("heure_fin");
                 String symptomes = resultSet.getString("symptomes");
+                int patient_id = resultSet.getInt("patient_id");
+
                 RendezVous rendez_vous = new RendezVous(id, symptomes,etat,dateRdv,heureDebut,heureFin,idPlanning);
+                rendez_vous.setIdPatient(patient_id);
                 rendezVousList.add(rendez_vous);
 
             }

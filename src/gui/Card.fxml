@@ -21,7 +21,7 @@
             </Circle>
             <VBox prefHeight="60.0" prefWidth="150.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="17.0" prefWidth="42.0" rotate="-90.0" style="-fx-background-color: #ffff;" text=". . .">
+                  <Button fx:id="btn3Point" mnemonicParsing="false" prefHeight="17.0" prefWidth="42.0" rotate="-90.0" style="-fx-background-color: #ffff;" text=". . .">
                      <VBox.margin>
                         <Insets left="100.0" />
                      </VBox.margin>

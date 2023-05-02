@@ -174,7 +174,7 @@ void Refresh(ActionEvent event) {
     for (categorie c : cardListData) {
         try {
             FXMLLoader load = new FXMLLoader();
-            load.setLocation(getClass().getResource("CARDCAT.fxml"));
+            load.setLocation(getClass().getResource("../gui/CARDCAT.fxml"));
             AnchorPane pane = load.load();
             CARDCATController cardC = load.getController();
             cardC.setData(c);

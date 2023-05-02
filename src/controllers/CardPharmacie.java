@@ -77,20 +77,21 @@ public class CardPharmacie implements Initializable {
         this.pharmacie = ph;
         System.out.println(pharmacie.getIdph());
         int maxLength = 20; // set the maximum length of the text
-        circleImg.setStroke(Color.SEAGREEN);
+        circleImg.setStroke(Color.TRANSPARENT);
         Image im = new Image("./gui/images/pharmacie.jpg",false);
         etatLb.setText(ph.getEtat());
           if(ph.getEtat().equals("Ouverte")){
             etatLb.setTextFill(Color.GREEN); // set the text color to red    
           }else if(ph.getEtat().equals("Fermee")){
             etatLb.setTextFill(Color.RED); // set the text color to red    
+            etatLb.setText("Fermée");
           }else{
             etatLb.setTextFill(Color.ORANGE); // set the text color to red    
 
     }
         circleImg.setFill(new ImagePattern(im));
-        nameLb.setText(ph.getNom());
-        adresseLb.setText(ph.getAdresse());
+        nameLb.setText(ph.getNom().substring(0, 1).toUpperCase() +ph.getNom().substring(1));
+        adresseLb.setText(ph.getAdresse().substring(0, 1).toUpperCase() +ph.getAdresse().substring(1));
         num_telLb.setText(ph.getNum_tel());
         emailLb.setText(ph.getEmail());
 

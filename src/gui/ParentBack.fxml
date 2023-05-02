@@ -48,7 +48,7 @@
                            <Image url="@images/users.png" />
                         </image>
                      </ImageView>
-                     <Button mnemonicParsing="false" style="-fx-background-color: transparent;" onAction="#userAction" text="Utilisateurs">
+                     <Button mnemonicParsing="false" onAction="#userAction" style="-fx-background-color: transparent;" text="Utilisateurs">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -96,7 +96,7 @@
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/ordonnance%20(2).png" />
+                              <Image url="@images/ordonnance.png" />
                            </image>
                         </ImageView>
                         <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Ordonnances">
@@ -113,7 +113,7 @@
             <children>
                <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                     <Image url="@images/pharmacie%20(1).png" />
+                     <Image url="@images/pharmacie1.png" />
                   </image>
                </ImageView>
                <Button mnemonicParsing="false" onAction="#PharmacieAction" style="-fx-background-color: transparent;" text="Pharmacies">

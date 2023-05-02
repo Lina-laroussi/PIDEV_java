@@ -68,59 +68,11 @@ import utils.MyConnection;
  */
 public class AfficherPharmacie implements Initializable {
     
-    @FXML
-    private Button btnfac;
-
-    @FXML
-    private Button btnpharma;
+ 
     
-    @FXML
-    void btnfacaction(ActionEvent event) throws IOException {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AfficherFacture.fxml"));
-        Parent parent = loader.load();
-        AfficherFacture controller = (AfficherFacture) loader.getController();
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle("Afficher Facture");
-        stage.setScene(new Scene(parent));
-        stage.show();
-                 stage.setOnHiding((e) -> {
-                try {
-                    handleRefresh(new ActionEvent());
-                    loadData();
-                   
-                    
-                }catch (SQLException ex) {
-                    System.out.println(ex);
-                   // Logger.getLogger("gg").log(Level.SEVERE, null, ex);
-                }
-            });
+    
 
-
-    }
-
-    @FXML
-    void btnpharmaaction(ActionEvent event) throws IOException {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AfficherPharmacie.fxml"));
-        Parent parent = loader.load();
-        AfficherPharmacie controller = (AfficherPharmacie) loader.getController();
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle("Afficher Pharmacie");
-        stage.setScene(new Scene(parent));
-        stage.show();
-                 stage.setOnHiding((e) -> {
-                try {
-                    handleRefresh(new ActionEvent());
-                    loadData();
-                   
-                    
-                }catch (SQLException ex) {
-                    System.out.println(ex);
-                   // Logger.getLogger("gg").log(Level.SEVERE, null, ex);
-                }
-            });
-
-
-    }
+   
    
     @FXML
     private TableView<Pharmacie> table_pharmacie;
@@ -157,12 +109,15 @@ public class AfficherPharmacie implements Initializable {
 
     @FXML
     private TextField tf_rechercher_pharmacie;
-      @FXML
-        private BarChart<String, Number> barChart;    
+    @FXML
+    private BarChart<String, Number> barChart;    
 
     private PreparedStatement  preparedStatement;
-  
-
+    ObservableList<Pharmacie> listPharmacie =  FXCollections.observableArrayList();
+    PharmacieService pharmacieService = new PharmacieService();
+    Pharmacie p = new Pharmacie();
+    public List<Pharmacie> pharmacies;
+    
     public AfficherPharmacie() {
         MyConnection bd=MyConnection.getInstance();
         cnx=bd.getCnx();
@@ -170,28 +125,21 @@ public class AfficherPharmacie implements Initializable {
         /**
      * Initializes the controller class.
      */
-    
-    ObservableList<Pharmacie> listPharmacie =  FXCollections.observableArrayList();
-    PharmacieService pharmacieService = new PharmacieService();
-    Pharmacie p = new Pharmacie();
-    public List<Pharmacie> pharmacies;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-     
         try {
             listPharmacie = pharmacieService.showPharmacie();
-       
-        nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        adresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
-        gouvernorat.setCellValueFactory(new PropertyValueFactory<>("gouvernorat"));
-        num_tel.setCellValueFactory(new PropertyValueFactory<>("num_tel"));
-        horaire.setCellValueFactory(new PropertyValueFactory<>("horaire"));
-        etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
-        services.setCellValueFactory(new PropertyValueFactory<>("services"));
+            nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            adresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+            gouvernorat.setCellValueFactory(new PropertyValueFactory<>("gouvernorat"));
+            num_tel.setCellValueFactory(new PropertyValueFactory<>("num_tel"));
+            horaire.setCellValueFactory(new PropertyValueFactory<>("horaire"));
+            etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+            services.setCellValueFactory(new PropertyValueFactory<>("services"));
 
 
-        table_pharmacie.getItems().setAll(listPharmacie);
+            table_pharmacie.getItems().setAll(listPharmacie);
 //           
     
         } 

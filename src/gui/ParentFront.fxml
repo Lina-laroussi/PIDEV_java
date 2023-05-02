@@ -74,14 +74,11 @@
                      <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="250.0">
                         <children>
                            <ImageView fx:id="icon_profile" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                 <Image url="@images/iconUser.png" />
-                              </image>
                               <HBox.margin>
                                  <Insets />
                               </HBox.margin>
                            </ImageView>
-                           <Button fx:id="button_profile" mnemonicParsing="false" onAction="#Profile" prefHeight="30.0" prefWidth="76.0" style="-fx-background-color: transparent;" text="Profile">
+                           <Button fx:id="button_profile" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#Profile" prefHeight="30.0" prefWidth="76.0" style="-fx-background-color: transparent;" text="Profile">
                               <font>
                                  <Font size="14.0" />
                               </font>
@@ -98,12 +95,8 @@
                </VBox>
                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
                   <children>
-                     <ImageView fx:id="icon_planning" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@images/plan.png" />
-                        </image>
-                     </ImageView>
-                     <Button fx:id="button_planning" mnemonicParsing="false" onAction="#Planning" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: transparent;" text="Planning">
+                     <ImageView fx:id="icon_planning" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
+                     <Button fx:id="button_planning" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#Planning" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: transparent;" text="Planning">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -118,12 +111,8 @@
                </HBox>
                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
                   <children>
-                     <ImageView fx:id="icon_rendez" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@images/rendezVous.png" />
-                        </image>
-                     </ImageView>
-                     <Button fx:id="button_rendezVous" mnemonicParsing="false" onAction="#RendezVous" prefHeight="30.0" prefWidth="104.0" style="-fx-background-color: transparent;" text="Rendez-vous">
+                     <ImageView fx:id="icon_rendez" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
+                     <Button fx:id="button_rendezVous" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#RendezVous" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: transparent;" text="Rendez-vous">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -135,12 +124,8 @@
                </HBox>
                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
                   <children>
-                     <ImageView fx:id="icon_cal" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@images/calendrier.png" />
-                        </image>
-                     </ImageView>
-                     <Button fx:id="button_cal" mnemonicParsing="false" onAction="#Calendrier" prefHeight="30.0" prefWidth="95.0" style="-fx-background-color: transparent;" text="Calendrier">
+                     <ImageView fx:id="icon_cal" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
+                     <Button fx:id="button_cal" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#Calendrier" prefHeight="30.0" prefWidth="141.0" style="-fx-background-color: transparent;" text="Calendrier">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -153,14 +138,11 @@
                <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="250.0">
                   <children>
                      <ImageView fx:id="icon_fiche" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@images/fiche-de-taches.png" />
-                        </image>
                         <HBox.margin>
                            <Insets />
                         </HBox.margin>
                      </ImageView>
-                     <Button fx:id="button_fiche" mnemonicParsing="false" prefHeight="30.0" prefWidth="121.0" style="-fx-background-color: transparent;" text="Fiche médicale">
+                     <Button fx:id="button_fiche" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: transparent;" text="Fiche médicale">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -175,12 +157,8 @@
                </HBox>
                <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="250.0">
                   <children>
-                     <ImageView fx:id="icon_consul" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@images/consultation.png" />
-                        </image>
-                     </ImageView>
-                     <Button fx:id="button_consul" mnemonicParsing="false" prefHeight="30.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="Consultations">
+                     <ImageView fx:id="icon_consul" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
+                     <Button fx:id="button_consul" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="30.0" prefWidth="167.0" style="-fx-background-color: transparent;" text="Consultations">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -192,12 +170,8 @@
                </HBox>
                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
                   <children>
-                     <ImageView fx:id="icon_ord" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@images/ordonnance%20(2).png" />
-                        </image>
-                     </ImageView>
-                     <Button fx:id="butt_ord" mnemonicParsing="false" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: transparent;" text="Ordonnances">
+                     <ImageView fx:id="icon_ord" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
+                     <Button fx:id="butt_ord" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: transparent;" text="Ordonnances">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -209,12 +183,8 @@
                </HBox>
                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
                   <children>
-                     <ImageView fx:id="icon_deconnect" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@images/se-deconnecter.png" />
-                        </image>
-                     </ImageView>
-                     <Button fx:id="button_deconnect1" mnemonicParsing="false" onAction="#deconnectAction" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: transparent;" text="Se déconnecter">
+                     <ImageView fx:id="icon_deconnect" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
+                     <Button fx:id="button_deconnect1" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#deconnectAction" prefHeight="33.0" prefWidth="176.0" style="-fx-background-color: transparent;" text="Se déconnecter">
                         <font>
                            <Font size="14.0" />
                         </font>

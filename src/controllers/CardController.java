@@ -35,6 +35,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import services.PlanningService;
 import services.RendezVousService;
 import utils.Session;
 
@@ -62,14 +63,21 @@ public class CardController implements Initializable {
     private Label symptomesLb;
     @FXML
     private Label etatLb;
+    @FXML
+    public Button btn3Point;
     RendezVous rendezVous;
     User currentUser;
+    RendezVousService rdvService;
+    PlanningService p;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         currentUser = Session.getInstance().getUser();
+          
+
         circleImg.setStroke(Color.SEAGREEN);
         Image im = new Image("./utils/img/patient.jpg",false);
         circleImg.setFill(new ImagePattern(im));
@@ -89,8 +97,9 @@ public class CardController implements Initializable {
         System.out.println(rendezVous.getIdRdv());
         int maxLength = 20; // set the maximum length of the text
         //circleImg.setStroke(Color.SEAGREEN);
+
         if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){
-          RendezVousService rdvService = new RendezVousService(); 
+           rdvService = new RendezVousService(); 
             try {
                  patient = rdvService.findPatient(rdv.getIdPatient());
             } catch (SQLException ex) {

@@ -7,8 +7,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="306.0" style="-fx-background-radius: 10px; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CardPharmacie">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="318.0" prefWidth="309.0" style="-fx-background-radius: 30px; -fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CardPharmacie">
    <children>
+      <HBox prefHeight="54.0" prefWidth="309.0" />
         <HBox alignment="CENTER" prefHeight="81.0" prefWidth="306.0">
          <children>
             <Circle fx:id="circleImg" fill="WHITE" radius="48.0" stroke="BLACK" strokeType="INSIDE">
@@ -18,21 +19,9 @@
             </Circle>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="81.0" prefWidth="306.0">
+      <HBox alignment="CENTER" prefHeight="78.0" prefWidth="309.0">
          <children>
-             <Label fx:id="etatLb" alignment="CENTER" prefHeight="16.0" prefWidth="157.0" text=" etat">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </Label>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="58.0" prefWidth="306.0">
-         <children>
-            <Label fx:id="nameLb" alignment="CENTER" prefHeight="34.0" prefWidth="183.0" text="Pharmacie" textFill="#1bccd1">
+            <Label fx:id="nameLb" alignment="CENTER" prefHeight="34.0" prefWidth="183.0" text="Pharmacie">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -42,16 +31,28 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="41.0" prefWidth="300.0">
+      <HBox alignment="CENTER" prefHeight="68.0" prefWidth="309.0">
          <children>
-            <Label fx:id="adresseLb" alignment="CENTER" prefHeight="19.0" prefWidth="301.0" text=" Adresse">
+             <Label fx:id="etatLb" alignment="CENTER" prefHeight="16.0" prefWidth="157.0" text="etat">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="69.0" prefWidth="309.0">
+         <children>
+            <Label fx:id="adresseLb" alignment="CENTER" prefHeight="33.0" prefWidth="301.0" text=" Adresse">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
          </children>
       </HBox>
-        <HBox alignment="CENTER" prefHeight="47.0" prefWidth="393.0">
+        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="309.0">
          <children>
             <Label fx:id="num_telLb" alignment="CENTER" prefHeight="19.0" prefWidth="303.0" text="Numéro" textFill="#4d4c4c">
                <HBox.margin>
@@ -63,7 +64,7 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="393.0">
+      <HBox alignment="CENTER" prefHeight="74.0" prefWidth="309.0">
          <children>
             <Label fx:id="emailLb" alignment="CENTER" prefHeight="19.0" prefWidth="256.0" text="pharma@gmail.com" textFill="#4d4c4c">
                <HBox.margin>
@@ -75,9 +76,9 @@
             </Label>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="72.0" prefWidth="309.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="43.0" prefWidth="298.0" style="-fx-border-radius: 10;">
+            <VBox alignment="CENTER" prefHeight="35.0" prefWidth="298.0" style="-fx-border-radius: 10;">
                <children>
                   
           

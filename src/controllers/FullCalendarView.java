@@ -216,7 +216,8 @@ public class FullCalendarView{
                 else if(rdv.getEtat().equals("archivé")|| rdv.getEtat().equals("annulé")){
                     event.setStyle("-fx-background-color: red;-fx-background-radius: 10px;-fx-text-fill: white;");
                 }
-            event.setOnDragDetected(e -> {
+                if((currentUser.getId()== medecin_id)||(currentUser.getId()== rdv.getIdPatient())){
+                event.setOnDragDetected(e -> {
                 Dragboard db = event.startDragAndDrop(TransferMode.MOVE);
                 ClipboardContent content = new ClipboardContent();
                 content.putString(event.getText());
@@ -228,11 +229,29 @@ public class FullCalendarView{
                 ((VBox) event.getParent()).getChildren().remove(event);
                 
             });
+               }  
+
             event.setOnMouseClicked(c->{
             try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/Card.fxml"));
             Parent parent = loader.load();
             CardController controller = (CardController) loader.getController();
+            try {
+            if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){
+                rdv.setFullName(rdvService.userName(rdv.getIdPatient()));
+            }else  if(currentUser.getRoles().equals("[\"ROLE_PATIENT\"]")){
+                int medecin_id = pService.findById(rdv.getIdPlanning());
+                rdv.setFullName(rdvService.userName(medecin_id));   
+                }
+            }catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+
+            }
+   
+        if(currentUser.getRoles().equals("[\"ROLE_PATIENT\"]")&&(currentUser.getId()!=rdv.getIdPatient())){
+         controller.btn3Point.setVisible(false);
+
+        }   
             controller.setData(rdv);
 
             Stage stage = new Stage(StageStyle.DECORATED);

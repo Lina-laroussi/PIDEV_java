@@ -188,31 +188,60 @@ public class ParentFrontController implements Initializable {
                 }
             }
             
-            
-      if(currentUser.getRoles().equals("[\"ROLE_PATIENT\"]")){
+        Image Profile = new Image(getClass().getResourceAsStream("../gui/images/iconUser.png")); // Replace with the path to your actual image file
+        Image Planning = new Image(getClass().getResourceAsStream("../gui/images/plan.png")); // Replace with the path to your actual image file
+        Image RendezVous = new Image(getClass().getResourceAsStream("../gui/images/rendezVous.png")); // Replace with the path to your actual image file
+        Image Cal = new Image(getClass().getResourceAsStream("../gui/images/calendrier.png")); // Replace with the path to your actual image file
+        Image Consul = new Image(getClass().getResourceAsStream("../gui/images/consultation.png")); // Replace with the path to your actual image file
+        Image Fiche = new Image(getClass().getResourceAsStream("../gui/images/fiche-de-taches.png")); // Replace with the path to your actual image file
+        Image Ord = new Image(getClass().getResourceAsStream("../gui/images/ordonnance.png")); // Replace with the path to your actual image file
+        Image deconnect1 = new Image(getClass().getResourceAsStream("../gui/images/se-deconnecter.png")); // Replace with the path to your actual image file    
+        Image pharmacie = new Image(getClass().getResourceAsStream("../gui/images/pharmacie1.png")); // Replace with the path to your actual image file       
+        Image Facture = new Image(getClass().getResourceAsStream("../gui/images/bill.png")); // Replace with the path to your actual image file       
+        Image Stat = new Image(getClass().getResourceAsStream("../gui/images/stats.png")); // Replace with the path to your actual image file       
+        Image Rembour = new Image(getClass().getResourceAsStream("../gui/images/refund.png")); // Replace with the path to your actual image file       
+
+    
+      if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){   
+          icon_profile.setImage(Profile);
+          icon_planning.setImage(Planning);
+          icon_rendez.setImage(RendezVous);
+          icon_cal.setImage(Cal);
+          icon_fiche.setImage(Fiche);
+          icon_consul.setImage(Consul);
+          icon_deconnect.setImage(deconnect1);
+          icon_ord.setImage(Ord);
+          
+       }else  if(currentUser.getRoles().equals("[\"ROLE_PATIENT\"]")){
         Image imageRv = new Image(getClass().getResourceAsStream("../gui/images/rendezVous.png")); // Replace with the path to your actual image file
 
+          icon_profile.setImage(Profile);
           button_planning.setText("Rendez-vous");
-          icon_planning.setId("icon_rendez");
+          icon_planning.setImage(RendezVous);
           button_rendezVous.setText("Fiche médicale");
-          //icon_rendez.setId(icon_fiche.toString());
+          icon_rendez.setImage(Fiche);
           button_cal.setText("Consultations");
-          //icon_cal.setId(icon_consul.toString());
-          button_fiche.setText("Ordonannaces");
-         // icon_fiche.setId(icon_ord.toString());
+          icon_cal.setImage(Consul);
+          button_fiche.setText("Ordonnances");
+          icon_fiche.setImage(Ord);
           button_consul.setText("Se déconnecter");
-         // icon_consul.setId(icon_deconnect.toString());
+          icon_consul.setImage(deconnect1);
           butt_ord.setVisible(false);
           button_deconnect1.setVisible(false);  
           icon_deconnect.setVisible(false);
           icon_ord.setVisible(false);
           
        }else if(currentUser.getRoles().equals("[\"ROLE_ASSUREUR\"]")){
+           icon_profile.setImage(Profile);       
            button_planning.setText("Fiche Assurance");
+           icon_planning.setImage(Fiche);
            button_rendezVous.setText("Remboursement");
+           icon_rendez.setImage(Rembour);
            button_cal.setText("Statistique");
-           button_fiche.setText("Changer mot de passe");
-           button_consul.setText("Se déconnecter");
+           icon_cal.setImage(Stat);
+           button_fiche.setText("Se déconnecter");
+           icon_fiche.setImage(deconnect1);
+           button_consul.setVisible(false);
            butt_ord.setVisible(false);
            button_password.setVisible(false);
            button_deconnect1.setVisible(false);  
@@ -221,10 +250,15 @@ public class ParentFrontController implements Initializable {
            icon_ord.setVisible(false);
            
        }else if(currentUser.getRoles().equals("[\"ROLE_PHARMACIEN\"]")){
+           icon_profile.setImage(Profile);       
            button_planning.setText("Pharmacies");
+           icon_planning.setImage(pharmacie);
            button_rendezVous.setText("Factures");
+           icon_rendez.setImage(Facture);
            button_cal.setText("Statistique");
+           icon_cal.setImage(Stat);
            button_fiche.setText("Se déconnecter");
+           icon_fiche.setImage(deconnect1);
            button_consul.setVisible(false);
            butt_ord.setVisible(false);
            button_deconnect1.setVisible(false);  
@@ -315,14 +349,15 @@ public class ParentFrontController implements Initializable {
         
             stageRegister .setScene(sceneRegister);
             stageRegister .show();
-        }    
+        }   
+        
     }
     
     
      @FXML
-    private void Planning(ActionEvent event) throws IOException {
+    private void Planning(ActionEvent event) {
         User currentUser = Session.getInstance().getUser();    
-        
+      try{ 
         if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){
             Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/AfficherPlanning.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
@@ -346,11 +381,14 @@ public class ParentFrontController implements Initializable {
             Scene sceneRegister = new Scene(parentLogin);
             Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
        
-            stageRegister .hide();
+            stageRegister.hide();
         
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
-        }       
+            stageRegister.setScene(sceneRegister);
+            stageRegister.show();
+        }   
+      }catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
     }
     
     
@@ -366,18 +404,18 @@ public class ParentFrontController implements Initializable {
        
             stageRegister .hide();
         
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
+            stageRegister.setScene(sceneRegister);
+            stageRegister.show();
             
         }else if(currentUser.getRoles().equals("[\"ROLE_PHARMACIEN\"]")){
             Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/AfficherFacture.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
             Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
        
-            stageRegister .hide();
+            stageRegister.hide();
         
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
+            stageRegister.setScene(sceneRegister);
+            stageRegister.show();
     }
     }
     
