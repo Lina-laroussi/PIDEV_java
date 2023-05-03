@@ -21,12 +21,12 @@
 .table-view{
     -fx-background-color: transparent;
     -fx-padding: 0;
-    -fx-border-color: linear-gradient(to bottom right, #0f6789, #286155);
+    -fx-border-color: linear-gradient(to right top, #41b4f2, #30abf1, #20a1f0, #1397ee, #128deb);
     -fx-border-radius: 5px;
     -fx-border-width: 1.5px;
 }
 .table-view .column-header-background{
-    -fx-background-color: linear-gradient(to bottom right, #0f6789, #286155);
+    -fx-background-color: linear-gradient(to right top, #41b4f2, #30abf1, #20a1f0, #1397ee, #128deb);
     -fx-background-radius: 5px 5px 0 0;
     -fx-background-insets: 0 0 0 0;
 }

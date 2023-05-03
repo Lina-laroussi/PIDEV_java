@@ -2,7 +2,6 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -10,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="599.0" prefWidth="704.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FrontCategorieController">
     <stylesheets>
@@ -27,16 +25,11 @@
             <TableColumn fx:id="col_Groupe_age" prefWidth="134.0" text="Groupe_age" />
          </columns>
       </TableView>
-      <Label layoutX="187.0" layoutY="82.0" prefHeight="36.0" prefWidth="289.0" text="La liste des Categories" textAlignment="CENTER" textFill="#89adeb">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <TextField fx:id="searchField" layoutX="585.0" layoutY="100.0" promptText="Enter letter here" />
-      <Button fx:id="Refresh" layoutX="646.0" layoutY="554.0" mnemonicParsing="false" onMouseClicked="#Refresh" prefHeight="33.0" prefWidth="88.0" style="-fx-background-color: #15558d;" styleClass="btn" text="Refresh" />
+      <TextField fx:id="searchField" layoutX="585.0" layoutY="100.0" promptText="Rechercher" />
+      <Button fx:id="Refresh" layoutX="628.0" layoutY="554.0" mnemonicParsing="false" onMouseClicked="#Refresh" prefHeight="30.0" prefWidth="98.0" style="-fx-background-color: #15558d;" styleClass="btn" text="Refresh" />
       <Button fx:id="btnTriNom" layoutX="628.0" layoutY="169.0" mnemonicParsing="false" onAction="#onTriNomClicked" prefHeight="30.0" prefWidth="98.0" style="-fx-background-color: #15558d;" styleClass="btn" text="Tri Nom" />
       <Button fx:id="btnTriMarque" layoutX="628.0" layoutY="221.0" mnemonicParsing="false" onAction="#onTriMarqueClicked" prefHeight="30.0" prefWidth="98.0" style="-fx-background-color: #15558d;" styleClass="btn" text="Tri Marque" />
-      <ScrollPane layoutX="16.0" layoutY="140.0" prefHeight="440.0" prefWidth="592.0">
+      <ScrollPane layoutX="16.0" layoutY="140.0" prefHeight="459.0" prefWidth="592.0">
          <content>
             <GridPane fx:id="menu_gridPane" prefHeight="20.0" prefWidth="109.0">
                <columnConstraints>

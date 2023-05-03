@@ -17,19 +17,19 @@
     <children>
       <VBox layoutX="65.0" layoutY="-10.0" prefHeight="180.0" prefWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="69.0" prefWidth="228.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="69.0" prefWidth="228.0" spacing="10.0">
                <children>
-                  <Label fx:id="prod_name" alignment="CENTER" blendMode="SRC_ATOP" prefHeight="69.0" prefWidth="112.0" text="Spaghetti" textFill="#80d4ee" underline="true">
+                  <Label fx:id="prod_name" alignment="CENTER" blendMode="SRC_ATOP" prefHeight="69.0" prefWidth="91.0" text="Spaghetti">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="16.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="25.0" />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="prod_marque" alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="51.0" text="Marque" textFill="#44721e">
+                  <Label fx:id="prod_marque" alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="66.0" text="Marque" textFill="RED">
                      <font>
-                        <Font name="Berlin Sans FB" size="15.0" />
+                        <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Label>
                </children>

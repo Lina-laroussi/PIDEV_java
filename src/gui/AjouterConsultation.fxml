@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="536.0" prefWidth="480.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterConsultationController">
+   <children>
+      <ImageView fx:id="img" fitHeight="411.0" fitWidth="480.0" layoutY="65.70382690429688" opacity="0.14" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="75.59234619140625" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@../utils/clinic-7.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="22.0" layoutY="209.0" text="poids" />
+      <Label layoutX="136.0" layoutY="209.0" text="taille" />
+      <Label layoutX="263.0" layoutY="209.0" text="imc" />
+      <Label layoutX="352.0" layoutY="209.0" text="temperature" />
+      <Label layoutX="398.0" layoutY="321.0" text="prix" />
+      <Label layoutX="22.0" layoutY="265.0" text="pression arterielle" />
+      <Label layoutX="178.0" layoutY="265.0" text="frequence cardiaque" />
+      <Label layoutX="352.0" layoutY="265.0" text="taux glycemie" />
+      <Label layoutX="23.0" layoutY="321.0" text="maladie" />
+      <Label layoutX="195.0" layoutY="321.0" text="traitement" />
+      <Label layoutX="23.0" layoutY="369.0" text="observation" />
+      <Button id="btn_valider" fx:id="btn_valider" layoutX="273.0" layoutY="483.0" mnemonicParsing="false" onAction="#Valider" prefHeight="42.0" prefWidth="109.0" style="-fx-background-color: #2be131;" text="valider" />
+      <Button fx:id="BT_reset" layoutX="117.0" layoutY="483.0" mnemonicParsing="false" onAction="#Reset" prefHeight="42.0" prefWidth="109.0" style="-fx-background-color: #80c8e4;" text="reset" />
+      <TextField fx:id="txt_poid" alignment="CENTER" layoutX="54.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_taill" alignment="CENTER" layoutX="164.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_imc" alignment="CENTER" disable="true" editable="false" layoutX="286.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_temp" alignment="CENTER" layoutX="419.0" layoutY="205.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_press" alignment="CENTER" layoutX="124.0" layoutY="261.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_freq" alignment="CENTER" layoutX="301.0" layoutY="261.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_tx" alignment="CENTER" layoutX="432.0" layoutY="261.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextField fx:id="txt_mal" layoutX="72.0" layoutY="317.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="txt_trait" layoutX="261.0" layoutY="317.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="txt_px" alignment="CENTER" layoutX="432.0" layoutY="317.0" prefHeight="25.0" prefWidth="42.0" />
+      <TextArea fx:id="txt_obsv" layoutX="27.0" layoutY="393.0" prefHeight="58.0" prefWidth="447.0" />
+      <Text layoutX="13.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <VBox layoutX="18.0" layoutY="88.0" prefHeight="77.0" prefWidth="237.0">
+         <children>
+            <HBox prefHeight="17.0" prefWidth="238.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="63.0" text="Num CIN" />
+                  <TextField fx:id="txt_cin" prefHeight="33.0" prefWidth="145.0" promptText="write the patient CIN" />
+               </children>
+            </HBox>
+            <HBox prefHeight="38.0" prefWidth="237.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="63.0" text="Nom " />
+                  <TextField fx:id="txt_nom" editable="false" prefHeight="25.0" prefWidth="145.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="237.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="63.0" text="Num tel" />
+                  <TextField fx:id="txt_tel" editable="false" prefHeight="25.0" prefWidth="145.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Text layoutX="13.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details Consultation:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Label layoutX="97.0" layoutY="209.0" text="Kg" />
+      <Label layoutX="207.0" layoutY="209.0" text="Metre" />
+      <VBox layoutX="255.0" layoutY="94.0" prefHeight="65.0" prefWidth="210.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="210.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="100.0" text="Date RDV: " />
+                  <TextField fx:id="txt_dateRDV" editable="false" prefHeight="25.0" prefWidth="110.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="210.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="100.0" text="Heur debut RDV: " />
+                  <TextField fx:id="txt_hRDV" editable="false" prefHeight="25.0" prefWidth="110.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="TOP_CENTER" layoutX="1.0" layoutY="14.0" prefHeight="42.0" prefWidth="480.0">
+         <children>
+            <Label prefHeight="42.0" prefWidth="282.0" text="Ajouter Consultation N°:" textAlignment="CENTER" textFill="#3b88d0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lb_consltId" alignment="CENTER" prefHeight="42.0" prefWidth="71.0" text="num" textAlignment="CENTER" textFill="#3b88d0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

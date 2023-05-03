@@ -87,7 +87,6 @@ public class CardPharmacie implements Initializable {
             etatLb.setText("Fermée");
           }else{
             etatLb.setTextFill(Color.ORANGE); // set the text color to red    
-
     }
         circleImg.setFill(new ImagePattern(im));
         nameLb.setText(ph.getNom().substring(0, 1).toUpperCase() +ph.getNom().substring(1));

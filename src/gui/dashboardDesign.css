@@ -99,7 +99,7 @@ and open the template in the editor.
     -fx-alignment: CENTER;
 }
 .table-view .column-header-background{
-    -fx-background-color:linear-gradient(to bottom right, #2d658c, #2ca772);
+    -fx-background-color:linear-gradient(90deg, rgba(78,195,236,1) 0%, rgba(26,129,212,1) 35%, rgba(0,212,255,1) 100%);
     -fx-background-radius:8px 8px 0px 0px;
     -fx-background-inset: 0 0 0 0;
 }
@@ -115,7 +115,7 @@ and open the template in the editor.
 .textfield{
     -fx-background-color:linear-gradient(to bottom, #efefef, #eee);
     -fx-background-radius:4px;
-    -fx-border-color:linear-gradient(to bottom right, #2d658c, #2ca772);
+    -fx-border-color:linear-gradient(90deg, rgba(78,195,236,1) 0%, rgba(26,129,212,1) 35%, rgba(0,212,255,1) 100%);
     -fx-border-width:.8px;
     -fx-font-family:"Tahoma";
     -fx-border-radius:4px;

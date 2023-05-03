@@ -5,12 +5,13 @@
  */
 package controllers;
 
-import services.CategorieService;
+import entities.User;
+import entities.categorie;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -22,29 +23,35 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import entities.categorie;
-import entities.produit;
+import javafx.stage.Stage;
+import services.CategorieService;
 import utils.MyConnection;
+import utils.Session;
+
 
 /**
  * FXML Controller class
  *
- * @author Asus
+ * @author LINA
  */
-public class FrontCategorieController implements Initializable {
+public class DoctoshopConnectController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
-    
        @FXML
     private TableColumn<categorie , String> col_Groupe_age;
 
@@ -68,7 +75,8 @@ private VBox productContainer;
     @FXML
     private TextField searchField;
 
-    
+     @FXML
+    private MenuButton btn_menu;
      @FXML
     private GridPane menu_gridPane;
       
@@ -112,7 +120,66 @@ private VBox productContainer;
         e.printStackTrace();
     }
 }
-              } 
+         User currentUser = Session.getInstance().getUser();
+         btn_menu.setText(currentUser.getNom().substring(0, 1).toUpperCase() +currentUser.getNom().substring(1) +" "+ currentUser.getPrenom().substring(0, 1).toUpperCase() +currentUser.getPrenom().substring(1));
+        
+           MenuItem deconnect = btn_menu.getItems().get(1);
+         
+           deconnect.setOnAction(event->{
+                  Session.getInstance().clear();
+                  Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                  alert.setHeaderText(null);
+                  alert.setContentText("deconnexion réussie ");
+                  alert.showAndWait();   
+                  Parent parentLogin;
+            try {
+                parentLogin = FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+                Scene sceneRegister = new Scene(parentLogin);
+                  Stage stageRegister = (Stage) btn_menu.getScene().getWindow();
+
+                  stageRegister .hide();
+
+                  stageRegister .setScene(sceneRegister);
+                  stageRegister .show();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+                  
+           });
+           
+            MenuItem profile = btn_menu.getItems().get(0);
+             profile.setOnAction(event->{
+             if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){
+                 try {
+                     Parent parentLogin = FXMLLoader.load(getClass().getResource("../gui/ProfileMedecin.fxml"));
+                     Scene sceneRegister = new Scene(parentLogin);
+                     Stage stageRegister = (Stage) btn_menu.getScene().getWindow();
+
+                     stageRegister .hide();
+
+                     stageRegister .setScene(sceneRegister);
+                     stageRegister .show();
+                 } catch (IOException ex) {
+                     System.out.println(ex.getMessage());
+                 }
+                        
+        }else{
+                 try {
+                     Parent parentLogin = FXMLLoader.load(getClass().getResource("../gui/ProfileUser.fxml"));
+                     Scene sceneRegister = new Scene(parentLogin);
+                     Stage stageRegister = (Stage) btn_menu.getScene().getWindow();
+
+                    stageRegister .hide();
+
+                    stageRegister .setScene(sceneRegister);
+                    stageRegister .show();
+                 } catch (IOException ex) {
+                     System.out.println(ex.getMessage()); 
+                 }       
+        }    
+                  
+           });
+} 
     
     
   @FXML
@@ -276,5 +343,58 @@ searchField.textProperty().addListener((observable, oldValue, newValue) -> {
         table_categories.setItems(produits);
     }
    
-
+       @FXML
+    private void deconnectAction(ActionEvent event) throws IOException {
+        
+            
+            Session.getInstance().clear();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("deconnexion réussie ");
+            alert.showAndWait();   
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
+    
+      @FXML
+    void medecinsAction(ActionEvent event) throws IOException {
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/MedecinsConnect.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
+        
+       @FXML
+    private void PharmaciesAction(ActionEvent event) throws IOException {
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/PharmacieConnect.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
+    
+     @FXML
+    private void DoctoshopAction(ActionEvent event) throws IOException {
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/DoctoshopConnectConnect.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
 }

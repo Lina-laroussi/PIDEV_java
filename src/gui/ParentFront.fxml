@@ -142,7 +142,7 @@
                            <Insets />
                         </HBox.margin>
                      </ImageView>
-                     <Button fx:id="button_fiche" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: transparent;" text="Fiche médicale">
+                     <Button fx:id="button_fiche" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#Fiche" prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: transparent;" text="Fiche médicale">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -158,7 +158,7 @@
                <HBox alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="250.0">
                   <children>
                      <ImageView fx:id="icon_consul" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
-                     <Button fx:id="button_consul" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="30.0" prefWidth="167.0" style="-fx-background-color: transparent;" text="Consultations">
+                     <Button fx:id="button_consul" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#Consultations" prefHeight="30.0" prefWidth="167.0" style="-fx-background-color: transparent;" text="Consultations">
                         <font>
                            <Font size="14.0" />
                         </font>
@@ -171,7 +171,7 @@
                <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
                   <children>
                      <ImageView fx:id="icon_ord" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
-                     <Button fx:id="butt_ord" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: transparent;" text="Ordonnances">
+                     <Button fx:id="butt_ord" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#Ordonnances" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: transparent;" text="Ordonnances">
                         <font>
                            <Font size="14.0" />
                         </font>

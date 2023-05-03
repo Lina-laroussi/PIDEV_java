@@ -53,7 +53,7 @@ import javafx.stage.StageStyle;
 import studentmanagementsystem.Remboursement;
 import studentmanagementsystem.courseData;
 import studentmanagementsystem.getData;
-import studentmanagementsystem.studentData;
+import entities.studentData;
 import utils.MyConnection;
 
 

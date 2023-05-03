@@ -58,57 +58,6 @@
                      <Insets left="40.0" />
                   </VBox.margin>
                </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/rendezVous.png" />
-                           </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Rendez-vous">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/consultation.png" />
-                           </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Consultations">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/ordonnance.png" />
-                           </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Ordonnances">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                  </HBox>
          <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
             <children>
                <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
@@ -151,23 +100,6 @@
                   </image>
                </ImageView>
                <Button fx:id="button_categ" mnemonicParsing="false" onAction="#CategorieAction" style="-fx-background-color: transparent;" text="Catégorie">
-                  <font>
-                     <Font size="14.0" />
-                  </font>
-               </Button>
-            </children>
-            <VBox.margin>
-               <Insets left="40.0" />
-            </VBox.margin>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="250.0">
-            <children>
-               <ImageView fitHeight="150.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@images/bouclier.png" />
-                  </image>
-               </ImageView>
-               <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Assurances">
                   <font>
                      <Font size="14.0" />
                   </font>

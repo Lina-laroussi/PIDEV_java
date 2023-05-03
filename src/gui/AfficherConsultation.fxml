@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="477.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherConsultationController">
+   <children>
+      <fx:include source="ParentFront.fxml" />   
+      <TabPane fx:id="tabPane" layoutX="283.0" layoutY="112.0" prefHeight="544.0" prefWidth="755.0" style="-fx-background-color: #5fa2e1;" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="tabConsult" text="Consultations">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="743.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <TableView fx:id="table_consult" layoutX="4.0" layoutY="76.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="355.0" prefWidth="555.0">
+                          <columns>
+                            <TableColumn fx:id="patient_name" editable="false" prefWidth="81.0" text="Nom patient" />
+                              <TableColumn fx:id="poids" editable="false" prefWidth="75.0" text="poids" />
+                              <TableColumn fx:id="taille" editable="false" prefWidth="54.0" text="Taille" />
+                              <TableColumn fx:id="temp" editable="false" prefWidth="84.0" text="Temperature" />
+                            <TableColumn fx:id="mal" editable="false" prefWidth="90.0" text="Maladie" />
+                              <TableColumn fx:id="trait" editable="false" prefWidth="103.0" text="Traitement" />
+                              <TableColumn fx:id="px" editable="false" prefWidth="66.0" text="Prix" />
+                          </columns>
+                        </TableView>
+                        <Button id="BT_AjoutConsult" fx:id="BT_AjoutConsult" layoutX="572.0" layoutY="76.0" mnemonicParsing="false" onAction="#AjouterConsultation" prefHeight="38.0" prefWidth="140.0" style="-fx-background-radius: 5; -fx-background-color: #15558d;" text="Ajouter Consultation" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Button id="BT_ModifConsult" fx:id="BT_ModifConsult" layoutX="572.0" layoutY="200.0" mnemonicParsing="false" onAction="#editerConsultation" prefHeight="38.0" prefWidth="140.0" style="-fx-background-radius: 5; -fx-background-color: #15558d;" text="Modifier" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button id="BT_DelConsult" fx:id="BT_DelConsult" layoutX="574.0" layoutY="261.0" mnemonicParsing="false" onAction="#supprimerConsultation" prefHeight="38.0" prefWidth="140.0" style="-fx-background-radius: 5; -fx-background-color: #15558d;" text="Supprimer" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button id="BT_Telecharger" fx:id="BT_Telecharger" layoutX="576.0" layoutY="322.0" mnemonicParsing="false" onAction="#download" prefHeight="38.0" prefWidth="140.0" style="-fx-background-radius: 5;" text="Télécharger">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button id="BT_AjoutOrd" fx:id="BT_AjoutOrd" alignment="CENTER" disable="true" layoutX="572.0" layoutY="137.0" mnemonicParsing="false" onAction="#ajouterOrdonnance" prefHeight="38.0" prefWidth="140.0" style="-fx-background-radius: 5; -fx-background-color: #c2aaff;" text="Ajouter Ordonnance">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                          </Button>
+                        <Text fill="#43a5da" layoutX="263.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste Consultations" textAlignment="CENTER" underline="true">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+               </content>
+              
+            </Tab>
+            <Tab fx:id="tabOrd" text="Ordonnances">
+               <content>
+                  <AnchorPane prefHeight="497.0" prefWidth="690.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <Text fill="#43a5da" layoutX="259.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste Ordonnances" textAlignment="CENTER" underline="true">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <TableView fx:id="tab_Ord" layoutX="6.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="314.0" prefWidth="609.0">
+                           <columns>
+                              <TableColumn fx:id="code_ordonnance" prefWidth="107.0" text="Code ordonnance" />
+                              <TableColumn fx:id="desc" prefWidth="110.0" text="Description" />
+                              <TableColumn fx:id="medicaments" prefWidth="106.0" text="medicaments" />
+                              <TableColumn fx:id="dosage" prefWidth="75.0" sortType="DESCENDING" text="dosage" />
+                              <TableColumn fx:id="nombre_jours" prefWidth="114.0" text="nombre de jours" />
+                              <TableColumn fx:id="date_de_creation" prefWidth="96.0" text="date de creation" />
+                           </columns>
+                        </TableView>
+                        <Button id="BT_AjoutConsult" fx:id="BT_ModifOrd" layoutX="623.0" layoutY="88.0" mnemonicParsing="false" onAction="#editerOrdonnance" prefHeight="38.0" prefWidth="123.0" style="-fx-background-radius: 5; -fx-background-color: #15558d;" text="Modifier" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button id="BT_AjoutConsult" fx:id="BT_DelOrd" layoutX="623.0" layoutY="147.0" mnemonicParsing="false" onAction="#supprimerOrdonnance" prefHeight="38.0" prefWidth="123.0" style="-fx-background-radius: 5; -fx-background-color: #15558d;" text="Supprimer" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button id="BT_Telecharger" fx:id="BT_print" layoutX="623.0" layoutY="202.0" mnemonicParsing="false" onAction="#printOrdonnance" prefHeight="38.0" prefWidth="123.0" style="-fx-background-radius: 5;" text="Imprimer">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+           
+            </Tab>
+            <Tab fx:id="tabFile" text="Fiches Medicales">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="457.0" prefWidth="755.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <Text fill="#43a5da" layoutX="195.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste Fiches Medicales" textAlignment="CENTER" underline="true" wrappingWidth="299.42578125">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Text>
+                        <VBox fx:id="box_card" layoutX="7.0" layoutY="64.0" prefHeight="371.0" prefWidth="741.0">
+                            <children>
+                                <ScrollPane prefHeight="358.0" prefWidth="741.0">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="836.0" prefWidth="701.0">
+                                       <children>
+                                          <TilePane fx:id="tilePane" hgap="10.0" layoutX="14.0" layoutY="11.0" prefColumns="5" prefHeight="322.0" prefRows="3" prefWidth="703.0" vgap="10.0" />
+                                       </children>
+                                        </AnchorPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </VBox>
+                        <Button fx:id="bt_ajoutFich" layoutX="592.0" layoutY="11.0" mnemonicParsing="false" onAction="#AjouterFich" prefHeight="38.0" prefWidth="130.0" style="-fx-background-color: #15558d;" text="Ajouter Fiche" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+
+                     </children></AnchorPane>
+               </content>
+              
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

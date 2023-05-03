@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="491.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierFichMedController">
+   <children>
+      <HBox alignment="CENTER" layoutY="-3.0" prefHeight="59.0" prefWidth="486.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="271.0" text="Modifier Fiche Medicale N°:" textAlignment="CENTER" textFill="#3b88d0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="lb_num" prefHeight="40.0" prefWidth="57.0" text="num" textFill="#3b88d0">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Text fill="#e10f0f" fontSmoothingType="LCD" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONFIDENTIEL" textAlignment="CENTER" wrappingWidth="486.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="85.0" prefHeight="40.0" prefWidth="467.0">
+         <children>
+            <Label prefHeight="25.0" prefWidth="84.0" text="Date création" />
+            <TextField fx:id="txt_dateCrea" editable="false" prefHeight="25.0" prefWidth="127.0" />
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="103.0" text="Date modification" />
+            <TextField fx:id="txt_dateModif" prefHeight="25.0" prefWidth="150.0" />
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="5.0" layoutY="134.0" prefHeight="263.0" prefWidth="479.0">
+         <children>
+            <HBox prefHeight="40.0" prefWidth="486.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="41.0" text="Nom" />
+                  <TextField fx:id="txt_nom" prefHeight="25.0" prefWidth="116.0" />
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="59.0" text="Prenom" />
+                  <TextField fx:id="txt_prenom" prefHeight="25.0" prefWidth="150.0" />
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="40.0" text="Sexe" />
+                  <TextField fx:id="txt_sexe" prefHeight="25.0" prefWidth="68.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="486.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Adresse" />
+                  <TextField fx:id="txt_adre" prefHeight="25.0" prefWidth="246.0" />
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="53.0" text="CIN" />
+                  <TextField fx:id="txt_cin" prefHeight="25.0" prefWidth="103.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="486.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="64.0" text="Telephone" />
+                  <TextField fx:id="txt_tel" prefHeight="25.0" prefWidth="122.0" />
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="Email" />
+                  <TextField fx:id="txt_mail" prefHeight="25.0" prefWidth="166.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="486.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="64.0" text="Date Naiss." />
+                  <TextField fx:id="txt_naiss" prefHeight="25.0" prefWidth="106.0" />
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="75.0" text="N° séc. soci." />
+                  <TextField fx:id="txt_ss" prefHeight="25.0" prefWidth="159.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="486.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="43.0" text="Taille" />
+                  <TextField fx:id="txt_tail" prefHeight="25.0" prefWidth="52.0" />
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="50.0" text="Poids" />
+                  <TextField fx:id="txt_poi" prefHeight="25.0" prefWidth="48.0" />
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="88.0" text="Description" />
+                  <TextField fx:id="txt_desc" prefHeight="25.0" prefWidth="145.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="486.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="61.0" text="Allergie" />
+                  <TextField fx:id="ch_allerg" />
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="75.0" text="Pathologie" />
+                  <TextField fx:id="ch_path" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button id="btn_valider" fx:id="btn_valider" layoutX="271.0" layoutY="411.0" mnemonicParsing="false" onAction="#Valider" prefHeight="42.0" prefWidth="109.0" style="-fx-background-color: #2be131;" text="valider" />
+      <Button fx:id="BT_reset" layoutX="115.0" layoutY="411.0" mnemonicParsing="false" onAction="#Reset" prefHeight="42.0" prefWidth="109.0" style="-fx-background-color: #80c8e4;" text="reset" />
+   </children>
+</AnchorPane>

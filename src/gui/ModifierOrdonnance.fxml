@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="409.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierOrdonnanceController">
+    <children>
+        <ImageView fitHeight="274.0" fitWidth="411.0" layoutY="160.0" opacity="0.12" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../utils/ordonnance.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="83.0" layoutY="8.0" text="Modifier Ordonnance" textAlignment="CENTER" textFill="#3b88d0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>      
+      <Text layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <VBox layoutX="14.0" layoutY="75.0" prefHeight="85.0" prefWidth="237.0">
+         <children>
+            <HBox prefHeight="17.0" prefWidth="238.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Nom" />
+                  <TextField fx:id="txt_id" editable="false" prefHeight="25.0" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="38.0" prefWidth="237.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Maladie" />
+                  <TextField fx:id="txt_mal" editable="false" prefHeight="25.0" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="75.0" text="Traitement" />
+                  <TextField fx:id="txt_trait" editable="false" prefHeight="25.0" prefWidth="150.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="168.0" prefHeight="44.0" prefWidth="385.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="40.0" text="Date:" />
+            <TextField fx:id="dateRDV" editable="false" prefHeight="25.0" prefWidth="103.0" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="150.0" text="Heur debut Consultation" />
+            <TextField fx:id="hDebut" editable="false" prefHeight="25.0" prefWidth="77.0" />
+         </children>
+      </HBox>
+      <VBox layoutX="17.0" layoutY="230.0" prefHeight="191.0" prefWidth="385.0">
+         <children>
+             <HBox layoutX="17.0" layoutY="156.0" prefHeight="36.0" prefWidth="385.0">
+                <children>
+                   <Label prefHeight="30.0" prefWidth="135.0" text="Code ordonnance:" textFill="#3b1bcd">
+                      <font>
+                         <Font name="System Bold" size="13.0" />
+                      </font>
+                   </Label>
+                   <TextField fx:id="codeOrd" disable="true" editable="false" prefHeight="31.0" prefWidth="233.0" />
+                </children>
+             </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Description" />
+                  <TextField fx:id="txt_desc" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Medicament" />
+                  <TextField fx:id="txt_med" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Dosage" />
+                  <TextField fx:id="txt_dos" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="Nombre de jour" />
+                  <TextField fx:id="txt_nbrJ" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="385.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="135.0" text="date de modification">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txt_date" prefHeight="31.0" prefWidth="233.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      
+      <Button id="btn_valider" fx:id="btn_valider" layoutX="218.0" layoutY="458.0" mnemonicParsing="false" onAction="#Valider" prefHeight="50.0" prefWidth="125.0" style="-fx-background-color: #2be131;" text="valider">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Button fx:id="BT_reset" layoutX="70.0" layoutY="458.0" mnemonicParsing="false" onAction="#Reset" prefHeight="50.0" prefWidth="125.0" style="-fx-background-color: #80c8e4;" text="reset">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      
+      <ImageView fx:id="qrCode" fitHeight="85.0" fitWidth="92.0" layoutX="280.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
+   
+    </children>
+</AnchorPane>

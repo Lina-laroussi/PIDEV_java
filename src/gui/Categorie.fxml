@@ -67,10 +67,10 @@
             <TableColumn fx:id="col_description" prefWidth="122.0" text="Description" />
             <TableColumn fx:id="col_etat" prefWidth="74.0" text="Etat" />
             <TableColumn fx:id="col_Marque" prefWidth="111.0" text="Marque" />
-            <TableColumn fx:id="col_Groupe_age" prefWidth="136.0" text="Groupe_age" />
+            <TableColumn fx:id="col_Groupe_age" prefWidth="155.0" text="Groupe_age" />
          </columns>
       </TableView>
-      <Label layoutX="636.0" layoutY="14.0" text="La liste des Categories" textAlignment="CENTER" textFill="#49637c">
+      <Label layoutX="636.0" layoutY="14.0" text="La liste des Categories" textAlignment="CENTER" textFill="#43a5da">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>

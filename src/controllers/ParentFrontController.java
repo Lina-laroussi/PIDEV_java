@@ -207,10 +207,13 @@ public class ParentFrontController implements Initializable {
           icon_planning.setImage(Planning);
           icon_rendez.setImage(RendezVous);
           icon_cal.setImage(Cal);
-          icon_fiche.setImage(Fiche);
+          button_fiche.setText("Statistiques");
+          icon_fiche.setImage(Stat);
           icon_consul.setImage(Consul);
-          icon_deconnect.setImage(deconnect1);
-          icon_ord.setImage(Ord);
+          butt_ord.setText("Se déconnecter");
+          icon_ord.setImage(deconnect1);
+          icon_deconnect.setVisible(false);
+          button_deconnect1.setVisible(false);
           
        }else  if(currentUser.getRoles().equals("[\"ROLE_PATIENT\"]")){
         Image imageRv = new Image(getClass().getResourceAsStream("../gui/images/rendezVous.png")); // Replace with the path to your actual image file
@@ -442,11 +445,92 @@ public class ParentFrontController implements Initializable {
     
     
     
+     @FXML
+    private void Fiche(ActionEvent event) throws IOException {
+        User currentUser = Session.getInstance().getUser();    
+        
+        if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/DashbordMedecin.fxml"));
+            Parent parentLogin = loader.load();
+ 
+            DashbordMedecinController controller = (DashbordMedecinController) loader.getController();
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stageRegister .hide();
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+        }else if(currentUser.getRoles().equals("[\"ROLE_ASSUREUR\"]") && currentUser.getRoles().equals("[\"ROLE_PHARMACIEN\"]") ){
+               Session.getInstance().clear();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("deconnexion réussie ");
+                alert.showAndWait();   
+                Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+                Scene sceneRegister = new Scene(parentLogin);
+                Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                stageRegister .hide();
+
+                stageRegister .setScene(sceneRegister);
+                stageRegister .show();
+        }
+    }
+    
+      @FXML
+    private void Consultations(ActionEvent event) throws IOException {
+        User currentUser = Session.getInstance().getUser();    
+        
+        if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AfficherConsultation.fxml"));
+            Parent parentLogin = loader.load();
+ 
+            AfficherConsultationController controller = (AfficherConsultationController) loader.getController();
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stageRegister .hide();
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+        } else if(currentUser.getRoles().equals("[\"ROLE_PATIENT\"]")){
+               Session.getInstance().clear();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("deconnexion réussie ");
+                alert.showAndWait();   
+                Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+                Scene sceneRegister = new Scene(parentLogin);
+                Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                stageRegister .hide();
+
+                stageRegister .setScene(sceneRegister);
+                stageRegister .show();
+        }
+    }
     
     
+       @FXML
+    private void Ordonnances(ActionEvent event) throws IOException {
+        User currentUser = Session.getInstance().getUser();    
+        
+        if(currentUser.getRoles().equals("[\"ROLE_MEDECIN\"]")){
+            Session.getInstance().clear();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("deconnexion réussie ");
+            alert.showAndWait();   
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/Login.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+        } 
+    }
     
     
-    
+   
     
     @FXML
     private void deconnectAction(ActionEvent event) throws IOException {
@@ -480,18 +564,6 @@ public class ParentFrontController implements Initializable {
     }
 
     @FXML
-    void DoctoshopAction(ActionEvent event) throws IOException {
-            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/FrontCategorie.fxml"));
-            Scene sceneRegister = new Scene(parentLogin);
-            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
-       
-            stageRegister .hide();
-        
-            stageRegister .setScene(sceneRegister);
-            stageRegister .show();
-    }
-
-    @FXML
     void PharmaciesAction(ActionEvent event) throws IOException {
             Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/PharmacieConnect.fxml"));
             Scene sceneRegister = new Scene(parentLogin);
@@ -503,4 +575,15 @@ public class ParentFrontController implements Initializable {
             stageRegister .show();
     }
     
+        @FXML
+    private void DoctoshopAction(ActionEvent event) throws IOException {
+            Parent parentLogin= FXMLLoader.load(getClass().getResource("../gui/DoctoshopConnect.fxml"));
+            Scene sceneRegister = new Scene(parentLogin);
+            Stage stageRegister = (Stage)((Node)event.getSource()).getScene().getWindow();
+       
+            stageRegister .hide();
+        
+            stageRegister .setScene(sceneRegister);
+            stageRegister .show();
+    }
 }

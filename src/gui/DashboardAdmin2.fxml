@@ -16,9 +16,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1060.0" style="-fx-background-color: #FFFFFF" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardAdmin2">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1060.0" style="-fx-background-color: #FFFFFF" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DashboardAdmin2">
      <Pane prefHeight="59.0" prefWidth="752.0" style="-fx-background-color: #FFFFFF;" styleClass="parent">
-
     <children>
             <fx:include source="ParentBack.fxml" />
     </children>
@@ -38,11 +37,11 @@
             <columns>
                 <TableColumn fx:id="nom" minWidth="0.0" prefWidth="57.0" text="Nom" />
                 <TableColumn fx:id="adresse" prefWidth="103.0" text="Adresse" />
-                <TableColumn fx:id="gouvernorat" minWidth="0.0" prefWidth="105.0" text="Gouvernorat" />
-            <TableColumn fx:id="num_tel" prefWidth="150.0" text="Numéro de Telephone" />
-            <TableColumn fx:id="etat" minWidth="0.0" prefWidth="50.0" text="Etat" />
-            <TableColumn fx:id="horaire" minWidth="0.0" prefWidth="100.0" text="Horaire" />
-          <TableColumn fx:id="services" maxWidth="100.0" minWidth="0.0" prefWidth="100.0" text="Services" />
+                <TableColumn fx:id="gouvernorat" minWidth="0.0" prefWidth="114.0" text="Gouvernorat" />
+            <TableColumn fx:id="num_tel" prefWidth="160.0" text="Numéro de Telephone" />
+            <TableColumn fx:id="etat" minWidth="0.0" prefWidth="73.0" text="Etat" />
+            <TableColumn fx:id="horaire" minWidth="0.0" prefWidth="120.0" text="Horaire" />
+          <TableColumn fx:id="services" maxWidth="230.0" minWidth="0.0" prefWidth="168.0" text="Services" />
           
 
             </columns>

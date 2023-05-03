@@ -31,7 +31,7 @@ SUBSCRIBE OUR YOUTUBE CHANNEL -> https://www.youtube.com/channel/UCPgcmw0LXToDn4
 }
 
 .textfield{
-    -fx-background-color:linear-gradient(to bottom, #efefef, #eee);
+    -fx-background-color: linear-gradient(to right top, #41b4f2, #30abf1, #20a1f0, #1397ee, #128deb);
     -fx-background-radius:5px;
     -fx-border-color:#000;
     -fx-border-width:.2px;
@@ -41,7 +41,7 @@ SUBSCRIBE OUR YOUTUBE CHANNEL -> https://www.youtube.com/channel/UCPgcmw0LXToDn4
 }
 .textfield:focused{
     -fx-background-color:#fff;
-    -fx-border-color:linear-gradient(to bottom right, #2d658c, #2ca772);
+    -fx-border-color: linear-gradient(to right top, #41b4f2, #30abf1, #20a1f0, #1397ee, #128deb);
     -fx-border-width:.8px;
 }
 
